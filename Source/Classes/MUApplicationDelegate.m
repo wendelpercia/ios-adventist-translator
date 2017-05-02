@@ -322,34 +322,4 @@
     }
 }
 
-+ (NSString*)languageSelectedStringForKey:(NSString*) key {
-    
-    NSString *path = nil;
-    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    
-    
-    if ([language isEqualToString:@"en"])
-        path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
-    else if ([language isEqualToString:@"pt-BR"])
-        path = [[NSBundle mainBundle] pathForResource:@"pt-BR" ofType:@"lproj"];
-    
-    
-    /*
-    if ([language isEqualToString:@"en"])
-        path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
-    else if ([language isEqualToString:@"pt-BR"])
-        path = [[NSBundle mainBundle] pathForResource:@"pt-BR" ofType:@"lproj"];
-        //path = [[NSBundle mainBundle] pathForResource:@"Localizable-pt-BR" ofType:@"strings"];
-        //path = [documentsDirectory stringByAppendingPathComponent:@"Localizable-pt-BR.strings"];
-     */
-    
-    NSLog(@"%@", path);
-    
-    NSBundle *languageBundle = [NSBundle bundleWithPath:path];
-    NSString* str=[languageBundle localizedStringForKey:key value:@"" table:nil];
-    NSLog(@"%@", str);
-    
-    return str;
-}
-
 @end

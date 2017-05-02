@@ -137,14 +137,11 @@
     /* Servers section. */
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            //cell.textLabel.text = NSLocalizedString(@"Public Servers", nil);
-            cell.textLabel.text = [MUApplicationDelegate languageSelectedStringForKey:@"Public Servers"];
+            cell.textLabel.text = NSLocalizedString(@"Public Servers", nil);
         } else if (indexPath.row == 1) {
-            //cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
-            cell.textLabel.text = [MUApplicationDelegate languageSelectedStringForKey:@"Favourite Servers"];
+            cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
         } else if (indexPath.row == 2) {
-            //cell.textLabel.text = NSLocalizedString(@"LAN Servers", nil);
-            cell.textLabel.text = [MUApplicationDelegate languageSelectedStringForKey:@"LAN Servers"];
+            cell.textLabel.text = NSLocalizedString(@"LAN Servers", nil);
         }
     }
 

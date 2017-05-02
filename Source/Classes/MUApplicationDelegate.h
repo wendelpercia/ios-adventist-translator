@@ -6,5 +6,4 @@
 
 @interface MUApplicationDelegate : NSObject <UIApplicationDelegate>
 - (void) reloadPreferences;
-+ (NSString*)languageSelectedStringForKey:(NSString*) key;
 @end
