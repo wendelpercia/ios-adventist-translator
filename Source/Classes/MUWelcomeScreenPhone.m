@@ -15,6 +15,9 @@
 #import "MUOperatingSystem.h"
 #import "MUBackgroundView.h"
 
+#import "MUApplicationDelegate.h"
+
+
 @interface MUWelcomeScreenPhone () {
     UIAlertView  *_aboutView;
     NSInteger    _aboutWebsiteButton;
@@ -134,11 +137,14 @@
     /* Servers section. */
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = NSLocalizedString(@"Public Servers", nil);
+            //cell.textLabel.text = NSLocalizedString(@"Public Servers", nil);
+            cell.textLabel.text = [MUApplicationDelegate languageSelectedStringForKey:@"Public Servers"];
         } else if (indexPath.row == 1) {
-            cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
+            //cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
+            cell.textLabel.text = [MUApplicationDelegate languageSelectedStringForKey:@"Favourite Servers"];
         } else if (indexPath.row == 2) {
-            cell.textLabel.text = NSLocalizedString(@"LAN Servers", nil);
+            //cell.textLabel.text = NSLocalizedString(@"LAN Servers", nil);
+            cell.textLabel.text = [MUApplicationDelegate languageSelectedStringForKey:@"LAN Servers"];
         }
     }
 

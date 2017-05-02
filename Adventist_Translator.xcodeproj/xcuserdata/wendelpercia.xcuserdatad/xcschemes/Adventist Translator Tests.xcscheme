@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-               BuildableName = "Adventist Translator.app"
-               BlueprintName = "Adventist Translator"
-               ReferencedContainer = "container:Adventist Translator.xcodeproj">
+               BlueprintIdentifier = "285D6B7B16BF02E900F239EB"
+               BuildableName = "Adventist_TranslatorTests.octest"
+               BlueprintName = "Adventist_TranslatorTests"
+               ReferencedContainer = "container:Adventist_Translator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,20 +29,11 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "Adventist Translator.app"
-            BlueprintName = "Adventist Translator"
-            ReferencedContainer = "container:Adventist Translator.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -51,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "Adventist Translator.app"
-            BlueprintName = "Adventist Translator"
-            ReferencedContainer = "container:Adventist Translator.xcodeproj">
+            BlueprintIdentifier = "285D6B7B16BF02E900F239EB"
+            BuildableName = "Adventist_TranslatorTests.octest"
+            BlueprintName = "Adventist_TranslatorTests"
+            ReferencedContainer = "container:Adventist_Translator.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "Adventist Translator.app"
-            BlueprintName = "Adventist Translator"
-            ReferencedContainer = "container:Adventist Translator.xcodeproj">
+            BlueprintIdentifier = "285D6B7B16BF02E900F239EB"
+            BuildableName = "Adventist_TranslatorTests.octest"
+            BlueprintName = "Adventist_TranslatorTests"
+            ReferencedContainer = "container:Adventist_Translator.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
