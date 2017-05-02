@@ -181,8 +181,6 @@
 		28FAA35F14D74C1600F6D711 /* SmallMumbleIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAA35D14D74C1600F6D711 /* SmallMumbleIcon.png */; };
 		28FAA36014D74C1600F6D711 /* SmallMumbleIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAA35E14D74C1600F6D711 /* SmallMumbleIcon@2x.png */; };
 		28FAA36414D7551600F6D711 /* MKNumberBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FAA36314D7551600F6D711 /* MKNumberBadgeView.m */; };
-		E77FF7601EB825D20053C279 /* Localizable-en.strings in Resources */ = {isa = PBXBuildFile; fileRef = E77FF75E1EB825D20053C279 /* Localizable-en.strings */; };
-		E77FF7611EB825D20053C279 /* Localizable-pt-BR.strings in Resources */ = {isa = PBXBuildFile; fileRef = E77FF75F1EB825D20053C279 /* Localizable-pt-BR.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,7 +209,7 @@
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* Mumble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Mumble.app; path = "Adventist Translator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Mumble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Mumble.app; path = Adventist_Translator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2801C35911CA9F1A00E664E8 /* MUPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUPreferencesViewController.h; sourceTree = "<group>"; };
 		2801C35A11CA9F1A00E664E8 /* MUPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUPreferencesViewController.m; sourceTree = "<group>"; };
@@ -472,8 +470,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Mumble.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mumble.pch; path = Source/Mumble.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Source/Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		E77FF75E1EB825D20053C279 /* Localizable-en.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Localizable-en.strings"; sourceTree = "<group>"; };
-		E77FF75F1EB825D20053C279 /* Localizable-pt-BR.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Localizable-pt-BR.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -919,8 +915,6 @@
 		E77FF75D1EB825D20053C279 /* Languages */ = {
 			isa = PBXGroup;
 			children = (
-				E77FF75E1EB825D20053C279 /* Localizable-en.strings */,
-				E77FF75F1EB825D20053C279 /* Localizable-pt-BR.strings */,
 			);
 			name = Languages;
 			path = Resources/Languages;
@@ -1086,7 +1080,6 @@
 				28BE999A18CFED9A00910551 /* Balloon_2_Right@2x.png in Resources */,
 				2879528514C2687D00567430 /* Balloon_Blue@2x.png in Resources */,
 				2879528A14C3874C00567430 /* LeftBalloonSelected.png in Resources */,
-				E77FF7601EB825D20053C279 /* Localizable-en.strings in Resources */,
 				2879528B14C3874C00567430 /* LeftBalloonSelected@2x.png in Resources */,
 				2879528C14C3874C00567430 /* RightBalloonSelected.png in Resources */,
 				2879528D14C3874C00567430 /* RightBalloonSelected@2x.png in Resources */,
@@ -1100,7 +1093,6 @@
 				28529B3C1541C043003DD813 /* certificatecreation@2x.png in Resources */,
 				286A3CA7158CD05A00C817D1 /* BackgroundTextureBlackGradientPad@2x.png in Resources */,
 				286A3CA9158CD12E00C817D1 /* LogoBigShadow@2x.png in Resources */,
-				E77FF7611EB825D20053C279 /* Localizable-pt-BR.strings in Resources */,
 				286A3CAB158CD55700C817D1 /* LogoBigShadow.png in Resources */,
 				286A3CAD158CD5F400C817D1 /* BackgroundTextureBlackGradientPad.png in Resources */,
 				286A3CC1158CFEAB00C817D1 /* _UIPopoverViewBlackBackgroundArrowUp.png in Resources */,
@@ -1245,7 +1237,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = AE7MRGDVXJ;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
-				PRODUCT_NAME = Adventist_Translator;
+				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1258,7 +1250,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = AE7MRGDVXJ;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
-				PRODUCT_NAME = Adventist_Translator;
+				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1268,7 +1260,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 285E2A60150D729B008AE185 /* AppStore.xcconfig */;
 			buildSettings = {
-				PRODUCT_NAME = AdventistTranslator;
+				PRODUCT_NAME = Translator;
 			};
 			name = AppStore;
 		};
@@ -1279,7 +1271,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = AE7MRGDVXJ;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
-				PRODUCT_NAME = Adventist_Translator;
+				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1289,7 +1281,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 285E2A62150D729B008AE185 /* BetaDist.xcconfig */;
 			buildSettings = {
-				PRODUCT_NAME = AdventistTranslator;
+				PRODUCT_NAME = Translator;
 			};
 			name = BetaDist;
 		};
@@ -1300,7 +1292,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = AE7MRGDVXJ;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
-				PRODUCT_NAME = Adventist_Translator;
+				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1311,7 +1303,7 @@
 			baseConfigurationReference = 285E2A63150D729B008AE185 /* Debug.xcconfig */;
 			buildSettings = {
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = AdventistTranslator;
+				PRODUCT_NAME = Translator;
 			};
 			name = Debug;
 		};
@@ -1319,7 +1311,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 285E2A64150D729B008AE185 /* Release.xcconfig */;
 			buildSettings = {
-				PRODUCT_NAME = AdventistTranslator;
+				PRODUCT_NAME = Translator;
 			};
 			name = Release;
 		};
