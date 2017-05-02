@@ -82,7 +82,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    self.navigationItem.title = @"Mumble";
+    self.navigationItem.title = @"Translator";
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
     
@@ -161,6 +161,7 @@
 #pragma mark About Dialog
 
 - (void) alertView:(UIAlertView *)alert didDismissWithButtonIndex:(NSInteger)buttonIndex {
+/*
     if (buttonIndex == 1) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.mumbleapp.com/"]];
     } else if (buttonIndex == 2) {
@@ -173,6 +174,15 @@
     } else if (buttonIndex == 3) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:support@mumbleapp.com"]];
     }
+*/
+    
+    if (buttonIndex == 1) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.iatec.com"]];
+    } else if (buttonIndex == 2) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.iatec.com"]];
+    }
+
+    
 }
 
 #pragma mark - Actions
@@ -188,11 +198,19 @@
 #endif
     NSString *aboutMessage = NSLocalizedString(@"Low latency, high quality voice chat", nil);
     
+    /*
     UIAlertView *aboutView = [[UIAlertView alloc] initWithTitle:aboutTitle message:aboutMessage delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                               otherButtonTitles:NSLocalizedString(@"Website", nil),
                               NSLocalizedString(@"Legal", nil),
                               NSLocalizedString(@"Support", nil), nil];
+    */
+    
+    UIAlertView *aboutView = [[UIAlertView alloc] initWithTitle:aboutTitle message:aboutMessage delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                              otherButtonTitles:NSLocalizedString(@"Legal", nil),
+                              NSLocalizedString(@"Support", nil), nil];
+    
     [aboutView show];
     [aboutView release];
 }

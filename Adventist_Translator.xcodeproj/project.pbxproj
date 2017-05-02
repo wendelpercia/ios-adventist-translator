@@ -183,6 +183,7 @@
 		28FAA36414D7551600F6D711 /* MKNumberBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FAA36314D7551600F6D711 /* MKNumberBadgeView.m */; };
 		E74E926D1EB8CC8000DE5C6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E74E926B1EB8CC8000DE5C6A /* Localizable.strings */; };
 		E74E92711EB8CC9200DE5C6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E74E926F1EB8CC9200DE5C6A /* Localizable.strings */; };
+		E74E92751EB8CFDB00DE5C6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E74E92731EB8CFDB00DE5C6A /* Localizable.strings */; };
 		E7B870E11EB8C6CF005129D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 280256361510D70D00178B08 /* Localizable.strings */; };
 		E7B870E21EB8C80C005129D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7B870DE1EB8C44B005129D1 /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -476,6 +477,7 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Source/Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		E74E926C1EB8CC8000DE5C6A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		E74E92701EB8CC9200DE5C6A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
+		E74E92741EB8CFDB00DE5C6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Localizable.strings; sourceTree = "<group>"; };
 		E7B870DF1EB8C44B005129D1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -760,6 +762,7 @@
 		28DC1C1213DE59120037CDC2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E74E92721EB8CFDB00DE5C6A /* Base.lproj */,
 				E74E926E1EB8CC9200DE5C6A /* es.lproj */,
 				E74E926A1EB8CC8000DE5C6A /* fr.lproj */,
 				E7B870DD1EB8C44B005129D1 /* pt-BR.lproj */,
@@ -939,6 +942,15 @@
 			path = Resources/es.lproj;
 			sourceTree = "<group>";
 		};
+		E74E92721EB8CFDB00DE5C6A /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				E74E92731EB8CFDB00DE5C6A /* Localizable.strings */,
+			);
+			name = Base.lproj;
+			path = Resources/Base.lproj;
+			sourceTree = "<group>";
+		};
 		E7B870DD1EB8C44B005129D1 /* pt-BR.lproj */ = {
 			isa = PBXGroup;
 			children = (
@@ -997,6 +1009,7 @@
 				"pt-BR",
 				fr,
 				es,
+				Base,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -1045,6 +1058,7 @@
 				28DC1C6513DE596B0037CDC2 /* certificatecell-selected.png in Resources */,
 				28DC1C6613DE596B0037CDC2 /* certificatecell-selected@2x.png in Resources */,
 				28DC1C6713DE596B0037CDC2 /* certificatecell.png in Resources */,
+				E74E92751EB8CFDB00DE5C6A /* Localizable.strings in Resources */,
 				28BE998E18CFD7DC00910551 /* Default-iOS7@2x.png in Resources */,
 				28DC1C6813DE596B0037CDC2 /* certificatecell@2x.png in Resources */,
 				28DC1C6913DE596B0037CDC2 /* channel.png in Resources */,
@@ -1273,6 +1287,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				E74E92701EB8CC9200DE5C6A /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		E74E92731EB8CFDB00DE5C6A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E74E92741EB8CFDB00DE5C6A /* Base */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
