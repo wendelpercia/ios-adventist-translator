@@ -107,7 +107,9 @@
 // Customize the number of rows in the table view.
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0)
-        return 3;
+        //return 3;
+        //Table Lines
+        return 1;
     return 0;
 }
 
@@ -125,6 +127,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     /* Servers section. */
+    /*
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = NSLocalizedString(@"Public Servers", nil);
@@ -132,6 +135,13 @@
             cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
         } else if (indexPath.row == 2) {
             cell.textLabel.text = NSLocalizedString(@"LAN Servers", nil);
+        }
+      */
+    
+    /* Servers section. */
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
         }
     }
     
@@ -143,6 +153,7 @@
 // Override to support row selection in the table view.
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     /* Servers section. */
+    /*
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             MUPublicServerListController *serverList = [[[MUPublicServerListController alloc] init] autorelease];
@@ -153,6 +164,14 @@
         } else if (indexPath.row == 2) {
             MULanServerListController *lanList = [[[MULanServerListController alloc] init] autorelease];
             [self.navigationController pushViewController:lanList animated:YES];
+        }
+    }
+    */
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            MUFavouriteServerListController *favList = [[[MUFavouriteServerListController alloc] init] autorelease];
+            [self.navigationController pushViewController:favList animated:YES];
         }
     }
 }
@@ -188,15 +207,31 @@
 #pragma mark - Actions
 
 - (void) aboutButtonClicked:(id)sender {
+/*
 #ifdef MUMBLE_BETA_DIST
-    NSString *aboutTitle = [NSString stringWithFormat:@"Mumble %@ (%@)",
+    NSString *aboutTitle = [NSString stringWithFormat:@"Translator %@ (%@)",
                             [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
                             [[NSBundle mainBundle] objectForInfoDictionaryKey:@"MumbleGitRevision"]];
 #else
-    NSString *aboutTitle = [NSString stringWithFormat:@"Mumble %@",
+    NSString *aboutTitle = [NSString stringWithFormat:@"Translator %@",
                             [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
 #endif
-    NSString *aboutMessage = NSLocalizedString(@"Low latency, high quality voice chat", nil);
+*/
+
+#ifdef MUMBLE_BETA_DIST
+    NSString *aboutTitle = [NSString stringWithFormat:@"Translator %@ (%@)",
+                            //[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
+                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
+                            
+                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"MumbleGitRevision"]];
+#else
+    NSString *aboutTitle = [NSString stringWithFormat:@"Translator %@",
+                            //[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
+                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+#endif
+    
+    //NSString *aboutMessage = NSLocalizedString(@"Low latency, high quality voice chat", nil);
+    NSString *aboutMessage = NSLocalizedString(@"aboutMessage", nil);
     
     /*
     UIAlertView *aboutView = [[UIAlertView alloc] initWithTitle:aboutTitle message:aboutMessage delegate:self
@@ -209,7 +244,7 @@
     UIAlertView *aboutView = [[UIAlertView alloc] initWithTitle:aboutTitle message:aboutMessage delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                               otherButtonTitles:NSLocalizedString(@"Legal", nil),
-                              NSLocalizedString(@"Support", nil), nil];
+                                                                NSLocalizedString(@"Support", nil), nil];
     
     [aboutView show];
     [aboutView release];

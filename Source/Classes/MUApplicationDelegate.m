@@ -54,7 +54,7 @@
     
     // Set MumbleKit release string
     [[MKVersion sharedVersion] setOverrideReleaseString:
-        [NSString stringWithFormat:@"Mumble for iOS %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]]];
+        [NSString stringWithFormat:@"Translator for iOS %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]]];
     
     // Enable Opus unconditionally
     [[MKVersion sharedVersion] setOpusEnabled:YES];

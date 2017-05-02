@@ -54,6 +54,7 @@
         navBar.backgroundColor = [UIColor blackColor];
     }
     navBar.barStyle = UIBarStyleBlackOpaque;
+    //navBar.barStyle = UIBarStyleBlackTranslucent;
 
     self.tableView.backgroundView = [MUBackgroundView backgroundView];
     
@@ -68,16 +69,16 @@
     
 #if MUMBLE_LAUNCH_IMAGE_CREATION != 1
     UIBarButtonItem *about = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil)
-                                                              style:UIBarButtonItemStyleBordered
-                                                             target:self
-                                                             action:@selector(aboutClicked:)];
+                                                                style:UIBarButtonItemStyleBordered
+                                                                target:self
+                                                                action:@selector(aboutClicked:)];
     [self.navigationItem setRightBarButtonItem:about];
     [about release];
     
     UIBarButtonItem *prefs = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Preferences", nil)
-                                                              style:UIBarButtonItemStyleBordered
-                                                             target:self
-                                                             action:@selector(prefsClicked:)];
+                                                                style:UIBarButtonItemStyleBordered
+                                                                target:self
+                                                                action:@selector(prefsClicked:)];
     [self.navigationItem setLeftBarButtonItem:prefs];
     [prefs release];
 #endif
@@ -100,7 +101,9 @@
     return 1;
 #endif
     if (section == 0)
-        return 3;
+        //return 3;
+        //Table Lines
+        return 1;
     return 0;
 }
 
@@ -135,6 +138,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     /* Servers section. */
+    /*
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = NSLocalizedString(@"Public Servers", nil);
@@ -144,6 +148,15 @@
             cell.textLabel.text = NSLocalizedString(@"LAN Servers", nil);
         }
     }
+     */
+    
+    /* Servers section. */
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
+        }
+    }
+    
 
     [[cell textLabel] setHidden: NO];
 
@@ -153,6 +166,7 @@
 // Override to support row selection in the table view.
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     /* Servers section. */
+    /*
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             MUPublicServerListController *serverList = [[[MUPublicServerListController alloc] init] autorelease];
@@ -165,18 +179,31 @@
             [self.navigationController pushViewController:lanList animated:YES];
         }
     }
+    */
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            MUFavouriteServerListController *favList = [[[MUFavouriteServerListController alloc] init] autorelease];
+            [self.navigationController pushViewController:favList animated:YES];
+        }
+    }
+    
 }
 
 - (void) aboutClicked:(id)sender {
 #ifdef MUMBLE_BETA_DIST
-    NSString *aboutTitle = [NSString stringWithFormat:@"Mumble %@ (%@)",
-                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
+    NSString *aboutTitle = [NSString stringWithFormat:@"Translator %@ (%@)",
+                            //[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
+                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
+                            
                             [[NSBundle mainBundle] objectForInfoDictionaryKey:@"MumbleGitRevision"]];
 #else
-    NSString *aboutTitle = [NSString stringWithFormat:@"Mumble %@",
-                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
+    NSString *aboutTitle = [NSString stringWithFormat:@"Translator %@",
+                            //[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
+                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
 #endif
-    NSString *aboutMessage = NSLocalizedString(@"Low latency, high quality voice chat", nil);
+    //NSString *aboutMessage = NSLocalizedString(@"Low latency, high quality voice chat", nil);
+    NSString *aboutMessage = NSLocalizedString(@"aboutMessage", nil);
     
     /*
     UIAlertView *aboutView = [[UIAlertView alloc] initWithTitle:aboutTitle message:aboutMessage delegate:self
