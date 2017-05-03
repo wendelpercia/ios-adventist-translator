@@ -166,6 +166,7 @@
                                                   otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
         [alertView show];
         [alertView release];
+
     // Connect
     } else if (index == 2) {
         NSString *userName = [favServ userName];
@@ -174,11 +175,19 @@
         }
         
         MUConnectionController *connCtrlr = [MUConnectionController sharedController];
-        [connCtrlr connetToHostname:[favServ hostName]
+        /*
+         [connCtrlr connetToHostname:[favServ hostName]
                                port:[favServ port]
-                            withUsername:userName
+                       withUsername:userName
                         andPassword:[favServ password]
+        */
+        
+        [connCtrlr connetToHostname:@"192.168.1.132"
+                               port:64738
+                            withUsername:@"Teste-1"
+                        andPassword:@""
            withParentViewController:self];
+        
         [[self tableView] deselectRowAtIndexPath:indexPath animated:YES];
     // Edit
     } else if (index == 1) {

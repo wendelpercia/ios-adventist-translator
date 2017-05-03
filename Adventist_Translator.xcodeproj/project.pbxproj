@@ -507,6 +507,7 @@
 			children = (
 				2872F7C4124668880078C0B1 /* Certificates */,
 				28BF8E1C11D93A1900B72770 /* Database */,
+				2838EA0C1293165700035C5D /* Preferences */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				286A3CAE158CEB5A00C817D1 /* MainWindow~iPad.xib */,
 				28F79C71147991480003B8BA /* MUAccessTokenViewController.h */,
@@ -592,7 +593,6 @@
 				286A3CA2158CCF9D00C817D1 /* MUWelcomeScreenPad.m */,
 				2861C270116BE905002B8514 /* MUWelcomeScreenPhone.h */,
 				2861C271116BE905002B8514 /* MUWelcomeScreenPhone.m */,
-				2838EA0C1293165700035C5D /* Preferences */,
 			);
 			name = Classes;
 			path = Source/Classes;
@@ -992,7 +992,7 @@
 				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = AE7MRGDVXJ;
+						DevelopmentTeam = C82EXA77J4;
 					};
 				};
 			};
@@ -1315,7 +1315,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = AE7MRGDVXJ;
+				DEVELOPMENT_TEAM = C82EXA77J4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
@@ -1328,7 +1328,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = AE7MRGDVXJ;
+				DEVELOPMENT_TEAM = C82EXA77J4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
@@ -1349,7 +1349,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = AE7MRGDVXJ;
+				DEVELOPMENT_TEAM = C82EXA77J4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
@@ -1370,7 +1370,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = AE7MRGDVXJ;
+				DEVELOPMENT_TEAM = C82EXA77J4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
