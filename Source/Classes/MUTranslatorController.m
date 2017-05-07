@@ -68,10 +68,6 @@
         self.tableView.separatorInset = UIEdgeInsetsZero;
     }
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonClicked:)];
-    [[self navigationItem] setRightBarButtonItem:addButton];
-    [addButton release];
-    
     [self reloadChannels];
     
 }
@@ -104,16 +100,5 @@
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     return (UITableViewCell *) cell;
 }
-
-- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
-- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self deleteFavouriteAtIndexPath:indexPath];
-    }
-}
-
 
 @end

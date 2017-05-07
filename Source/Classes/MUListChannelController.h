@@ -11,5 +11,7 @@
 @interface MUListChannelController : NSObject
 
 + (NSMutableArray *) fetchAllChannels;
+- (NSMutableArray *) connectTranslatorServer;
+- (NSString *) getIPAddress;
 
 @end
