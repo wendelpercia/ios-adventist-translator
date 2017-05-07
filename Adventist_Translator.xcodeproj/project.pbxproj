@@ -184,6 +184,10 @@
 		E74E926D1EB8CC8000DE5C6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E74E926B1EB8CC8000DE5C6A /* Localizable.strings */; };
 		E74E92711EB8CC9200DE5C6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E74E926F1EB8CC9200DE5C6A /* Localizable.strings */; };
 		E74E92751EB8CFDB00DE5C6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E74E92731EB8CFDB00DE5C6A /* Localizable.strings */; };
+		E7734DAC1EBFB7DA00419003 /* MUChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7734DAB1EBFB7DA00419003 /* MUChannelCell.m */; };
+		E7ADD0FD1EBF889E00374120 /* MUTranslatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADD0FC1EBF889E00374120 /* MUTranslatorController.m */; };
+		E7ADD1011EBF942600374120 /* MUTranslatorChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADD1001EBF942600374120 /* MUTranslatorChannel.m */; };
+		E7ADD1041EBF9E2100374120 /* MUListChannelController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADD1031EBF9E2100374120 /* MUListChannelController.m */; };
 		E7B870E11EB8C6CF005129D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 280256361510D70D00178B08 /* Localizable.strings */; };
 		E7B870E21EB8C80C005129D1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7B870DE1EB8C44B005129D1 /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -478,6 +482,14 @@
 		E74E926C1EB8CC8000DE5C6A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 		E74E92701EB8CC9200DE5C6A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
 		E74E92741EB8CFDB00DE5C6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Localizable.strings; sourceTree = "<group>"; };
+		E7734DAA1EBFB7DA00419003 /* MUChannelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUChannelCell.h; sourceTree = "<group>"; };
+		E7734DAB1EBFB7DA00419003 /* MUChannelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUChannelCell.m; sourceTree = "<group>"; };
+		E7ADD0FB1EBF889E00374120 /* MUTranslatorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUTranslatorController.h; sourceTree = "<group>"; };
+		E7ADD0FC1EBF889E00374120 /* MUTranslatorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUTranslatorController.m; sourceTree = "<group>"; };
+		E7ADD0FF1EBF942600374120 /* MUTranslatorChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUTranslatorChannel.h; sourceTree = "<group>"; };
+		E7ADD1001EBF942600374120 /* MUTranslatorChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUTranslatorChannel.m; sourceTree = "<group>"; };
+		E7ADD1021EBF9E2100374120 /* MUListChannelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUListChannelController.h; sourceTree = "<group>"; };
+		E7ADD1031EBF9E2100374120 /* MUListChannelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUListChannelController.m; sourceTree = "<group>"; };
 		E7B870DF1EB8C44B005129D1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -593,6 +605,14 @@
 				286A3CA2158CCF9D00C817D1 /* MUWelcomeScreenPad.m */,
 				2861C270116BE905002B8514 /* MUWelcomeScreenPhone.h */,
 				2861C271116BE905002B8514 /* MUWelcomeScreenPhone.m */,
+				E7ADD0FB1EBF889E00374120 /* MUTranslatorController.h */,
+				E7ADD0FC1EBF889E00374120 /* MUTranslatorController.m */,
+				E7ADD0FF1EBF942600374120 /* MUTranslatorChannel.h */,
+				E7ADD1001EBF942600374120 /* MUTranslatorChannel.m */,
+				E7ADD1021EBF9E2100374120 /* MUListChannelController.h */,
+				E7ADD1031EBF9E2100374120 /* MUListChannelController.m */,
+				E7734DAA1EBFB7DA00419003 /* MUChannelCell.h */,
+				E7734DAB1EBFB7DA00419003 /* MUChannelCell.m */,
 			);
 			name = Classes;
 			path = Source/Classes;
@@ -1186,6 +1206,7 @@
 				2861C27C116BE905002B8514 /* MUPublicServerListController.m in Sources */,
 				2861C281116BE905002B8514 /* MUWelcomeScreenPhone.m in Sources */,
 				28F9174811B946250030D649 /* FMDatabase.m in Sources */,
+				E7ADD0FD1EBF889E00374120 /* MUTranslatorController.m in Sources */,
 				28F9174911B946250030D649 /* FMDatabaseAdditions.m in Sources */,
 				28F9174B11B946250030D649 /* FMResultSet.m in Sources */,
 				287BA29011B96C960010E031 /* MUDatabase.m in Sources */,
@@ -1196,6 +1217,7 @@
 				289D254C11BC28BC00E39F2C /* MULanServerListController.m in Sources */,
 				2801C35B11CA9F1A00E664E8 /* MUPreferencesViewController.m in Sources */,
 				287639F911D29D99009DB8B6 /* MUCertificateCreationProgressView.m in Sources */,
+				E7ADD1041EBF9E2100374120 /* MUListChannelController.m in Sources */,
 				2858DBA31233E31B000D6F75 /* MUVersionChecker.m in Sources */,
 				2858A5AD123BA08D00A82155 /* MUCertificateCell.m in Sources */,
 				2882858118CE40C80034F319 /* MUBackgroundView.m in Sources */,
@@ -1220,6 +1242,7 @@
 				286E9260148452A000B13593 /* MUVoiceActivitySetupViewController.m in Sources */,
 				28BE998818CFCDE600910551 /* MUServerTableViewCell.m in Sources */,
 				2822AC0614878AC500E9DB17 /* MUConnectionController.m in Sources */,
+				E7ADD1011EBF942600374120 /* MUTranslatorChannel.m in Sources */,
 				28F04B2214898A7100C90909 /* MUAdvancedAudioPreferencesViewController.m in Sources */,
 				28ADA303148A3E3B00C55E51 /* MUAudioQualityPreferencesViewController.m in Sources */,
 				2879523714BF519A00567430 /* MUMessagesViewController.m in Sources */,
@@ -1242,6 +1265,7 @@
 				286A3CBE158CFDF300C817D1 /* MUPopoverBackgroundView.m in Sources */,
 				28F9E1BF15EBDF2400D52001 /* MURemoteControlServer.m in Sources */,
 				2813B1D115EBFDA90049A59A /* MURemoteControlPreferencesViewController.m in Sources */,
+				E7734DAC1EBFB7DA00419003 /* MUChannelCell.m in Sources */,
 				285D6B7116BEEFA700F239EB /* MUTextMessageProcessor.m in Sources */,
 				2846C7D616F4A09000739FD8 /* MUServerButton.m in Sources */,
 			);
@@ -1316,10 +1340,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = C82EXA77J4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1329,10 +1354,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = C82EXA77J4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1350,10 +1376,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = C82EXA77J4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = AppStore;
 		};
@@ -1371,10 +1398,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = C82EXA77J4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = BetaDist;
 		};

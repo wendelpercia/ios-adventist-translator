@@ -231,10 +231,13 @@
     [_channelIndexMap setObject:[NSNumber numberWithUnsignedInteger:[_modelItems count]] forKey:[NSNumber numberWithInteger:[channel channelId]]];
     [_modelItems addObject:[MUChannelNavigationItem navigationItemWithObject:channel indentLevel:indentLevel]];
 
+    /* Wendel - Aqui ele adiciona os usuários aos canais */
     for (MKUser *user in [channel users]) {
         [_userIndexMap setObject:[NSNumber numberWithUnsignedInteger:[_modelItems count]] forKey:[NSNumber numberWithUnsignedInteger:[user session]]];
         [_modelItems addObject:[MUChannelNavigationItem navigationItemWithObject:user indentLevel:indentLevel+1]];
     }
+     /* */
+    
     for (MKChannel *chan in [channel channels]) {
         [self addChannelTreeToModel:chan indentLevel:indentLevel+1];
     }

@@ -182,7 +182,7 @@
                         andPassword:[favServ password]
         */
         
-        [connCtrlr connetToHostname:@"192.168.1.132"
+        [connCtrlr connetToHostname:@"192.168.1.78"
                                port:64738
                             withUsername:@"Teste-1"
                         andPassword:@""

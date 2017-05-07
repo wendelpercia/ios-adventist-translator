@@ -35,7 +35,8 @@
 }
 
 + (UIColor *) backgroundViewiOS7Color {
-    return [UIColor colorWithRed:0x1C/255.0f green:0x1C/255.0f blue:0x1C/255.0f alpha:1.0f];
+    //return [UIColor colorWithRed:0x1C/255.0f green:0x1C/255.0f blue:0x1C/255.0f alpha:1.0f];
+    return [UIColor colorWithRed:0x1C/255.0f green:0x1C/87.0f blue:0x1C/51.0f alpha:1.0f];
 }
 
 @end

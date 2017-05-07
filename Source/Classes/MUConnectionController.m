@@ -128,6 +128,7 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
     _serverRoot = [[MUServerRootViewController alloc] initWithConnection:_connection andServerModel:_serverModel];
     
     // Set the connection's client cert if one is set in the app's preferences...
+    // Certificate definition
     NSData *certPersistentId = [[NSUserDefaults standardUserDefaults] objectForKey:@"DefaultCertificate"];
     if (certPersistentId != nil) {
         NSArray *certChain = [MUCertificateChainBuilder buildChainFromPersistentRef:certPersistentId];

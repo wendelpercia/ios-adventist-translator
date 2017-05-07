@@ -14,6 +14,7 @@
 #import "MUImage.h"
 #import "MUOperatingSystem.h"
 #import "MUBackgroundView.h"
+#import "MUTranslatorController.h"
 
 #import "MUApplicationDelegate.h"
 
@@ -52,6 +53,7 @@
         navBar.tintColor = [UIColor whiteColor];
         navBar.translucent = NO;
         navBar.backgroundColor = [UIColor blackColor];
+        //navBar.backgroundColor = [UIColor blueColor];
     }
     navBar.barStyle = UIBarStyleBlackOpaque;
     //navBar.barStyle = UIBarStyleBlackTranslucent;
@@ -115,6 +117,7 @@
     return imgView;
 }
 
+
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 #if MUMBLE_LAUNCH_IMAGE_CREATION == 1
     CGFloat statusBarAndTitleBarHeight = 64;
@@ -123,6 +126,7 @@
     UIImage *img = [MUImage imageNamed:@"WelcomeScreenIcon"];
     return img.size.height;
 }
+
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 44.0;
@@ -138,26 +142,12 @@
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     /* Servers section. */
-    /*
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            cell.textLabel.text = NSLocalizedString(@"Public Servers", nil);
-        } else if (indexPath.row == 1) {
-            cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
-        } else if (indexPath.row == 2) {
-            cell.textLabel.text = NSLocalizedString(@"LAN Servers", nil);
-        }
-    }
-     */
-    
-    /* Servers section. */
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
         }
     }
     
-
     [[cell textLabel] setHidden: NO];
 
     return cell;
@@ -165,26 +155,21 @@
 
 // Override to support row selection in the table view.
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    /* Servers section. */
-    /*
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            MUPublicServerListController *serverList = [[[MUPublicServerListController alloc] init] autorelease];
-            [self.navigationController pushViewController:serverList animated:YES];
-        } else if (indexPath.row == 1) {
-            MUFavouriteServerListController *favList = [[[MUFavouriteServerListController alloc] init] autorelease];
-            [self.navigationController pushViewController:favList animated:YES];
-        } else if (indexPath.row == 2) {
-            MULanServerListController *lanList = [[[MULanServerListController alloc] init] autorelease];
-            [self.navigationController pushViewController:lanList animated:YES];
-        }
-    }
-    */
     
+    /* Servers section. */
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            MUFavouriteServerListController *favList = [[[MUFavouriteServerListController alloc] init] autorelease];
-            [self.navigationController pushViewController:favList animated:YES];
+            
+            int *vai = 1;
+            
+            if (vai == 1) {
+                MUTranslatorController *openTrans = [[[MUTranslatorController alloc] init] autorelease];
+                [self.navigationController pushViewController:openTrans animated:YES];
+            } else {
+                MUFavouriteServerListController *favList = [[[MUFavouriteServerListController alloc] init] autorelease];
+                [self.navigationController pushViewController:favList animated:YES];
+            }
+            
         }
     }
     
@@ -202,17 +187,8 @@
                             //[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
                             [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
 #endif
-    //NSString *aboutMessage = NSLocalizedString(@"Low latency, high quality voice chat", nil);
     NSString *aboutMessage = NSLocalizedString(@"aboutMessage", nil);
     
-    /*
-    UIAlertView *aboutView = [[UIAlertView alloc] initWithTitle:aboutTitle message:aboutMessage delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                              otherButtonTitles:NSLocalizedString(@"Website", nil),
-                                                                NSLocalizedString(@"Legal", nil),
-                                                                NSLocalizedString(@"Support", nil), nil];
-    */
-     
     UIAlertView *aboutView = [[UIAlertView alloc] initWithTitle:aboutTitle message:aboutMessage delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                               otherButtonTitles:NSLocalizedString(@"Legal", nil),
@@ -232,21 +208,6 @@
 #pragma mark About Dialog
 
 - (void) alertView:(UIAlertView *)alert didDismissWithButtonIndex:(NSInteger)buttonIndex {
-
-    /*
-    if (buttonIndex == 1) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.mumbleapp.com/"]];
-    } else if (buttonIndex == 2) {
-        MULegalViewController *legalView = [[MULegalViewController alloc] init];
-        UINavigationController *navController = [[UINavigationController alloc] init];
-        [navController pushViewController:legalView animated:NO];
-        [legalView release];
-        [[self navigationController] presentModalViewController:navController animated:YES];
-        [navController release];
-    } else if (buttonIndex == 3) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:support@mumbleapp.com"]];
-    }
-     */
     
     if (buttonIndex == 1) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.iatec.com"]];
