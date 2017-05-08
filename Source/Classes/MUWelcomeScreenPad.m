@@ -9,6 +9,7 @@
 #import "MUPublicServerListController.h"
 #import "MUFavouriteServerListController.h"
 #import "MULanServerListController.h"
+#import "MUTranslatorController.h"
 
 @interface MUWelcomeScreenPad () <UIPopoverControllerDelegate, UITableViewDataSource, UITableViewDelegate> {
     UIPopoverController   *_prefsPopover;
@@ -127,18 +128,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     /* Servers section. */
-    /*
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            cell.textLabel.text = NSLocalizedString(@"Public Servers", nil);
-        } else if (indexPath.row == 1) {
-            cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
-        } else if (indexPath.row == 2) {
-            cell.textLabel.text = NSLocalizedString(@"LAN Servers", nil);
-        }
-      */
-    
-    /* Servers section. */
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
@@ -152,26 +141,20 @@
 
 // Override to support row selection in the table view.
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    /* Servers section. */
-    /*
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            MUPublicServerListController *serverList = [[[MUPublicServerListController alloc] init] autorelease];
-            [self.navigationController pushViewController:serverList animated:YES];
-        } else if (indexPath.row == 1) {
-            MUFavouriteServerListController *favList = [[[MUFavouriteServerListController alloc] init] autorelease];
-            [self.navigationController pushViewController:favList animated:YES];
-        } else if (indexPath.row == 2) {
-            MULanServerListController *lanList = [[[MULanServerListController alloc] init] autorelease];
-            [self.navigationController pushViewController:lanList animated:YES];
-        }
-    }
-    */
     
+    /* Servers section. */
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            MUFavouriteServerListController *favList = [[[MUFavouriteServerListController alloc] init] autorelease];
-            [self.navigationController pushViewController:favList animated:YES];
+            
+            int *vai = 0;
+            
+            if (vai == 1) {
+                MUTranslatorController *openTrans = [[[MUTranslatorController alloc] init] autorelease];
+                [self.navigationController pushViewController:openTrans animated:YES];
+            } else {
+                MUFavouriteServerListController *favList = [[[MUFavouriteServerListController alloc] init] autorelease];
+                [self.navigationController pushViewController:favList animated:YES];
+            }
         }
     }
 }
@@ -180,20 +163,6 @@
 #pragma mark About Dialog
 
 - (void) alertView:(UIAlertView *)alert didDismissWithButtonIndex:(NSInteger)buttonIndex {
-/*
-    if (buttonIndex == 1) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.mumbleapp.com/"]];
-    } else if (buttonIndex == 2) {
-        MULegalViewController *legalView = [[MULegalViewController alloc] init];
-        UINavigationController *navController = [[UINavigationController alloc] init];
-        [navController pushViewController:legalView animated:NO];
-        [legalView release];
-        [[self navigationController] presentModalViewController:navController animated:YES];
-        [navController release];
-    } else if (buttonIndex == 3) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:support@mumbleapp.com"]];
-    }
-*/
     
     if (buttonIndex == 1) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.iatec.com"]];
@@ -207,17 +176,7 @@
 #pragma mark - Actions
 
 - (void) aboutButtonClicked:(id)sender {
-/*
-#ifdef MUMBLE_BETA_DIST
-    NSString *aboutTitle = [NSString stringWithFormat:@"Translator %@ (%@)",
-                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
-                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"MumbleGitRevision"]];
-#else
-    NSString *aboutTitle = [NSString stringWithFormat:@"Translator %@",
-                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
-#endif
-*/
-
+    
 #ifdef MUMBLE_BETA_DIST
     NSString *aboutTitle = [NSString stringWithFormat:@"Translator %@ (%@)",
                             //[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],

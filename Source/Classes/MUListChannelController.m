@@ -24,42 +24,49 @@
     
     MUConnectionController *connCtrlr = [MUConnectionController sharedController];
     
-    [connCtrlr connetToHostname:@"192.168.1.78"
-                           port:64738
-                   withUsername:@"Teste-2"
-                    andPassword:@""
-       withParentViewController:nil];
-    
     MUListChannelController *mUListChannelController = [[MUListChannelController alloc] init];
+    
+    /* Wendel - Get IP Address */
     NSString *myIP = [mUListChannelController getIPAddress];
     
-    //NSString *myIPTeste = @"Wendel";
-    
-    NSLog(@"%@", myIP);
-    
+    if (myIP != nil) {
+        NSString *userName = [NSString stringWithFormat:@"usr-%@", myIP];
+        
+        [connCtrlr connetToHostname:@"192.168.1.78"
+                               port:64738
+                       withUsername:userName
+                        andPassword:@""
+           withParentViewController:nil];
+    }
     
     MUTranslatorChannel *res = [[MUTranslatorChannel alloc] init];
     
-    [res setPrimaryKey: -1];
-    [res setDisplayName: NSLocalizedString(@"en", nil)];
-    [channels addObject:res];
-    [res release];
-
-    res = [[MUTranslatorChannel alloc] init];
-    [res setPrimaryKey: 0];
-    [res setDisplayName: NSLocalizedString(@"es", nil)];
-    [channels addObject:res];
-
-    res = [[MUTranslatorChannel alloc] init];
-    [res setPrimaryKey: 1];
-    [res setDisplayName: NSLocalizedString(@"pt-BR", nil)];
-    [channels addObject:res];
-
-    res = [[MUTranslatorChannel alloc] init];
-    [res setPrimaryKey: 2];
-    [res setDisplayName: NSLocalizedString(@"fr", nil)];
-    [channels addObject:res];
     
+    //MUChannelNavigationItem *navItem = [_modelItems objectAtIndex:[indexPath row]];
+    //id object = [navItem object];
+    
+    
+    /*
+     [res setPrimaryKey: -1];
+     [res setDisplayName: NSLocalizedString(@"en", nil)];
+     [channels addObject:res];
+     [res release];
+     
+     res = [[MUTranslatorChannel alloc] init];
+     [res setPrimaryKey: 0];
+     [res setDisplayName: NSLocalizedString(@"es", nil)];
+     [channels addObject:res];
+     
+     res = [[MUTranslatorChannel alloc] init];
+     [res setPrimaryKey: 1];
+     [res setDisplayName: NSLocalizedString(@"pt-BR", nil)];
+     [channels addObject:res];
+     
+     res = [[MUTranslatorChannel alloc] init];
+     [res setPrimaryKey: 2];
+     [res setDisplayName: NSLocalizedString(@"fr", nil)];
+     [channels addObject:res];
+     */
     
     return [channels autorelease];
 }

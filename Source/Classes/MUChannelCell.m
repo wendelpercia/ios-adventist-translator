@@ -44,6 +44,8 @@
     
     self.textLabel.text = _displayname;
     //self.imageView.image = [self drawPingImageWithPingValue:999 andUserCount:0 isFull:NO];
+    
+    //self.imageView.image = [UIImage imageNamed:@"BR"];
 }
 
 

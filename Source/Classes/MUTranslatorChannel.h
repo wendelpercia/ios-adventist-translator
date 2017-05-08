@@ -18,6 +18,9 @@
 @property (assign)  NSInteger   primaryKey;
 @property (copy)    NSString    *displayName;
 
+//@property (assign)  NSInteger   primaryKey;
+//@property (copy)    NSString    *localization;
+//@property (copy)    NSString    *language;
 
 - (BOOL) hasPrimaryKey;
 - (NSComparisonResult) compare:(MUTranslatorChannel *)favServ;
