@@ -18,6 +18,7 @@
 #import <MumbleKit/MKAudio.h>
 #import <MumbleKit/MKVersion.h>
 
+
 @interface MUApplicationDelegate () <UIApplicationDelegate,
                                      UIAlertViewDelegate> {
     UIWindow                  *_window;
