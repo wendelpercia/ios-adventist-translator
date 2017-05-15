@@ -232,14 +232,16 @@
     [_modelItems addObject:[MUChannelNavigationItem navigationItemWithObject:channel indentLevel:indentLevel]];
 
     /* Wendel - Aqui ele adiciona os usuários aos canais */
-    for (MKUser *user in [channel users]) {
+    /*for (MKUser *user in [channel users]) {
         [_userIndexMap setObject:[NSNumber numberWithUnsignedInteger:[_modelItems count]] forKey:[NSNumber numberWithUnsignedInteger:[user session]]];
         [_modelItems addObject:[MUChannelNavigationItem navigationItemWithObject:user indentLevel:indentLevel+1]];
-    }
+    }*/
      /* */
     
     for (MKChannel *chan in [channel channels]) {
         [self addChannelTreeToModel:chan indentLevel:indentLevel+1];
+        /* Wendel - Descrição do Canal */
+        NSLog(@"%@", chan.channelDescription);
     }
 }
 
@@ -275,6 +277,7 @@
         }
     }
 
+    /* Wendel - Recebimento e trato da listagem de canais que vem do servidor */
     MUChannelNavigationItem *navItem = [_modelItems objectAtIndex:[indexPath row]];
     id object = [navItem object];
 

@@ -32,7 +32,7 @@
     if (myIP != nil) {
         NSString *userName = [NSString stringWithFormat:@"usr-%@", myIP];
         
-        [connCtrlr connetToHostname:@"192.168.1.78"
+        [connCtrlr connetToHostname:@"10.91.20.193"
                                port:64738
                        withUsername:userName
                         andPassword:@""
@@ -46,7 +46,7 @@
     //id object = [navItem object];
     
     
-    /*
+    
      [res setPrimaryKey: -1];
      [res setDisplayName: NSLocalizedString(@"en", nil)];
      [channels addObject:res];
@@ -66,7 +66,7 @@
      [res setPrimaryKey: 2];
      [res setDisplayName: NSLocalizedString(@"fr", nil)];
      [channels addObject:res];
-     */
+    
     
     return [channels autorelease];
 }

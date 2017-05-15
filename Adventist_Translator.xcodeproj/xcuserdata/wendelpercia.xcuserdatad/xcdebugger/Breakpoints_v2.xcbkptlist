@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Classes/MUServerViewController.m"
-            timestampString = "515857509.511352"
+            timestampString = "516055705.101504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "375"
+            endingLineNumber = "375"
             landmarkName = "-serverModel:joinedServerAsUser:"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,22 +202,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Classes/MUWelcomeScreenPhone.m"
-            timestampString = "515971699.90383"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Source/Classes/MUWelcomeScreenPhone.m"
             timestampString = "515971712.953618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -230,16 +214,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Source/Classes/MUTranslatorController.m"
-            timestampString = "515973585.397574"
+            filePath = "Source/Classes/MUServerViewController.m"
+            timestampString = "516052756.812672"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "-viewDidAppear:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -250,13 +234,77 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Classes/MUServerViewController.m"
-            timestampString = "515975943.801523"
+            timestampString = "516052762.099052"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "-viewWillAppear:"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Classes/MUChannelCell.m"
+            timestampString = "516056372.083463"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "-populateFromFavouriteServer:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Classes/MUServerViewController.m"
+            timestampString = "516055718.177811"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "-addChannelTreeToModel:indentLevel:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MUServerViewController addChannelTreeToModel:indentLevel:]"
+                  moduleName = "Translator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wendelpercia/Projects/Adventist-Translator/iOS-Adventist-Translator/Source/Classes/MUServerViewController.m"
+                  timestampString = "516056372.192049"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "241"
+                  endingLineNumber = "241"
+                  offsetFromSymbolStart = "242">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MUServerViewController addChannelTreeToModel:indentLevel:]"
+                  moduleName = "Translator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wendelpercia/Projects/Adventist-Translator/iOS-Adventist-Translator/Source/Classes/MUServerViewController.m"
+                  timestampString = "516056372.194688"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "241"
+                  endingLineNumber = "241"
+                  offsetFromSymbolStart = "270">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
