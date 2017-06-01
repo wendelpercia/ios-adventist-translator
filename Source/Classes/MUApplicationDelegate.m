@@ -126,6 +126,7 @@
     [_window setRootViewController:_navigationController];
     [_window makeKeyAndVisible];
 
+    
     NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
     if ([[url scheme] isEqualToString:@"mumble"]) {
         MUConnectionController *connController = [MUConnectionController sharedController];
@@ -136,6 +137,20 @@
         [connController connetToHostname:hostname port:port ? [port integerValue] : 64738 withUsername:username andPassword:password withParentViewController:welcomeScreen];
         return YES;
     }
+
+    /*
+        MUConnectionController *connController = [MUConnectionController sharedController];
+        NSString *hostname = @"10.91.20.195";
+        NSUInteger port = 64738;
+        NSString *username = @"wop-mac";
+        NSString *password = @"";
+    */
+    
+        /* Realiza a conexão com o Servidor Mumble */
+        //[connController connetToHostname:hostname port:port  withUsername:username andPassword:password withParentViewController:welcomeScreen];
+        //return YES;
+    
+    
     return NO;
 }
 

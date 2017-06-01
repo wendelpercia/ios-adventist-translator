@@ -21,5 +21,7 @@
 # import <CFNetwork/CFNetwork.h>
 #endif
 
+/*
 #undef NSLocalizedString
 #define NSLocalizedString(str, comment) str
+*/

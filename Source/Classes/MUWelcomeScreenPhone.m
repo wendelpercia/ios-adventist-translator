@@ -130,8 +130,10 @@
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
+
     
     /* Servers section. */
+    /*
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = NSLocalizedString(@"Public Servers", nil);
@@ -141,6 +143,7 @@
             cell.textLabel.text = NSLocalizedString(@"LAN Servers", nil);
         }
     }
+    */
 
     [[cell textLabel] setHidden: NO];
 
