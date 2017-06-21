@@ -14,200 +14,100 @@
 #import "MUImage.h"
 #import "MUOperatingSystem.h"
 #import "MUBackgroundView.h"
+#import "MUColor.h"
+#import "MUConnectionController.h"
 
-@interface MUWelcomeScreenPhone () {
-    UIAlertView  *_aboutView;
+@interface MUWelcomeScreen () {
     NSInteger    _aboutWebsiteButton;
     NSInteger    _aboutContribButton;
     NSInteger    _aboutLegalButton;
+    UILabel* lbMessage;
+    UIActivityIndicatorView* loading;
+    
+    UIImageView                      *_translateLogo;
+    UIImageView                      *_iatecLogo;
 }
 @end
 
-#define MUMBLE_LAUNCH_IMAGE_CREATION 0
-
-@implementation MUWelcomeScreenPhone
+@implementation MUWelcomeScreen
 
 - (id) init {
-    if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
-        // ...
-    }
+    self = [super init];
     return self;
 }
 
 - (void) dealloc {
+    [lbMessage release];
+    [loading release];
+    
     [super dealloc];
+}
+
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    
+    lbMessage = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 40, self.view.frame.size.width, 20)];
+    [lbMessage setFont:[UIFont systemFontOfSize:15]];
+    [lbMessage setTextAlignment:NSTextAlignmentCenter];
+    [lbMessage setTextColor:[UIColor whiteColor]];
+    [lbMessage setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth];
+    [lbMessage setText:@"Conectando..."];
+    
+    [self.view addSubview:lbMessage];
+    
+    _iatecLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"IatecLogo"]];
+    [_iatecLogo setFrame:CGRectMake( self.view.frame.size.width - 140, -100, _iatecLogo.frame.size.width, _iatecLogo.frame.size.height)];
+    [_iatecLogo setAlpha:0.15f];
+    [self.view addSubview:_iatecLogo];
+    
+    _translateLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"translatelogo"]];
+    [_translateLogo setCenter:CGPointMake(self.view.frame.size.width / 2.0f, 140)];
+    [self.view addSubview:_translateLogo];
+
+    loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [loading setCenter: self.view.center];
+    
+    [self.view addSubview:loading];
+    [loading startAnimating];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MuConnecting) name:MUConnectingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MuConnectingError) name:MUConnectingErrorNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MUConnectionOpened) name:MUConnectionOpenedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MUConnectionClosed) name:MUConnectingErrorNotification object:nil];
+}
+
+-(void)MuConnecting{
+    [lbMessage setText:NSLocalizedString(@"Connecting", nil)];
+    [loading startAnimating];
+}
+
+-(void)MuConnectingError {
+    [lbMessage setText:NSLocalizedString(@"Connection Error", nil)];
+    [loading stopAnimating];
+}
+
+-(void)MUConnectionOpened{
+    [lbMessage setText:NSLocalizedString(@"Connected", nil)];
+    [loading stopAnimating];
+}
+
+-(void)MUConnectionClosed{
+    [lbMessage setText:NSLocalizedString(@"Connection Closed", nil)];
+    [loading stopAnimating];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    self.navigationItem.title = @"Mumble";
-    self.navigationController.toolbarHidden = YES;
-
-    UINavigationBar *navBar = self.navigationController.navigationBar;
-    if (MUGetOperatingSystemVersion() >= MUMBLE_OS_IOS_7) {
-        navBar.tintColor = [UIColor whiteColor];
-        navBar.translucent = NO;
-        navBar.backgroundColor = [UIColor blackColor];
-    }
-    navBar.barStyle = UIBarStyleBlackOpaque;
-
-    self.tableView.backgroundView = [MUBackgroundView backgroundView];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
     
-    if (MUGetOperatingSystemVersion() >= MUMBLE_OS_IOS_7) {
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        self.tableView.separatorInset = UIEdgeInsetsZero;
-    } else {
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-
-    self.tableView.scrollEnabled = NO;
-    
-#if MUMBLE_LAUNCH_IMAGE_CREATION != 1
-    UIBarButtonItem *about = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"About", nil)
-                                                              style:UIBarButtonItemStyleBordered
-                                                             target:self
-                                                             action:@selector(aboutClicked:)];
-    [self.navigationItem setRightBarButtonItem:about];
-    [about release];
-    
-    UIBarButtonItem *prefs = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Preferences", nil)
-                                                              style:UIBarButtonItemStyleBordered
-                                                             target:self
-                                                             action:@selector(prefsClicked:)];
-    [self.navigationItem setLeftBarButtonItem:prefs];
-    [prefs release];
-#endif
+    gradient.frame = self.view.bounds;
+    gradient.colors = @[(id)[MUColor MainColor].CGColor, (id)[MUColor MainDarkerColor].CGColor];
+    [self.view.layer insertSublayer:gradient atIndex:0];
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    return toInterfaceOrientation == UIInterfaceOrientationPortrait;
-}
-
-#pragma mark -
-#pragma mark TableView
-
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-// Customize the number of rows in the table view.
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#if MUMBLE_LAUNCH_IMAGE_CREATION == 1
-    return 1;
-#endif
-    if (section == 0)
-        return 3;
-    return 0;
-}
-
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIImage *img = [MUImage imageNamed:@"WelcomeScreenIcon"];
-    UIImageView *imgView = [[[UIImageView alloc] initWithImage:img] autorelease];
-    [imgView setContentMode:UIViewContentModeCenter];
-    [imgView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
-    return imgView;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-#if MUMBLE_LAUNCH_IMAGE_CREATION == 1
-    CGFloat statusBarAndTitleBarHeight = 64;
-    return [UIScreen mainScreen].bounds.size.height - statusBarAndTitleBarHeight;
-#endif
-    UIImage *img = [MUImage imageNamed:@"WelcomeScreenIcon"];
-    return img.size.height;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44.0;
-}
-
-// Customize the appearance of table view cells.
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"welcomeItem"];
-    if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"welcomeItem"] autorelease];
-    }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-
-    
-    /* Servers section. */
-    /*
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            cell.textLabel.text = NSLocalizedString(@"Public Servers", nil);
-        } else if (indexPath.row == 1) {
-            cell.textLabel.text = NSLocalizedString(@"Favourite Servers", nil);
-        } else if (indexPath.row == 2) {
-            cell.textLabel.text = NSLocalizedString(@"LAN Servers", nil);
-        }
-    }
-    */
-
-    [[cell textLabel] setHidden: NO];
-
-    return cell;
-}
-
-// Override to support row selection in the table view.
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    /* Servers section. */
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            MUPublicServerListController *serverList = [[[MUPublicServerListController alloc] init] autorelease];
-            [self.navigationController pushViewController:serverList animated:YES];
-        } else if (indexPath.row == 1) {
-            MUFavouriteServerListController *favList = [[[MUFavouriteServerListController alloc] init] autorelease];
-            [self.navigationController pushViewController:favList animated:YES];
-        } else if (indexPath.row == 2) {
-            MULanServerListController *lanList = [[[MULanServerListController alloc] init] autorelease];
-            [self.navigationController pushViewController:lanList animated:YES];
-        }
-    }
-}
-
-- (void) aboutClicked:(id)sender {
-#ifdef MUMBLE_BETA_DIST
-    NSString *aboutTitle = [NSString stringWithFormat:@"Mumble %@ (%@)",
-                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
-                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"MumbleGitRevision"]];
-#else
-    NSString *aboutTitle = [NSString stringWithFormat:@"Mumble %@",
-                            [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
-#endif
-    NSString *aboutMessage = NSLocalizedString(@"Low latency, high quality voice chat", nil);
-    
-    UIAlertView *aboutView = [[UIAlertView alloc] initWithTitle:aboutTitle message:aboutMessage delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                              otherButtonTitles:NSLocalizedString(@"Website", nil),
-                                                                NSLocalizedString(@"Legal", nil),
-                                                                NSLocalizedString(@"Support", nil), nil];
-    [aboutView show];
-    [aboutView release];
-}
-
-- (void) prefsClicked:(id)sender {
-    MUPreferencesViewController *prefs = [[[MUPreferencesViewController alloc] init] autorelease];
-    [self.navigationController pushViewController:prefs animated:YES];
-}
-
-#pragma mark -
-#pragma mark About Dialog
-
-- (void) alertView:(UIAlertView *)alert didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.mumbleapp.com/"]];
-    } else if (buttonIndex == 2) {
-        MULegalViewController *legalView = [[MULegalViewController alloc] init];
-        UINavigationController *navController = [[UINavigationController alloc] init];
-        [navController pushViewController:legalView animated:NO];
-        [legalView release];
-        [[self navigationController] presentModalViewController:navController animated:YES];
-        [navController release];
-    } else if (buttonIndex == 3) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:support@mumbleapp.com"]];
-    }
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

@@ -31,7 +31,7 @@
     UIBarButtonItem             *_smallIcon;
     UIButton                    *_modeSwitchButton;
     MKNumberBadgeView           *_numberBadgeView;
-
+    
     MUServerViewController      *_serverView;
     MUMessagesViewController    *_messagesView;
     
@@ -95,7 +95,7 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-
+    [self setNavigationBarHidden:true];
     _segmentedControl = [[UISegmentedControl alloc] initWithItems:
                          [NSArray arrayWithObjects:
                             NSLocalizedString(@"Server", nil),
@@ -137,7 +137,7 @@
         navBar.backgroundColor = [UIColor blackColor];
     }
     navBar.barStyle = UIBarStyleBlackOpaque;
-
+    
     self.toolbar.barStyle = UIBarStyleBlackOpaque;
 }
 
@@ -447,6 +447,10 @@
     } else if (buttonIndex == _selfUnmuteAndUndeafenIndex) { // Unmute and undeafen
         [_model setSelfMuted:NO andSelfDeafened:NO];
     }
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

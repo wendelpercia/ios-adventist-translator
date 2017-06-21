@@ -58,7 +58,7 @@
 #pragma mark -
 #pragma mark MUChannelNavigationViewController
 
-@interface MUServerViewController () {
+@interface MUServerViewController () <UITableViewDelegate, UITableViewDataSource> {
     MUServerViewControllerViewMode   _viewMode;
     MKServerModel                    *_serverModel;
     NSMutableArray                   *_modelItems;
@@ -66,12 +66,20 @@
     NSMutableDictionary              *_channelIndexMap;
     BOOL                             _pttState;
     UIButton                         *_talkButton;
+    UILabel                          *_lbMessage;
+    UILabel                          *_caption;
+    UITableView                      *_tableView;
+
+    UIImageView                      *_translateLogo;
+    UIImageView                      *_iatecLogo;
+    
+    MUServerTableViewCell            *_activeCell;
 }
 - (NSInteger) indexForUser:(MKUser *)user;
 - (void) reloadUser:(MKUser *)user;
 - (void) reloadChannel:(MKChannel *)channel;
 - (void) rebuildModelArrayFromChannel:(MKChannel *)channel;
-- (void) addChannelTreeToModel:(MKChannel *)channel indentLevel:(NSInteger)indentLevel;
+- (void) addChannelTreeToModel:(MKChannel *)channel;
 @end
 
 @implementation MUServerViewController
@@ -80,83 +88,83 @@
 #pragma mark Initialization and lifecycle
 
 - (id) initWithServerModel:(MKServerModel *)serverModel {
-    if ((self = [super initWithStyle:UITableViewStylePlain])) {
+    if ((self = [super init])) {
         _serverModel = [serverModel retain];
         [_serverModel addDelegate:self];
         _viewMode = MUServerViewControllerViewModeServer;
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 400) style:UITableViewStylePlain];
     }
     return self;
+}
+
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = false;
+    
+    _iatecLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"IatecLogo"]];
+    [_iatecLogo setFrame:CGRectMake( self.view.frame.size.width - 140, -100, _iatecLogo.frame.size.width, _iatecLogo.frame.size.height)];
+    [_iatecLogo setAlpha:0.15f];
+    [self.view addSubview:_iatecLogo];
+    
+    _translateLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"translatelogo"]];
+    [_translateLogo setCenter:CGPointMake(self.view.frame.size.width / 2.0f, 140)];
+    [self.view addSubview:_translateLogo];
+    
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
+    _tableView.bounces = false;
+    
+    [self.view addSubview:_tableView];
+    
+    _caption = [[UILabel alloc] init];
+    _caption.text = NSLocalizedString(@"ChooseLanguage", nil);
+    _caption.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _caption.textColor = [UIColor whiteColor];
+    _caption.textAlignment = NSTextAlignmentCenter;
+    _caption.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _caption.numberOfLines = 0;
+    _caption.hidden = true;
+    
+    [self.view addSubview:_caption];
+    
+    _lbMessage = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 40, self.view.frame.size.width, 20)];
+    [_lbMessage setFont:[UIFont systemFontOfSize:15]];
+    [_lbMessage setTextAlignment:NSTextAlignmentCenter];
+    [_lbMessage setTextColor:[UIColor whiteColor]];
+    [_lbMessage setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth];
+    [_lbMessage setText:@"www.iatec.com"];
+    
+    [self.view addSubview:_lbMessage];
 }
 
 - (void) dealloc {
     [_serverModel removeDelegate:self];
     [_serverModel release];
+    [_lbMessage release];
+    [_tableView release];
     [super dealloc];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    UINavigationBar *navBar = self.navigationController.navigationBar;
-    if (MUGetOperatingSystemVersion() >= MUMBLE_OS_IOS_7) {
-        navBar.tintColor = [UIColor whiteColor];
-        navBar.translucent = NO;
-        navBar.backgroundColor = [UIColor blackColor];
-    }
-    navBar.barStyle = UIBarStyleBlackOpaque;
-    
-    if (MUGetOperatingSystemVersion() >= MUMBLE_OS_IOS_7) {
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        self.tableView.separatorInset = UIEdgeInsetsZero;
-    }
-    
     if (_viewMode == MUServerViewControllerViewModeServer) {
         [self rebuildModelArrayFromChannel:[_serverModel rootChannel]];
-        [self.tableView reloadData];
     } else if (_viewMode == MUServerViewControllerViewModeChannel) {
         [self switchToChannelMode];
-        [self.tableView reloadData];
     }
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-
-    if ([[MKAudio sharedAudio] transmitType] == MKTransmitTypeToggle) {
-        UIImage *onImage = [UIImage imageNamed:@"talkbutton_on"];
-        UIImage *offImage = [UIImage imageNamed:@"talkbutton_off"];
-        
-        UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-        CGRect windowRect = [window frame];
-        CGRect buttonRect = windowRect;
-        buttonRect.size = onImage.size;
-        buttonRect.origin.y = windowRect.size.height - (buttonRect.size.height + 40);
-        buttonRect.origin.x = (windowRect.size.width - buttonRect.size.width)/2;
-        
-        _talkButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _talkButton.frame = buttonRect;
-        [_talkButton setBackgroundImage:onImage forState:UIControlStateHighlighted];
-        [_talkButton setBackgroundImage:offImage forState:UIControlStateNormal];
-        [_talkButton setOpaque:NO];
-        [_talkButton setAlpha:0.80f];
-        [window addSubview:_talkButton];
-        
-        [_talkButton addTarget:self action:@selector(talkOn:) forControlEvents:UIControlEventTouchDown];
-        [_talkButton addTarget:self action:@selector(talkOff:) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(repositionTalkButton) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-        [self repositionTalkButton];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    }
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    
+    gradient.frame = self.view.bounds;
+    gradient.colors = @[(id)[MUColor MainColor].CGColor, (id)[MUColor MainDarkerColor].CGColor];
+    
+    [self.view.layer insertSublayer:gradient atIndex:0];
+    
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-
-    if (_talkButton) {
-        [_talkButton removeFromSuperview];
-        _talkButton = nil;
-    }
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -200,7 +208,7 @@
     [_channelIndexMap release];
     _channelIndexMap = [[NSMutableDictionary alloc] init];
 
-    [self addChannelTreeToModel:channel indentLevel:0];
+    [self addChannelTreeToModel:channel];
 }
 
 - (void) switchToServerMode {
@@ -227,20 +235,23 @@
     }
 }
 
-- (void) addChannelTreeToModel:(MKChannel *)channel indentLevel:(NSInteger)indentLevel {    
-    [_channelIndexMap setObject:[NSNumber numberWithUnsignedInteger:[_modelItems count]] forKey:[NSNumber numberWithInteger:[channel channelId]]];
-    [_modelItems addObject:[MUChannelNavigationItem navigationItemWithObject:channel indentLevel:indentLevel]];
-
-    for (MKUser *user in [channel users]) {
-        [_userIndexMap setObject:[NSNumber numberWithUnsignedInteger:[_modelItems count]] forKey:[NSNumber numberWithUnsignedInteger:[user session]]];
-        [_modelItems addObject:[MUChannelNavigationItem navigationItemWithObject:user indentLevel:indentLevel+1]];
+-(void)addChannelTreeToModel:(MKChannel *)channel {
+     for (MKChannel *chan in [channel channels]) {
+        [_channelIndexMap setObject:[NSNumber numberWithUnsignedInteger:[_modelItems count]] forKey:[NSNumber numberWithInteger:[chan channelId]]];
+        [_modelItems addObject:[MUChannelNavigationItem navigationItemWithObject:chan indentLevel:0]];
     }
-    for (MKChannel *chan in [channel channels]) {
-        [self addChannelTreeToModel:chan indentLevel:indentLevel+1];
-    }
+    
+    CGFloat height = channel.channels.count * 54;
+    
+    _tableView.frame = CGRectMake(20, self.view.frame.size.height - height - 60, self.view.frame.size.width - 40, height);
+    
+    _caption.frame = CGRectMake(20, _tableView.frame.origin.y - 50, self.view.frame.size.width-40, 44);
+    _caption.hidden = false;
 }
 
 #pragma mark - Table view data source
+
+
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -250,26 +261,12 @@
     return [_modelItems count];
 }
 
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    MUChannelNavigationItem *navItem = [_modelItems objectAtIndex:[indexPath row]];
-    id object = [navItem object];
-    if ([object class] == [MKChannel class]) {
-        MKChannel *chan = object;
-        if (chan == [_serverModel rootChannel] && [_serverModel serverCertificatesTrusted]) {
-            cell.backgroundColor = [MUColor verifiedCertificateChainColor];
-        }
-    }
-}
-
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ChannelNavigationCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        if (MUGetOperatingSystemVersion() >= MUMBLE_OS_IOS_7) {
-            cell = [[[MUServerTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
-        } else {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        }
+        cell = [[[MUServerTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
+        cell.backgroundColor = [UIColor clearColor];
     }
 
     MUChannelNavigationItem *navItem = [_modelItems objectAtIndex:[indexPath row]];
@@ -280,88 +277,53 @@
     cell.textLabel.font = [UIFont systemFontOfSize:18];
     if ([object class] == [MKChannel class]) {
         MKChannel *chan = object;
-        cell.imageView.image = [UIImage imageNamed:@"channel"];
+        cell.imageView.image = [UIImage imageNamed:chan.channelDescription];
         cell.textLabel.text = [chan channelName];
-        if (chan == [connectedUser channel])
+        if (chan == [connectedUser channel]) {
             cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
-        cell.accessoryView = nil;
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        
-    } else if ([object class] == [MKUser class]) {
-        MKUser *user = object;
-
-        cell.textLabel.text = [user userName];
-        if (user == connectedUser)
-            cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
-        
-        MKTalkState talkState = [user talkState];
-        NSString *talkImageName = nil;
-        if (talkState == MKTalkStatePassive)
-            talkImageName = @"talking_off";
-        else if (talkState == MKTalkStateTalking)
-            talkImageName = @"talking_on";
-        else if (talkState == MKTalkStateWhispering)
-            talkImageName = @"talking_whisper";
-        else if (talkState == MKTalkStateShouting)
-            talkImageName = @"talking_alt";
-        
-        // This check is here to correctly remove a user's talk state when backgrounding the app.
-        //
-        // For example, if the user of the app is holding his finger on the Push-to-Talk button
-        // and decides to background Mumble while he is transmitting (via either the home- or
-        // sleep button).
-        //
-        // This scenario brings two issues along with it:
-        //
-        //  1. We have to cut off Push-to-Talk when the app gets backgrounded - we get no TouchUpInside event
-        //     from the UIButton, so we wouldn't regularly stop Push-to-Talk in this scenario.
-        //
-        //  2. Even if we set MKAudio's forceTransmit to NO, there exists a delay in the audio subsystem
-        //     between setting the forceTransmit flag to NO before that change is propagated to MKServerModel
-        //     delegates.
-        //
-        // The first problem is solved by registering a notification observer for when the app enters the
-        // background. This is handled by the appDidEnterBackground: method of this class.
-        //
-        // This notification observer will set the forceTransmit flag to NO, but will also force-reload
-        // the view controller's table view, causing us to enter this method soon before we're really backgrounded.
-        //
-        // That's fine, but because of problem #2, the user's talk state will most likely not be updated by the time
-        // tableView:cellForRowAtIndexPath: is called by the table view.
-        //
-        // To solve this, we query the audio subsystem directly for the answer to whether the current user
-        // should be treated as holding down Push-to-Talk, and therefore be listed with an active talk state
-        // in the table view.
-        if (user == connectedUser && [[MKAudio sharedAudio] transmitType] == MKTransmitTypeToggle) {
-            if (![[MKAudio sharedAudio] forceTransmit]) {
-                talkImageName = @"talking_off";
-            }
+            ((MUServerTableViewCell*)cell).Activated = true;
+        } else {
+            ((MUServerTableViewCell*)cell).Activated = false;
         }
-        
-        cell.imageView.image = [UIImage imageNamed:talkImageName];
-        cell.accessoryView = [MUUserStateAcessoryView viewForUser:user];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryView = nil;
     }
 
-    cell.indentationLevel = [navItem indentLevel];
-
     return cell;
+}
+
+-(void)changeServer:(NSInteger)index{
+    MUChannelNavigationItem *navItem = [_modelItems objectAtIndex:index];
+    id object = [navItem object];
+    if ([object class] == [MKChannel class]) {
+        [_serverModel joinChannel:object];
+    }
 }
 
 #pragma mark - Table view delegate
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MUChannelNavigationItem *navItem = [_modelItems objectAtIndex:[indexPath row]];
-    id object = [navItem object];
-    if ([object class] == [MKChannel class]) {
-        [_serverModel joinChannel:object];
-    }
-
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self changeServer:[indexPath row]];
+    [tableView reloadData];
+    
+    if (_activeCell)
+        _activeCell.Activated = false;
+    
+    MUServerTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.Activated = true;
+    [UIView animateWithDuration:0.3 animations:^{
+        [_activeCell layoutIfNeeded];
+        [cell layoutIfNeeded];
+    }];
+    
+    _activeCell = cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44.0f;
+    return 54;
+}
+
+-(UITableView*)tableView{
+    return _tableView;
 }
 
 #pragma mark - MKServerModel delegate
@@ -458,9 +420,6 @@
         }
 
         [self rebuildModelArrayFromChannel:[model rootChannel]];
-        NSInteger newIdx = [self indexForUser:user];
-        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:newIdx inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        [self.tableView endUpdates];
     } else if (_viewMode == MUServerViewControllerViewModeChannel) {
         NSInteger userIdx = [self indexForUser:user];
         MKChannel *curChan = [[_serverModel connectedUser] channel];
@@ -549,64 +508,6 @@
     [self reloadUser:user];
 }
 
-#pragma mark - PushToTalk
-
-- (void) repositionTalkButton {
-    // fixme(mkrautz): This should stay put if we're run on the iPhone.
-    return;
-    
-    UIDevice *device = [UIDevice currentDevice];
-    UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-    CGRect windowRect = window.frame;
-    CGRect buttonRect;
-    CGSize buttonSize;
-    
-    UIImage *onImage = [UIImage imageNamed:@"talkbutton_on"];
-    buttonRect.size = onImage.size;
-    buttonRect.origin = CGPointMake(0, 0);
-    _talkButton.transform = CGAffineTransformIdentity;
-    buttonSize = onImage.size;
-    buttonRect.size = buttonSize;
-    
-    
-    UIDeviceOrientation orientation = device.orientation;
-    if (orientation == UIDeviceOrientationLandscapeLeft) {
-        _talkButton.transform = CGAffineTransformMakeRotation(M_PI_2);
-        buttonRect = _talkButton.frame;
-        buttonRect.origin.y = (windowRect.size.height - buttonSize.width)/2;
-        buttonRect.origin.x = 40;
-        _talkButton.frame = buttonRect;
-    } else if (orientation == UIDeviceOrientationLandscapeRight) {
-        _talkButton.transform = CGAffineTransformMakeRotation(-M_PI_2);
-        buttonRect = _talkButton.frame;
-        buttonRect.origin.y = (windowRect.size.height - buttonSize.width)/2;
-        buttonRect.origin.x = windowRect.size.width - (buttonSize.height + 40);
-        _talkButton.frame = buttonRect;
-    } else if (orientation == UIDeviceOrientationPortrait) {
-        _talkButton.transform = CGAffineTransformMakeRotation(0.0f);
-        buttonRect = _talkButton.frame;
-        buttonRect.origin.y = windowRect.size.height - (buttonSize.height + 40);
-        buttonRect.origin.x = (windowRect.size.width - buttonSize.width)/2;
-        _talkButton.frame = buttonRect;
-    } else if (orientation == UIDeviceOrientationPortraitUpsideDown) {
-        _talkButton.transform = CGAffineTransformMakeRotation(M_PI);
-        buttonRect = _talkButton.frame;
-        buttonRect.origin.y = 40;
-        buttonRect.origin.x = (windowRect.size.width - buttonSize.width)/2;
-        _talkButton.frame = buttonRect;
-    }
-}
-
-- (void) talkOn:(UIButton *)button {
-    [button setAlpha:1.0f];
-    [[MKAudio sharedAudio] setForceTransmit:YES];
-}
-
-- (void) talkOff:(UIButton *)button {
-    [button setAlpha:0.80f];
-    [[MKAudio sharedAudio] setForceTransmit:NO];
-}
-
 #pragma mark - Mode switch
 
 - (void) toggleMode {
@@ -625,20 +526,12 @@
     if (_viewMode == MUServerViewControllerViewModeServer) {
         MKChannel *cur = [[_serverModel connectedUser] channel];
         NSInteger idx = [self indexForChannel:cur];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    //    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }
 }
 
-#pragma mark - Background notification
-
-- (void) appDidEnterBackground:(NSNotification *)notification {
-    // Force Push-to-Talk to stop when the app is backgrounded.
-    [[MKAudio sharedAudio] setForceTransmit:NO];
-    
-    // Reload the table view to re-render the talk state for the user
-    // as not talking if they were holding down their Push-to-Talk buttons
-    // at the moment the app was sent to the background.
-    [[self tableView] reloadData];
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

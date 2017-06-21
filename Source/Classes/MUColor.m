@@ -38,4 +38,13 @@
     return [UIColor colorWithRed:0x1C/255.0f green:0x1C/255.0f blue:0x1C/255.0f alpha:1.0f];
 }
 
+//2aaed4
++(UIColor*)MainColor{
+    return [[UIColor alloc] initWithRed:0x2a/255.0f green:0xae/255.0f blue:0xd4/255.0f alpha:1];
+}
+//1188ca
++(UIColor*)MainDarkerColor{
+    return [[UIColor alloc] initWithRed:0x11/255.0f green:0x88/255.0f blue:0xca/255.0f alpha:1];
+}
+
 @end

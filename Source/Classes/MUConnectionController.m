@@ -17,6 +17,8 @@
 
 NSString *MUConnectionOpenedNotification = @"MUConnectionOpenedNotification";
 NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
+NSString *MUConnectingNotification = @"MUConnectingNotification";
+NSString *MUConnectingErrorNotification = @"MUConnectingErrorNotification";
 
 @interface MUConnectionController () <MKConnectionDelegate, MKServerModelDelegate, MUServerCertificateTrustViewControllerProtocol> {
     MKConnection               *_connection;
@@ -39,8 +41,7 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
 }
 - (void) establishConnection;
 - (void) teardownConnection;
-- (void) showConnectingView;
-- (void) hideConnectingView;
+- (void) showConnectingMessage;
 @end
 
 @implementation MUConnectionController
@@ -69,15 +70,21 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
     [_transitioningDelegate release];
 }
 
+-(void)sendNotification:(NSString*)notification{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:notification object:nil];
+    });
+}
+
 - (void) connetToHostname:(NSString *)hostName port:(NSUInteger)port withUsername:(NSString *)userName andPassword:(NSString *)password withParentViewController:(UIViewController *)parentViewController {
     _hostname = [hostName retain];
     _port = port;
     _username = [userName retain];
     _password = [password retain];
     
-    [self showConnectingView];
     [self establishConnection];
-    
+    [self showConnectingMessage];
+
     _parentViewController = [parentViewController retain];
 }
 
@@ -90,35 +97,13 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
     [self teardownConnection];
 }
 
-- (void) showConnectingView {
-    NSString *title = [NSString stringWithFormat:@"%@...", NSLocalizedString(@"Connecting", nil)];
-    NSString *msg = [NSString stringWithFormat:
-                        NSLocalizedString(@"Connecting to %@:%lu", @"Connecting to hostname:port"),
-                            _hostname, (unsigned long)_port];
-    
-    _alertView = [[UIAlertView alloc] initWithTitle:title
-                                            message:msg
-                                           delegate:self
-                                  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                  otherButtonTitles:nil];
-    [_alertView show];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(updateTitle) userInfo:nil repeats:YES];
-}
-
-- (void) hideConnectingView {
-    [_alertView dismissWithClickedButtonIndex:1 animated:YES];
-    [_alertView release];
-    _alertView = nil;
-    [_timer invalidate];
-    _timer = nil;
-
-    // This runloop wait works around a new behavior in iOS 7 where our UIAlertViews would suddenly
-    // disappear if shown too soon after hiding the previous alert view.
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeInterval:0.350f sinceDate:[NSDate date]]];
+- (void) showConnectingMessage {
+    [self sendNotification:MUConnectingNotification];
 }
 
 - (void) establishConnection {
     _connection = [[MKConnection alloc] init];
+    [_connection setIgnoreSSLVerification:true];
     [_connection setDelegate:self];
     [_connection setForceTCP:[[NSUserDefaults standardUserDefaults] boolForKey:@"NetworkForceTCP"]];
     
@@ -135,13 +120,14 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
     }
     
     [_connection connectToHost:_hostname port:_port];
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:MUConnectionOpenedNotification object:nil];
-    });
 }
 
-- (void) teardownConnection {
+
+- (void) teardownConnection{
+    [self teardownConnectionWithNotification:true];
+}
+
+- (void) teardownConnectionWithNotification:(BOOL)sendNotification {
     [_serverModel removeDelegate:self];
     [_serverModel release];
     _serverModel = nil;
@@ -155,10 +141,8 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
     
     // Reset app badge. The connection is no more.
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:MUConnectionClosedNotification object:nil];
-    });
+    if (sendNotification)
+        [self sendNotification:MUConnectionClosedNotification];
 }
             
 - (void) updateTitle {
@@ -179,65 +163,34 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
 - (void) connectionOpened:(MKConnection *)conn {
     NSArray *tokens = [MUDatabase accessTokensForServerWithHostname:[conn hostname] port:[conn port]];
     [conn authenticateWithUsername:_username password:_password accessTokens:tokens];
+    [self sendNotification:MUConnectionOpenedNotification];
 }
 
 - (void) connection:(MKConnection *)conn closedWithError:(NSError *)err {
-    [self hideConnectingView];
     if (err) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection closed", nil)
-                                                            message:[err localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                                  otherButtonTitles:nil];
-        [alertView show];
-        [alertView release];
-        [self teardownConnection];
+        [self teardownConnectionWithNotification:false];
+        [self sendNotification:MUConnectingErrorNotification];
     }
 }
 
 - (void) connection:(MKConnection*)conn unableToConnectWithError:(NSError *)err {
-    [self hideConnectingView];
-
-    NSString *msg = [err localizedDescription];
-
-    // errSSLClosedAbort: "connection closed via error".
-    //
-    // This is the error we get when users hit a global ban on the server.
-    // Ideally, we'd provide better descriptions for more of these errors,
-    // but when using NSStream's TLS support, the NSErrors we get are simply
-    // OSStatus codes in an NSError wrapper without a useful description.
-    //
-    // In the future, MumbleKit should probably wrap the SecureTransport range of
-    // OSStatus codes to improve this situation, but this will do for now.
-    if ([[err domain] isEqualToString:NSOSStatusErrorDomain] && [err code] == -9806) {
-        msg = NSLocalizedString(@"The TLS connection was closed due to an error.\n\n"
-                                @"The server might be temporarily rejecting your connection because you have "
-                                @"attempted to connect too many times in a row.", nil);
-    }
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to connect", nil)
-                                                        message:msg
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                              otherButtonTitles:nil];
-    [alertView show];
-    [alertView release];
-    [self teardownConnection];
+    [self teardownConnectionWithNotification:false];
+    [self sendNotification:MUConnectingErrorNotification];
 }
 
 // The connection encountered an invalid SSL certificate chain.
 - (void) connection:(MKConnection *)conn trustFailureInCertificateChain:(NSArray *)chain {
     // Check the database whether the user trusts the leaf certificate of this server.
-    NSString *storedDigest = [MUDatabase digestForServerWithHostname:[conn hostname] port:[conn port]];
-    MKCertificate *cert = [[conn peerCertificates] objectAtIndex:0];
-    NSString *serverDigest = [cert hexDigest];
-    if (storedDigest) {
-        if ([storedDigest isEqualToString:serverDigest]) {
+    //NSString *storedDigest = [MUDatabase digestForServerWithHostname:[conn hostname] port:[conn port]];
+    //MKCertificate *cert = [[conn peerCertificates] objectAtIndex:0];
+    //NSString *serverDigest = [cert hexDigest];
+    //if (storedDigest) {
+       // if ([storedDigest isEqualToString:serverDigest]) {
             // Match
-            [conn setIgnoreSSLVerification:YES];
-            [conn reconnect];
-            return;
-        } else {
+    [conn setIgnoreSSLVerification:YES];
+    [conn reconnect];
+    return;
+        /*} else {
             // Mismatch.  The server is using a new certificate, different from the one it previously
             // presented to us.
             [self hideConnectingView];
@@ -270,7 +223,7 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
         [alert addButtonWithTitle:NSLocalizedString(@"Show Certificates", nil)];
         [alert show];
         [alert release];
-    }
+    }*/
 }
 
 // The server rejected our connection.
@@ -279,7 +232,7 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
     NSString *msg = nil;
     UIAlertView *alert = nil;
     
-    [self hideConnectingView];
+   // [self hideConnectingView];
     [self teardownConnection];
     
     switch (reason) {
@@ -424,7 +377,7 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
             // Rejection handler has already handled the teardown for us.
         } else if (buttonIndex == 1) {
             [self establishConnection];
-            [self showConnectingView];
+            [self showConnectingMessage];
         }
         return;
     }
@@ -443,7 +396,7 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
         // the server presents us.
         [_connection setIgnoreSSLVerification:YES];
         [_connection reconnect];
-        [self showConnectingView];
+        [self showConnectingMessage];
         
     // Trust
     } else if (buttonIndex == 2) {
@@ -455,7 +408,7 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
         [MUDatabase storeDigest:digest forServerWithHostname:[_connection hostname] port:[_connection port]];
         [_connection setIgnoreSSLVerification:YES];
         [_connection reconnect];
-        [self showConnectingView];
+        [self showConnectingMessage];
         
     // Show certificates
     } else if (buttonIndex == 3) {
@@ -469,7 +422,7 @@ NSString *MUConnectionClosedNotification = @"MUConnectionClosedNotification";
 }
 
 - (void) serverCertificateTrustViewControllerDidDismiss:(MUServerCertificateTrustViewController *)trustView {
-    [self showConnectingView];
+    [self showConnectingMessage];
     [_connection reconnect];
 }
 

@@ -14,13 +14,15 @@
 #import "MUImage.h"
 #import "MUOperatingSystem.h"
 #import "MUBackgroundView.h"
+#import "TutorialController.h"
 
 #import <MumbleKit/MKAudio.h>
 #import <MumbleKit/MKVersion.h>
 
+#include <ifaddrs.h>
+#include <arpa/inet.h>
 
-@interface MUApplicationDelegate () <UIApplicationDelegate,
-                                     UIAlertViewDelegate> {
+@interface MUApplicationDelegate () <UIApplicationDelegate, UIAlertViewDelegate> {
     UIWindow                  *_window;
     UINavigationController    *_navigationController;
     MUPublicServerListFetcher *_publistFetcher;
@@ -62,7 +64,6 @@
 
     // Register default settings
     [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                // Audio
                                                                 [NSNumber numberWithFloat:1.0f],   @"AudioOutputVolume",
                                                                 [NSNumber numberWithFloat:0.6f],   @"AudioVADAbove",
                                                                 [NSNumber numberWithFloat:0.3f],   @"AudioVADBelow",
@@ -76,7 +77,6 @@
                                                                 [NSNumber numberWithFloat:0.2f],   @"AudioSidetoneVolume",
                                                                 [NSNumber numberWithBool:YES],     @"AudioSpeakerPhoneMode",
                                                                 [NSNumber numberWithBool:YES],     @"AudioOpusCodecForceCELTMode",
-                                                                // Network
                                                                 [NSNumber numberWithBool:NO],      @"NetworkForceTCP",
                                                                 @"MumbleUser",                     @"DefaultUserName",
                                                         nil]];
@@ -99,57 +99,28 @@
     }
     
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    if (MUGetOperatingSystemVersion() >= MUMBLE_OS_IOS_7) {
-    // XXX: don't do it system-wide just yet
-    //    _window.tintColor = [UIColor whiteColor];
-    }
     
     // Put a background view in here, to have prettier transitions.
     [_window addSubview:[MUBackgroundView backgroundView]];
 
-    // Add our default navigation controller
-    _navigationController = [[UINavigationController alloc] init];
-    _navigationController.toolbarHidden = YES;
-
-    UIUserInterfaceIdiom idiom = [[UIDevice currentDevice] userInterfaceIdiom];
-    UIViewController *welcomeScreen = nil;
-    if (idiom == UIUserInterfaceIdiomPad) {
-        welcomeScreen = [[MUWelcomeScreenPad alloc] init];
-        [_navigationController pushViewController:welcomeScreen animated:YES];
-        [welcomeScreen release];
-    } else {
-        welcomeScreen = [[MUWelcomeScreenPhone alloc] init];
-        [_navigationController pushViewController:welcomeScreen animated:YES];
-        [welcomeScreen release];
-    }
-    
-    [_window setRootViewController:_navigationController];
+    UIViewController *welcomeScreen = [[MUWelcomeScreen alloc] init];
+    [_navigationController pushViewController:welcomeScreen animated:YES];
+   
+    [_window setRootViewController:welcomeScreen];
     [_window makeKeyAndVisible];
-
+ 
+    [welcomeScreen release];
+   
+    MUConnectionController *connController = [MUConnectionController sharedController];
+    NSString *hostname = @"10.91.20.195";
+    NSUInteger port = 64738;
+    NSString *username = [NSString stringWithFormat:@"ios-%@", [self getIPAddress]];
+    NSString *password = @"";
     
-    NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
-    if ([[url scheme] isEqualToString:@"mumble"]) {
-        MUConnectionController *connController = [MUConnectionController sharedController];
-        NSString *hostname = [url host];
-        NSNumber *port = [url port];
-        NSString *username = [url user];
-        NSString *password = [url password];
-        [connController connetToHostname:hostname port:port ? [port integerValue] : 64738 withUsername:username andPassword:password withParentViewController:welcomeScreen];
-        return YES;
-    }
-
-    /*
-        MUConnectionController *connController = [MUConnectionController sharedController];
-        NSString *hostname = @"10.91.20.195";
-        NSUInteger port = 64738;
-        NSString *username = @"wop-mac";
-        NSString *password = @"";
-    */
     
-        /* Realiza a conexão com o Servidor Mumble */
-        //[connController connetToHostname:hostname port:port  withUsername:username andPassword:password withParentViewController:welcomeScreen];
-        //return YES;
-    
+    /* Realiza a conexão com o Servidor Mumble */
+    [connController connetToHostname:hostname port:port  withUsername:username andPassword:password withParentViewController:welcomeScreen];
+    //return YES;
     
     return NO;
 }
@@ -335,6 +306,37 @@
         [[MURemoteControlServer sharedRemoteControlServer] start];
 #endif
     }
+}
+
+- (NSString *)getIPAddress {
+    
+    NSString *address = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    // retrieve the current interfaces - returns 0 on success
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        // Loop through linked list of interfaces
+        temp_addr = interfaces;
+        while(temp_addr != NULL) {
+            if(temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                    
+                }
+                
+            }
+            
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    // Free memory
+    freeifaddrs(interfaces);
+    return address;
+    
 }
 
 @end

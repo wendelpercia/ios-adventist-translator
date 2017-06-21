@@ -4,6 +4,8 @@
 
 extern NSString *MUConnectionOpenedNotification;
 extern NSString *MUConnectionClosedNotification;
+extern NSString *MUConnectingNotification;
+extern NSString *MUConnectingErrorNotification;
 
 @interface MUConnectionController : UIView
 + (MUConnectionController *) sharedController;

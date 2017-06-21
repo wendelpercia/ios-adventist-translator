@@ -8,28 +8,37 @@
 
 - (id) initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
-        // ...
+        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageView.clipsToBounds = true;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.contentView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5f];
     }
     return self;
 }
 
+-(void)setActivated:(bool)Activated{
+    _Activated = Activated;
+    [self setNeedsLayout];
+}
+
 - (void) layoutSubviews {
     [super layoutSubviews];
-
-    self.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-
+    
+    self.contentView.frame = CGRectMake(0, 5, self.frame.size.width, self.frame.size.height - 10);
+    
+    
     self.imageView.frame = CGRectMake(
-        8 + self.indentationLevel * self.indentationWidth,
-        CGRectGetMinY(self.imageView.frame),
-        CGRectGetWidth(self.imageView.frame),
-        CGRectGetHeight(self.imageView.frame)
+        0,
+        0,
+        _Activated?self.imageView.image.size.width:10,
+        self.contentView.frame.size.height
     );
 
     self.textLabel.frame = CGRectMake(
-        CGRectGetMinX(self.imageView.frame) + 40,
-        CGRectGetMinY(self.textLabel.frame),
+        self.imageView.frame.size.width + 20,
+        0,
         CGRectGetWidth(self.frame) - (CGRectGetMinX(self.imageView.frame) + 60),
-        CGRectGetHeight(self.textLabel.frame)
+        self.contentView.frame.size.height
     );
 }
 

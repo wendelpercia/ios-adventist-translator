@@ -9,7 +9,7 @@ typedef enum {
     MUServerViewControllerViewModeChannel = 1,
 } MUServerViewControllerViewMode;
 
-@interface MUServerViewController : UITableViewController
+@interface MUServerViewController : UIViewController
 - (id) initWithServerModel:(MKServerModel *)serverModel;
 - (void) toggleMode;
 @end

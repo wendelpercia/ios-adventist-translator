@@ -10,4 +10,7 @@
 + (UIColor *) userCountColor;
 + (UIColor *) verifiedCertificateChainColor;
 + (UIColor *) backgroundViewiOS7Color;
+
++(UIColor*)MainColor;
++(UIColor*)MainDarkerColor;
 @end

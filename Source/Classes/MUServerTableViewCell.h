@@ -3,5 +3,9 @@
 // license that can be found in the LICENSE file.
 
 @interface MUServerTableViewCell : UITableViewCell
+
+@property (nonatomic) bool Activated;
+
 - (id) initWithReuseIdentifier:(NSString *)reuseIdentifier;
+
 @end
