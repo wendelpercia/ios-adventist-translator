@@ -36,19 +36,16 @@
     CGSize size = self.frame.size;
     
     iv = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, size.width - 30, size.height / 2 - 15)];
-    [iv setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-    iv.contentMode = UIViewContentModeScaleAspectFit;
+     iv.contentMode = UIViewContentModeScaleAspectFit;
     
     lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, size.height / 2 + 15, size.width - 30, 20)];
     lbTitle.textAlignment = NSTextAlignmentCenter;
     lbTitle.font = [UIFont boldSystemFontOfSize:17];
-    [lbTitle setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
     
     lbMessage = [[UILabel alloc] initWithFrame:CGRectMake(15, lbTitle.frame.origin.y + 35, size.width - 30, size.height - 65 - lbTitle.frame.origin.y)];
     lbMessage.textAlignment = NSTextAlignmentCenter;
     lbMessage.numberOfLines = 0;
     lbMessage.font = [UIFont systemFontOfSize:15];
-    [lbMessage setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
     
     self.backgroundColor = [UIColor whiteColor];
     
@@ -81,5 +78,12 @@
     return lbMessage.text;
 }
 
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    CGSize size = self.frame.size;
+    iv.frame = CGRectMake(15, 20, size.width - 30, size.height / 2 - 20);
+    lbTitle.frame = CGRectMake(15, size.height / 2 + 15, size.width - 30, 20);
+    lbMessage.frame = CGRectMake(15, lbTitle.frame.origin.y + 35, size.width - 30, size.height - 65 - lbTitle.frame.origin.y);
+}
 
 @end

@@ -66,27 +66,44 @@
 }
 
 - (IBAction)Next:(id)sender {
-
+    if (_psPosition.currentPage < 2){
+        [UIView animateWithDuration:0.3 animations:^{
+            [self toStep:_psPosition.currentPage + 1];
+        }];
+    } else {
+        if ([self.delegate respondsToSelector:@selector(TutorialControllerEnded:)]) {
+            [self.delegate TutorialControllerEnded:self];
+        }
+    }
 }
 
--(void)toStep:(int)step{
+-(void)toStep:(long)step{
     switch (step) {
         case 0:{
              _lbTitle.text = NSLocalizedString(@"SecurityDescription", nil);
-            [_btAction setTitle:NSLocalizedString(@"Next", nil) forState:UIControlStateNormal];
+            [_btAction setTitle:NSLocalizedString(@"NEXT", nil) forState:UIControlStateNormal];
         }
             break;
         case 1:{
             _lbTitle.text = NSLocalizedString(@"PhoneDescription", nil);
-            [_btAction setTitle:NSLocalizedString(@"Next", nil) forState:UIControlStateNormal];
+            [_btAction setTitle:NSLocalizedString(@"NEXT", nil) forState:UIControlStateNormal];
         }
             break;
         case 2: {
             _lbTitle.text = NSLocalizedString(@"NetworkDescription", nil);
-            [_btAction setTitle:NSLocalizedString(@"Begin", nil) forState:UIControlStateNormal];
+            [_btAction setTitle:NSLocalizedString(@"BEGIN", nil) forState:UIControlStateNormal];
         }
             break;
     }
+    
+    CGRect frame = CGRectInset(_vwCards.bounds, 30,0);
+    frame.origin.x -= step * _vwCards.frame.size.width;
+    
+    for (CardView* cv in cards) {
+        cv.frame = frame;
+        frame.origin.x += _vwCards.frame.size.width;
+    }
+    
     
     _psPosition.currentPage = step;
 }
@@ -99,6 +116,7 @@
     [cvPhones release];
     [cvSecurity release];
     [cvNetwork release];
+    [_delegate release];
     
     [super dealloc];
 }

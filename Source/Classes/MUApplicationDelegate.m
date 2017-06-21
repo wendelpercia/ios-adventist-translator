@@ -22,10 +22,11 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 
-@interface MUApplicationDelegate () <UIApplicationDelegate, UIAlertViewDelegate> {
+@interface MUApplicationDelegate () <UIApplicationDelegate, UIAlertViewDelegate, TutorialControlerDelegate> {
     UIWindow                  *_window;
     UINavigationController    *_navigationController;
     MUPublicServerListFetcher *_publistFetcher;
+    TutorialController        *_tutorial;
     BOOL                      _connectionActive;
 #ifdef MUMBLE_BETA_DIST
     MUVersionChecker          *_verCheck;
@@ -100,29 +101,60 @@
     
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    // Put a background view in here, to have prettier transitions.
+    
     [_window addSubview:[MUBackgroundView backgroundView]];
-
     UIViewController *welcomeScreen = [[MUWelcomeScreen alloc] init];
-    [_navigationController pushViewController:welcomeScreen animated:YES];
-   
     [_window setRootViewController:welcomeScreen];
     [_window makeKeyAndVisible];
  
     [welcomeScreen release];
    
+    NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
+    Boolean b = [defs boolForKey: @"TUTORIALSHOWED"];
+    if (!b) {
+        [self showTutorial];
+    } else {
+        [self connect];
+    }
+    return NO;
+}
+
+-(void)showTutorial {
+    UIViewController* root = _window.rootViewController;
+    _tutorial = [[TutorialController alloc] init];
+    _tutorial.view.frame = root.view.bounds;
+    _tutorial.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _tutorial.delegate = self;
+    [root.view addSubview:_tutorial.view];
+    [root addChildViewController:_tutorial];
+}
+
+-(void)TutorialControllerEnded:(TutorialController *)controller{
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        _tutorial.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [_tutorial.view removeFromSuperview];
+        [_tutorial removeFromParentViewController];
+        [_tutorial release];
+        _tutorial = nil;
+    }];
+    
+    [self connect];
+    
+    NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
+    [defs setBool:true forKey:@"TUTORIALSHOWED"];
+    [defs synchronize];
+}
+
+-(void)connect {
     MUConnectionController *connController = [MUConnectionController sharedController];
     NSString *hostname = @"10.91.20.195";
     NSUInteger port = 64738;
     NSString *username = [NSString stringWithFormat:@"ios-%@", [self getIPAddress]];
     NSString *password = @"";
     
-    
-    /* Realiza a conexão com o Servidor Mumble */
-    [connController connetToHostname:hostname port:port  withUsername:username andPassword:password withParentViewController:welcomeScreen];
-    //return YES;
-    
-    return NO;
+    [connController connetToHostname:hostname port:port  withUsername:username andPassword:password withParentViewController:_window.rootViewController];
 }
 
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
