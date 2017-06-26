@@ -101,8 +101,6 @@
 		289D254C11BC28BC00E39F2C /* MULanServerListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289D254B11BC28BC00E39F2C /* MULanServerListController.m */; };
 		28A2AEB914786E6000F3B83F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A2AEB514786E6000F3B83F /* Default.png */; };
 		28A2AEBA14786E6000F3B83F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A2AEB614786E6000F3B83F /* Default@2x.png */; };
-		28A2AEBB14786E6000F3B83F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A2AEB714786E6000F3B83F /* icon.png */; };
-		28A2AEBC14786E6000F3B83F /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A2AEB814786E6000F3B83F /* icon@2x.png */; };
 		28A2AEC114788BE300F3B83F /* MUColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A2AEC014788BE300F3B83F /* MUColor.m */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28ADA303148A3E3B00C55E51 /* MUAudioQualityPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ADA302148A3E3B00C55E51 /* MUAudioQualityPreferencesViewController.m */; };
@@ -112,7 +110,6 @@
 		28BE998818CFCDE600910551 /* MUServerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BE998718CFCDE600910551 /* MUServerTableViewCell.m */; };
 		28BE998A18CFD77400910551 /* Default-iOS7-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BE998918CFD77400910551 /* Default-iOS7-568h@2x.png */; };
 		28BE998E18CFD7DC00910551 /* Default-iOS7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BE998D18CFD7DC00910551 /* Default-iOS7@2x.png */; };
-		28BE999218CFE1FD00910551 /* icon7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BE999118CFE1FD00910551 /* icon7@2x.png */; };
 		28BE999918CFED9A00910551 /* Balloon_2_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BE999718CFED9A00910551 /* Balloon_2_Right.png */; };
 		28BE999A18CFED9A00910551 /* Balloon_2_Right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BE999818CFED9A00910551 /* Balloon_2_Right@2x.png */; };
 		28BE999F18CFF03D00910551 /* LeftBalloonSelectedMono.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BE999B18CFF03D00910551 /* LeftBalloonSelectedMono.png */; };
@@ -121,8 +118,6 @@
 		28BE99A218CFF03D00910551 /* RightBalloonSelectedMono@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BE999E18CFF03D00910551 /* RightBalloonSelectedMono@2x.png */; };
 		28BF81D2139AFFD50078B722 /* MUCertificateDiskImportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BF81D1139AFFD50078B722 /* MUCertificateDiskImportViewController.m */; };
 		28C6EF0A11BBF38100E426C8 /* MUCountryServerListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C6EF0911BBF38100E426C8 /* MUCountryServerListController.m */; };
-		28D963961639B9E4002A9E73 /* iconpad.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D963951639B9E4002A9E73 /* iconpad.png */; };
-		28D963981639B9E8002A9E73 /* iconpad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D963971639B9E8002A9E73 /* iconpad@2x.png */; };
 		28DC1C5C13DE596B0037CDC2 /* authenticated.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC1C1313DE596B0037CDC2 /* authenticated.png */; };
 		28DC1C5D13DE596B0037CDC2 /* authenticated@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC1C1413DE596B0037CDC2 /* authenticated@2x.png */; };
 		28DC1C6513DE596B0037CDC2 /* certificatecell-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DC1C1C13DE596B0037CDC2 /* certificatecell-selected.png */; };
@@ -182,6 +177,9 @@
 		28FAA35F14D74C1600F6D711 /* SmallMumbleIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAA35D14D74C1600F6D711 /* SmallMumbleIcon.png */; };
 		28FAA36014D74C1600F6D711 /* SmallMumbleIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAA35E14D74C1600F6D711 /* SmallMumbleIcon@2x.png */; };
 		28FAA36414D7551600F6D711 /* MKNumberBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FAA36314D7551600F6D711 /* MKNumberBadgeView.m */; };
+		8E44B4B91F013A3000D75634 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E44B4B81F013A3000D75634 /* LaunchScreen.storyboard */; };
+		8E44B4BC1F013B2800D75634 /* GradientBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E44B4BB1F013B2800D75634 /* GradientBack.png */; };
+		8E44B4BE1F013EDC00D75634 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E44B4BD1F013EDC00D75634 /* Image.xcassets */; };
 		8E665B561EF15FB200BF72EA /* translatelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E665B531EF15FB200BF72EA /* translatelogo.png */; };
 		8E665B571EF15FB200BF72EA /* translatelogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E665B541EF15FB200BF72EA /* translatelogo@2x.png */; };
 		8E665B581EF15FB200BF72EA /* translatelogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E665B551EF15FB200BF72EA /* translatelogo@3x.png */; };
@@ -442,6 +440,8 @@
 		8EC2AFB41EF9410300AF4756 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC2AFB31EF9410300AF4756 /* CardView.m */; };
 		8EC2AFB81EF94F5D00AF4756 /* TutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC2AFB61EF94F5D00AF4756 /* TutorialController.m */; };
 		8EC2AFB91EF94F5D00AF4756 /* TutorialController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EC2AFB71EF94F5D00AF4756 /* TutorialController.xib */; };
+		8EF4AA951EFD4F6500EA1943 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4AA941EFD4F6500EA1943 /* Reachability.m */; };
+		8EF4AA981EFD52FE00EA1943 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF4AA971EFD52FE00EA1943 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -622,8 +622,6 @@
 		289D254B11BC28BC00E39F2C /* MULanServerListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MULanServerListController.m; sourceTree = "<group>"; };
 		28A2AEB514786E6000F3B83F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		28A2AEB614786E6000F3B83F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		28A2AEB714786E6000F3B83F /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		28A2AEB814786E6000F3B83F /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		28A2AEBF14788BE300F3B83F /* MUColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUColor.h; sourceTree = "<group>"; };
 		28A2AEC014788BE300F3B83F /* MUColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUColor.m; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = ../MainWindow.xib; sourceTree = "<group>"; };
@@ -637,7 +635,6 @@
 		28BE998718CFCDE600910551 /* MUServerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUServerTableViewCell.m; sourceTree = "<group>"; };
 		28BE998918CFD77400910551 /* Default-iOS7-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-iOS7-568h@2x.png"; sourceTree = "<group>"; };
 		28BE998D18CFD7DC00910551 /* Default-iOS7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-iOS7@2x.png"; sourceTree = "<group>"; };
-		28BE999118CFE1FD00910551 /* icon7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon7@2x.png"; sourceTree = "<group>"; };
 		28BE999718CFED9A00910551 /* Balloon_2_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Balloon_2_Right.png; path = Resources/Apple/Balloon_2_Right.png; sourceTree = "<group>"; };
 		28BE999818CFED9A00910551 /* Balloon_2_Right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Balloon_2_Right@2x.png"; path = "Resources/Apple/Balloon_2_Right@2x.png"; sourceTree = "<group>"; };
 		28BE999B18CFF03D00910551 /* LeftBalloonSelectedMono.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LeftBalloonSelectedMono.png; path = Resources/Apple/LeftBalloonSelectedMono.png; sourceTree = "<group>"; };
@@ -647,8 +644,6 @@
 		28BF81D0139AFFD50078B722 /* MUCertificateDiskImportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUCertificateDiskImportViewController.h; sourceTree = "<group>"; };
 		28BF81D1139AFFD50078B722 /* MUCertificateDiskImportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUCertificateDiskImportViewController.m; sourceTree = "<group>"; };
 		28C6EF0911BBF38100E426C8 /* MUCountryServerListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUCountryServerListController.m; sourceTree = "<group>"; };
-		28D963951639B9E4002A9E73 /* iconpad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconpad.png; sourceTree = "<group>"; };
-		28D963971639B9E8002A9E73 /* iconpad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconpad@2x.png"; sourceTree = "<group>"; };
 		28DC1C1313DE596B0037CDC2 /* authenticated.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = authenticated.png; path = Resources/authenticated.png; sourceTree = "<group>"; };
 		28DC1C1413DE596B0037CDC2 /* authenticated@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "authenticated@2x.png"; path = "Resources/authenticated@2x.png"; sourceTree = "<group>"; };
 		28DC1C1613DE596B0037CDC2 /* certificate16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = certificate16.png; path = Resources/certificate16.png; sourceTree = "<group>"; };
@@ -732,6 +727,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Mumble.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mumble.pch; path = Source/Mumble.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Source/Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		8E44B4B81F013A3000D75634 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8E44B4BB1F013B2800D75634 /* GradientBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GradientBack.png; path = Resources/GradientBack.png; sourceTree = "<group>"; };
+		8E44B4BD1F013EDC00D75634 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		8E665B531EF15FB200BF72EA /* translatelogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = translatelogo.png; path = Resources/translatelogo.png; sourceTree = "<group>"; };
 		8E665B541EF15FB200BF72EA /* translatelogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "translatelogo@2x.png"; path = "Resources/translatelogo@2x.png"; sourceTree = "<group>"; };
 		8E665B551EF15FB200BF72EA /* translatelogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "translatelogo@3x.png"; path = "Resources/translatelogo@3x.png"; sourceTree = "<group>"; };
@@ -995,6 +993,9 @@
 		8EC2AFB51EF94F5D00AF4756 /* TutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialController.h; sourceTree = "<group>"; };
 		8EC2AFB61EF94F5D00AF4756 /* TutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialController.m; sourceTree = "<group>"; };
 		8EC2AFB71EF94F5D00AF4756 /* TutorialController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialController.xib; sourceTree = "<group>"; };
+		8EF4AA931EFD4F6500EA1943 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		8EF4AA941EFD4F6500EA1943 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		8EF4AA971EFD52FE00EA1943 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1002,6 +1003,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EF4AA981EFD52FE00EA1943 /* SystemConfiguration.framework in Frameworks */,
 				2879528F14C38FC200567430 /* MobileCoreServices.framework in Frameworks */,
 				28F79C6D14796B2F0003B8BA /* libsqlite3.dylib in Frameworks */,
 				28990AB1132FDA540034B406 /* libMumbleKit.a in Frameworks */,
@@ -1112,6 +1114,8 @@
 				8EC2AFB51EF94F5D00AF4756 /* TutorialController.h */,
 				8EC2AFB61EF94F5D00AF4756 /* TutorialController.m */,
 				8EC2AFB71EF94F5D00AF4756 /* TutorialController.xib */,
+				8EF4AA931EFD4F6500EA1943 /* Reachability.h */,
+				8EF4AA941EFD4F6500EA1943 /* Reachability.m */,
 				2838EA0C1293165700035C5D /* Preferences */,
 			);
 			name = Classes;
@@ -1291,6 +1295,7 @@
 		28DC1C1213DE59120037CDC2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8E44B4BB1F013B2800D75634 /* GradientBack.png */,
 				8E665B5A1EF16C6F00BF72EA /* flags */,
 				280256351510D70D00178B08 /* en.lproj */,
 				280256391510DDCA00178B08 /* da.lproj */,
@@ -1325,11 +1330,6 @@
 				28BE998D18CFD7DC00910551 /* Default-iOS7@2x.png */,
 				28451943163463C90027FAB3 /* Default-568h@2x.png */,
 				28BE998918CFD77400910551 /* Default-iOS7-568h@2x.png */,
-				28A2AEB714786E6000F3B83F /* icon.png */,
-				28A2AEB814786E6000F3B83F /* icon@2x.png */,
-				28BE999118CFE1FD00910551 /* icon7@2x.png */,
-				28D963951639B9E4002A9E73 /* iconpad.png */,
-				28D963971639B9E8002A9E73 /* iconpad@2x.png */,
 				28F79CA21479C23F0003B8BA /* BackgroundTextureBlackGradient.png */,
 				28F79CA01479C2180003B8BA /* BackgroundTextureBlackGradient@2x.png */,
 				284519491634849E0027FAB3 /* BackgroundTextureBlackGradient-568h@2x.png */,
@@ -1398,6 +1398,8 @@
 				2843040916BF25590025A783 /* MumbleMenuButton@2x.png */,
 				28BE998118CFA8B900910551 /* BlackToolbarPatterniOS7.png */,
 				28BE997F18CFA83800910551 /* BlackToolbarPatterniOS7@2x.png */,
+				8E44B4B81F013A3000D75634 /* LaunchScreen.storyboard */,
+				8E44B4BD1F013EDC00D75634 /* Image.xcassets */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1452,6 +1454,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EF4AA971EFD52FE00EA1943 /* SystemConfiguration.framework */,
 				28990AB0132FDA540034B406 /* libMumbleKit.a */,
 				28F79C6C14796B2E0003B8BA /* libsqlite3.dylib */,
 				2879528E14C38FC200567430 /* MobileCoreServices.framework */,
@@ -1763,11 +1766,6 @@
 			attributes = {
 				LastTestingUpgradeCheck = 0700;
 				LastUpgradeCheck = 0510;
-				TargetAttributes = {
-					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = AE7MRGDVXJ;
-					};
-				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Adventist Translator" */;
 			compatibilityVersion = "Xcode 8.0";
@@ -1972,6 +1970,7 @@
 				8E665C821EF16C6F00BF72EA /* CZ.png in Resources */,
 				8E665CAD1EF16C6F00BF72EA /* IC.png in Resources */,
 				8EA987EB1EFADF410059B15D /* Protection.png in Resources */,
+				8E44B4B91F013A3000D75634 /* LaunchScreen.storyboard in Resources */,
 				28DC1C9913DE596B0037CDC2 /* talking_alt@2x.png in Resources */,
 				28DC1C9A13DE596B0037CDC2 /* talking_off.png in Resources */,
 				8E665C5B1EF16C6F00BF72EA /* AX.png in Resources */,
@@ -2021,7 +2020,6 @@
 				28A2AEB914786E6000F3B83F /* Default.png in Resources */,
 				28A2AEBA14786E6000F3B83F /* Default@2x.png in Resources */,
 				8E665C891EF16C6F00BF72EA /* EC.png in Resources */,
-				28A2AEBB14786E6000F3B83F /* icon.png in Resources */,
 				8E665CBB1EF16C6F00BF72EA /* KE.png in Resources */,
 				8E665CEF1EF16C6F00BF72EA /* NO.png in Resources */,
 				8E665CD41EF16C6F00BF72EA /* ME.png in Resources */,
@@ -2032,7 +2030,6 @@
 				8E665D2C1EF16C6F00BF72EA /* US.png in Resources */,
 				8EA987E91EFADF410059B15D /* Phones@2x.png in Resources */,
 				8E665C7A1EF16C6F00BF72EA /* CN.png in Resources */,
-				28A2AEBC14786E6000F3B83F /* icon@2x.png in Resources */,
 				8E665CC61EF16C6F00BF72EA /* LA.png in Resources */,
 				28F79C69147966840003B8BA /* WelcomeScreenIcon.png in Resources */,
 				28F79C6B147968C60003B8BA /* WelcomeScreenIcon@2x.png in Resources */,
@@ -2043,6 +2040,7 @@
 				8E665D3B1EF16C6F00BF72EA /* ZM.png in Resources */,
 				8E665CCB1EF16C6F00BF72EA /* LR.png in Resources */,
 				8E665D1A1EF16C6F00BF72EA /* TC.png in Resources */,
+				8E44B4BE1F013EDC00D75634 /* Image.xcassets in Resources */,
 				8E665CF71EF16C6F00BF72EA /* PF.png in Resources */,
 				8E665CEE1EF16C6F00BF72EA /* NL.png in Resources */,
 				8E665CDF1EF16C6F00BF72EA /* MR.png in Resources */,
@@ -2164,16 +2162,14 @@
 				28451944163463C90027FAB3 /* Default-568h@2x.png in Resources */,
 				2845194816346F5B0027FAB3 /* WelcomeScreenIcon-568h@2x.png in Resources */,
 				2845194A1634849E0027FAB3 /* BackgroundTextureBlackGradient-568h@2x.png in Resources */,
-				28D963961639B9E4002A9E73 /* iconpad.png in Resources */,
 				8E665D291EF16C6F00BF72EA /* TZ.png in Resources */,
-				28BE999218CFE1FD00910551 /* icon7@2x.png in Resources */,
 				8E665D1B1EF16C6F00BF72EA /* TD.png in Resources */,
 				8E665C6C1EF16C6F00BF72EA /* BT.png in Resources */,
 				8E665D101EF16C6F00BF72EA /* SL.png in Resources */,
-				28D963981639B9E8002A9E73 /* iconpad@2x.png in Resources */,
 				8E665C591EF16C6F00BF72EA /* AU.png in Resources */,
 				2843040A16BF25590025A783 /* MumbleMenuButton.png in Resources */,
 				8E665C751EF16C6F00BF72EA /* CH.png in Resources */,
+				8E44B4BC1F013B2800D75634 /* GradientBack.png in Resources */,
 				8E665C701EF16C6F00BF72EA /* CA.png in Resources */,
 				8E665C6E1EF16C6F00BF72EA /* BY.png in Resources */,
 				8E665D231EF16C6F00BF72EA /* TN.png in Resources */,
@@ -2270,6 +2266,7 @@
 				28F9E1BF15EBDF2400D52001 /* MURemoteControlServer.m in Sources */,
 				2813B1D115EBFDA90049A59A /* MURemoteControlPreferencesViewController.m in Sources */,
 				285D6B7116BEEFA700F239EB /* MUTextMessageProcessor.m in Sources */,
+				8EF4AA951EFD4F6500EA1943 /* Reachability.m in Sources */,
 				2846C7D616F4A09000739FD8 /* MUServerButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2325,9 +2322,11 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = AE7MRGDVXJ;
+				DEVELOPMENT_TEAM = 49Y4NE4845;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;
@@ -2339,9 +2338,11 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = AE7MRGDVXJ;
+				DEVELOPMENT_TEAM = 49Y4NE4845;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;
@@ -2361,9 +2362,11 @@
 		2887C88A1454C4C2009B3576 /* AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = AE7MRGDVXJ;
+				DEVELOPMENT_TEAM = 49Y4NE4845;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;
@@ -2383,9 +2386,11 @@
 		28BC1E7B1227155500C03FCF /* BetaDist */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = AE7MRGDVXJ;
+				DEVELOPMENT_TEAM = 49Y4NE4845;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
 				PRODUCT_NAME = Translator;

@@ -41,11 +41,13 @@
     lbTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, size.height / 2 + 15, size.width - 30, 20)];
     lbTitle.textAlignment = NSTextAlignmentCenter;
     lbTitle.font = [UIFont boldSystemFontOfSize:17];
+    lbTitle.textColor = [UIColor colorWithRed:0x11/55.0 green:0x88/255.0 blue:0xca/255.0 alpha:1];
     
-    lbMessage = [[UILabel alloc] initWithFrame:CGRectMake(15, lbTitle.frame.origin.y + 35, size.width - 30, size.height - 65 - lbTitle.frame.origin.y)];
+    lbMessage = [[UILabel alloc] initWithFrame:CGRectMake(25, lbTitle.frame.origin.y + 35, size.width - 50, size.height - 65 - lbTitle.frame.origin.y)];
     lbMessage.textAlignment = NSTextAlignmentCenter;
     lbMessage.numberOfLines = 0;
     lbMessage.font = [UIFont systemFontOfSize:15];
+    lbMessage.textColor = [UIColor colorWithRed:0x2a/255.0 green:0xae/255.0 blue:0xd4/255.0 alpha:1];
     
     self.backgroundColor = [UIColor whiteColor];
     

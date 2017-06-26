@@ -19,14 +19,17 @@
     CardView* cvPhones;
     CardView* cvNetwork;
     NSArray<CardView*>* cards;
+    
+    CAGradientLayer *gradient;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient = [CAGradientLayer layer];
     gradient.frame = self.view.bounds;
     gradient.colors = @[(id)[MUColor MainColor].CGColor, (id)[MUColor MainDarkerColor].CGColor];
+    
     [self.view.layer insertSublayer:gradient atIndex:0];
     
     
@@ -106,6 +109,10 @@
     
     
     _psPosition.currentPage = step;
+}
+
+-(void)viewDidLayoutSubviews{
+    gradient.frame = self.view.bounds;
 }
 
 - (void)dealloc {
