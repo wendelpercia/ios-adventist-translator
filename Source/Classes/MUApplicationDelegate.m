@@ -23,6 +23,7 @@
 #include <arpa/inet.h>
 #include "Reachability.h"
 #include "CardView.h"
+#include <AVFoundation/AVFoundation.h>
 
 @interface MUApplicationDelegate () <UIApplicationDelegate, UIAlertViewDelegate, TutorialControlerDelegate> {
     UIWindow                  *_window;
@@ -32,7 +33,7 @@
     Reachability              * reachability;
     BOOL                      _connectionActive;
     
-    UIView* _networkIssueView;
+    UIView* _issueView;
 #ifdef MUMBLE_BETA_DIST
     MUVersionChecker          *_verCheck;
 #endif
@@ -43,6 +44,7 @@
 
 @implementation MUApplicationDelegate
 
+
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 #ifdef MUMBLE_BETA_DIST
     _verCheck = [[MUVersionChecker alloc] init];
@@ -51,6 +53,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionOpened:) name:MUConnectionOpenedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionClosed:) name:MUConnectionClosedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioRouteChanged:) name:MKAudioRouteChangedNotification object:nil];
     
     // Reset application badge, in case something brought it into an inconsistent state.
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
@@ -112,7 +115,7 @@
     UIViewController *welcomeScreen = [[MUWelcomeScreen alloc] init];
     [_window setRootViewController:welcomeScreen];
     [_window makeKeyAndVisible];
- 
+    
     [welcomeScreen release];
     
     reachability = [Reachability reachabilityForInternetConnection];
@@ -123,7 +126,20 @@
     if (!b) {
         [self showTutorial];
     } else {
-        [self connect];
+        [self checkForPendenciesAndConnect];
+    }
+        return NO;
+}
+
+-(void)audioRouteChanged:(NSNotification*)notification{
+   [self checkForPendenciesAndConnect];
+}
+
+- (BOOL)isHeadsetPluggedIn {
+    AVAudioSessionRouteDescription* route = [[AVAudioSession sharedInstance] currentRoute];
+    for (AVAudioSessionPortDescription* desc in [route outputs]) {
+        if ([[desc portType] isEqualToString:AVAudioSessionPortHeadphones])
+            return YES;
     }
     return NO;
 }
@@ -149,17 +165,39 @@
         _tutorial = nil;
     }];
     
-    [self connect];
+    [self checkForPendenciesAndConnect];
     
     NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
     [defs setBool:true forKey:@"TUTORIALSHOWED"];
     [defs synchronize];
 }
 
--(void)connect {
+-(void)checkForPendenciesAndConnect{
     NetworkStatus status = [reachability currentReachabilityStatus];
     
-    if (status == ReachableViaWiFi) {
+    if (_issueView != nil) {
+        [_issueView removeFromSuperview];
+        _issueView = nil;
+    }
+    
+     MUConnectionController *connController = [MUConnectionController sharedController];
+    
+    if (status != ReachableViaWiFi) {
+        [self showNetworkIssue];
+        if (connController.isConnected) [connController disconnectFromServer];
+        return;
+    }
+    
+    if(![self isHeadsetPluggedIn]) {
+        [self showHeadsetIssue];
+        if (connController.isConnected) [connController disconnectFromServer];
+        return;
+    }
+    
+    if (!connController.isConnected) [self connect];
+}
+
+-(void)connect {
         MUConnectionController *connController = [MUConnectionController sharedController];
         NSString *hostname = @"10.91.20.195";
         NSUInteger port = 64738;
@@ -167,11 +205,6 @@
         NSString *password = @"";
         
         [connController connetToHostname:hostname port:port  withUsername:username andPassword:password withParentViewController:_window.rootViewController];
-    } else {
-        if (_networkIssueView == nil){
-            [self showNetworkIssue];
-        }
-    }
 }
 
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -195,24 +228,33 @@
 }
 
 -(void)ReachabilityChanged:(NSNotification*)notification{
-    NetworkStatus status = [reachability currentReachabilityStatus];
-    MUConnectionController *connController = [MUConnectionController sharedController];
+    [self checkForPendenciesAndConnect];
+}
+
+-(void)showHeadsetIssue{
+    _issueView = [[UIView alloc] initWithFrame:_window.bounds];
+    CardView* cv = [[CardView alloc] initWithFrame:CGRectMake(0, 0, 260, 350)];
+    cv.layer.cornerRadius = 10;
+    cv.layer.shadowColor = [UIColor blackColor].CGColor;
+    cv.layer.shadowRadius = 2;
+    cv.layer.shadowOpacity = 0.5f;
+    cv.layer.shadowOffset = CGSizeMake(0, 2);
+    cv.image   = [UIImage imageNamed:@"Phones"];
+    cv.title   = NSLocalizedString(@"USE YOUR PHONE", nil);
+    cv.content = NSLocalizedString(@"PhoneCardDescription", nil);
     
-    if (status != ReachableViaWiFi) {
-        if ([connController isConnected]) {
-            [connController disconnectFromServer];
-        }
-        [self showNetworkIssue];
-    } else {
-        if (_networkIssueView != nil){
-            [_networkIssueView removeFromSuperview];
-            _networkIssueView = nil;
-        }
-    }
+    cv.center = _issueView.center;
+    cv.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    [_issueView addSubview:cv];
+    [_issueView setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.4]];
+    [cv release];
+    
+    [_window addSubview:_issueView];
+    [_issueView release];
 }
 
 -(void)showNetworkIssue{
-    _networkIssueView = [[UIView alloc] initWithFrame:_window.bounds];
+    _issueView = [[UIView alloc] initWithFrame:_window.bounds];
     CardView* cv = [[CardView alloc] initWithFrame:CGRectMake(0, 0, 260, 350)];
     cv.layer.cornerRadius = 10;
     cv.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -223,14 +265,14 @@
     cv.title = NSLocalizedString(@"WI-FI", nil);
     cv.content = NSLocalizedString(@"WifiNeeded", nil);
     
-    cv.center = _networkIssueView.center;
+    cv.center = _issueView.center;
     cv.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [_networkIssueView addSubview:cv];
-    [_networkIssueView setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.4]];
+    [_issueView addSubview:cv];
+    [_issueView setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.4]];
     [cv release];
     
-    [_window addSubview:_networkIssueView];
-    [_networkIssueView release];
+    [_window addSubview:_issueView];
+    [_issueView release];
 }
 
 - (void) dealloc {

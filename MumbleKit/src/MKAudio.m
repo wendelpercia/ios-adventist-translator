@@ -27,6 +27,7 @@
 #endif
 
 NSString *MKAudioDidRestartNotification = @"MKAudioDidRestartNotification";
+NSString *MKAudioRouteChangedNotification = @"MKAudioRouteChangedNotification";
 
 @interface MKAudio () {
     id<MKAudioDelegate>      _delegate;
@@ -128,6 +129,8 @@ static void MKAudio_AudioRouteChangedCallback(MKAudio *audio, AudioSessionProper
         NSLog(@"MKAudio: audio route changed, stopping audio (because delegate said so); reason=%i", reason);
         [audio stop];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:MKAudioRouteChangedNotification object:audio userInfo:dict];
 }
 
 static void MKAudio_SetupAudioSession(MKAudio *audio) {

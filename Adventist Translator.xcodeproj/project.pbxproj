@@ -180,6 +180,7 @@
 		8E44B4B91F013A3000D75634 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E44B4B81F013A3000D75634 /* LaunchScreen.storyboard */; };
 		8E44B4BC1F013B2800D75634 /* GradientBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E44B4BB1F013B2800D75634 /* GradientBack.png */; };
 		8E44B4BE1F013EDC00D75634 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E44B4BD1F013EDC00D75634 /* Image.xcassets */; };
+		8E5F10651F02838D003FBD6B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E5F10621F027CA9003FBD6B /* AVFoundation.framework */; };
 		8E665B561EF15FB200BF72EA /* translatelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E665B531EF15FB200BF72EA /* translatelogo.png */; };
 		8E665B571EF15FB200BF72EA /* translatelogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E665B541EF15FB200BF72EA /* translatelogo@2x.png */; };
 		8E665B581EF15FB200BF72EA /* translatelogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E665B551EF15FB200BF72EA /* translatelogo@3x.png */; };
@@ -730,6 +731,7 @@
 		8E44B4B81F013A3000D75634 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E44B4BB1F013B2800D75634 /* GradientBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GradientBack.png; path = Resources/GradientBack.png; sourceTree = "<group>"; };
 		8E44B4BD1F013EDC00D75634 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
+		8E5F10621F027CA9003FBD6B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8E665B531EF15FB200BF72EA /* translatelogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = translatelogo.png; path = Resources/translatelogo.png; sourceTree = "<group>"; };
 		8E665B541EF15FB200BF72EA /* translatelogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "translatelogo@2x.png"; path = "Resources/translatelogo@2x.png"; sourceTree = "<group>"; };
 		8E665B551EF15FB200BF72EA /* translatelogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "translatelogo@3x.png"; path = "Resources/translatelogo@3x.png"; sourceTree = "<group>"; };
@@ -1003,6 +1005,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E5F10651F02838D003FBD6B /* AVFoundation.framework in Frameworks */,
 				8EF4AA981EFD52FE00EA1943 /* SystemConfiguration.framework in Frameworks */,
 				2879528F14C38FC200567430 /* MobileCoreServices.framework in Frameworks */,
 				28F79C6D14796B2F0003B8BA /* libsqlite3.dylib in Frameworks */,
@@ -1454,6 +1457,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E5F10621F027CA9003FBD6B /* AVFoundation.framework */,
 				8EF4AA971EFD52FE00EA1943 /* SystemConfiguration.framework */,
 				28990AB0132FDA540034B406 /* libMumbleKit.a */,
 				28F79C6C14796B2E0003B8BA /* libsqlite3.dylib */,

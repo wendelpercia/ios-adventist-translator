@@ -277,7 +277,7 @@
     cell.textLabel.font = [UIFont systemFontOfSize:18];
     if ([object class] == [MKChannel class]) {
         MKChannel *chan = object;
-        cell.imageView.image = [UIImage imageNamed:chan.channelDescription];
+        cell.imageView.image = [UIImage imageNamed:[chan.channelDescription uppercaseString]];
         cell.textLabel.text = [chan channelName];
         if (chan == [connectedUser channel]) {
             cell.textLabel.font = [UIFont boldSystemFontOfSize:18];
