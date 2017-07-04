@@ -111,14 +111,13 @@
         [_btReconnect setCenter:self.view.center];
         [_btReconnect addTarget:self action:@selector(Reconnect) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_btReconnect];
-        
+    } else {
+        [_btReconnect setHidden:false];
     }
 }
 
 -(void)Reconnect{
-    [_btReconnect removeFromSuperview];
-    [_btReconnect release];
-    _btReconnect = nil;
+    [_btReconnect setHidden:true];
     [loading startAnimating];
     
     MUApplicationDelegate* md = (MUApplicationDelegate*)[UIApplication sharedApplication].delegate;
