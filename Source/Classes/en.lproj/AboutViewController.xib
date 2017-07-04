@@ -104,9 +104,8 @@ JPEG icons, licensed under the Apache License</string>
                     <rect key="frame" x="339" y="20" width="26" height="26"/>
                     <state key="normal" image="close.png"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtT-bn-uRg">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtT-bn-uRg">
                     <rect key="frame" x="339" y="20" width="26" height="26"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="close.png"/>
                     <connections>
                         <action selector="CloseClicked:" destination="-1" eventType="touchUpInside" id="n3y-xM-KzO"/>
@@ -120,6 +119,7 @@ JPEG icons, licensed under the Apache License</string>
                 <constraint firstItem="Lb2-BU-KgC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5tb-TS-pMP"/>
                 <constraint firstItem="OaM-jN-iLI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BCD-r8-J7A"/>
                 <constraint firstAttribute="trailing" secondItem="9fB-fB-iKM" secondAttribute="trailing" constant="10" id="CGm-wZ-zzM"/>
+                <constraint firstAttribute="trailing" secondItem="RtT-bn-uRg" secondAttribute="trailing" constant="10" id="HVg-GA-DNW"/>
                 <constraint firstItem="Lb2-BU-KgC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="Jqe-ln-faV"/>
                 <constraint firstAttribute="trailing" secondItem="mUJ-ok-yZf" secondAttribute="trailing" constant="-53" id="P02-zG-Shi"/>
                 <constraint firstItem="scT-BX-93I" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="SPx-hF-gxS"/>
@@ -131,6 +131,7 @@ JPEG icons, licensed under the Apache License</string>
                 <constraint firstItem="9fB-fB-iKM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="kuI-a0-pJp"/>
                 <constraint firstItem="OaM-jN-iLI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qxb-6p-ZSL"/>
                 <constraint firstAttribute="bottom" secondItem="SxC-Gk-tyK" secondAttribute="bottom" constant="16" id="sNC-7a-Cr2"/>
+                <constraint firstItem="RtT-bn-uRg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="uoc-31-yOb"/>
                 <constraint firstAttribute="trailing" secondItem="OaM-jN-iLI" secondAttribute="trailing" id="xxV-4s-Vxz"/>
             </constraints>
             <point key="canvasLocation" x="32.5" y="53.5"/>
