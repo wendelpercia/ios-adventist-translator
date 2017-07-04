@@ -18,6 +18,7 @@
     CardView* cvSecurity;
     CardView* cvPhones;
     CardView* cvNetwork;
+    CardView* cvRestrict;
     NSArray<CardView*>* cards;
     
     CAGradientLayer *gradient;
@@ -48,12 +49,24 @@
     cvNetwork.content = NSLocalizedString(@"NetworkCardDescription", nil);
     cvNetwork.image = [UIImage imageNamed:@"Internet"];
     
+    cvRestrict = [[CardView alloc] init];
+    cvRestrict.title = NSLocalizedString(@"RESTRICTION", nil);
+    cvRestrict.content = NSLocalizedString(@"RestrictionCardDescription", nil);
+    cvRestrict.image = [UIImage imageNamed:@"Church"];
+    
     cvNetwork.autoresizingMask  =
     cvPhones.autoresizingMask   =
     cvSecurity.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    cards = [[NSArray alloc] initWithObjects:cvSecurity,cvPhones,cvNetwork, nil];
+    cards = [[NSArray alloc] initWithObjects:cvSecurity,cvPhones,cvNetwork,cvRestrict, nil];
     
-    CGRect frame = CGRectInset(_vwCards.bounds, 30,0);
+    _psPosition.numberOfPages = 4;
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    CGRect frame = CGRectInset(_vwCards.bounds, 44,0);
     for (CardView* cv in cards) {
         cv.frame = frame;
         cv.layer.cornerRadius = 10;
@@ -69,7 +82,7 @@
 }
 
 - (IBAction)Next:(id)sender {
-    if (_psPosition.currentPage < 2){
+    if (_psPosition.currentPage < 3){
         [UIView animateWithDuration:0.3 animations:^{
             [self toStep:_psPosition.currentPage + 1];
         }];
@@ -94,12 +107,24 @@
             break;
         case 2: {
             _lbTitle.text = NSLocalizedString(@"NetworkDescription", nil);
+            [_btAction setTitle:NSLocalizedString(@"NEXT", nil) forState:UIControlStateNormal];
+        }
+            break;
+        case 3: {
+            _lbTitle.text = NSLocalizedString(@"RestrictionDescription", nil);
+            _btAction.translatesAutoresizingMaskIntoConstraints = false;
+            _btAction.backgroundColor = [UIColor colorWithRed:0.24 green:0.61 blue:0.80 alpha:1];
+            _btAction.layer.cornerRadius = 10;
+            
+            [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_btAction attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:16]];
+            [self.view layoutIfNeeded];
+            
             [_btAction setTitle:NSLocalizedString(@"BEGIN", nil) forState:UIControlStateNormal];
         }
             break;
     }
     
-    CGRect frame = CGRectInset(_vwCards.bounds, 30,0);
+    CGRect frame = CGRectInset(_vwCards.bounds, 44,0);
     frame.origin.x -= step * _vwCards.frame.size.width;
     
     for (CardView* cv in cards) {
@@ -113,6 +138,7 @@
 
 -(void)viewDidLayoutSubviews{
     gradient.frame = self.view.bounds;
+    [self toStep:_psPosition.currentPage];
 }
 
 - (void)dealloc {

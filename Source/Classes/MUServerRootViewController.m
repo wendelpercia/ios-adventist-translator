@@ -203,13 +203,13 @@
 
 - (void) connection:(MKConnection *)conn closedWithError:(NSError *)err {
     if (err) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection closed", nil)
+       /* UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection closed", nil)
                                                             message:[err localizedDescription]
                                                            delegate:nil
                                                   cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                                   otherButtonTitles:nil];
         [alertView show];
-        [alertView release];
+        [alertView release];*/
 
         [[MUConnectionController sharedController] disconnectFromServer];
     }

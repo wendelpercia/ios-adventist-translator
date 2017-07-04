@@ -136,6 +136,9 @@
 }
 
 - (BOOL)isHeadsetPluggedIn {
+    return  true;
+
+    
     AVAudioSessionRouteDescription* route = [[AVAudioSession sharedInstance] currentRoute];
     for (AVAudioSessionPortDescription* desc in [route outputs]) {
         if ([[desc portType] isEqualToString:AVAudioSessionPortHeadphones])
@@ -199,8 +202,8 @@
 
 -(void)connect {
         MUConnectionController *connController = [MUConnectionController sharedController];
-        //NSString *hostname = @"10.91.20.195";
-        NSString *hostname = @"ios.localnet";
+        NSString *hostname = @"192.168.2.3";// @"10.91.14.177";
+        //NSString *hostname = @"ios.localnet";
         NSUInteger port = 64738;
         NSString *username = [NSString stringWithFormat:@"ios-%@", [self getIPAddress]];
         NSString *password = @"";
@@ -247,7 +250,7 @@
     cv.center = _issueView.center;
     cv.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [_issueView addSubview:cv];
-    [_issueView setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.4]];
+    [_issueView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.4]];
     [cv release];
     
     [_window addSubview:_issueView];
@@ -269,7 +272,7 @@
     cv.center = _issueView.center;
     cv.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [_issueView addSubview:cv];
-    [_issueView setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.4]];
+    [_issueView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.4]];
     [cv release];
     
     [_window addSubview:_issueView];

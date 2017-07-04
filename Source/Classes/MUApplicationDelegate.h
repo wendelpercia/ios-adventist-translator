@@ -5,5 +5,6 @@
 #import "MUVersionChecker.h"
 
 @interface MUApplicationDelegate : NSObject <UIApplicationDelegate>
-- (void) reloadPreferences;
+-(void)reloadPreferences;
+-(void)connect;
 @end

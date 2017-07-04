@@ -16,6 +16,7 @@
 #import "MUBackgroundView.h"
 #import "MUColor.h"
 #import "MUConnectionController.h"
+#import "MUApplicationDelegate.h"
 
 @interface MUWelcomeScreen () {
     NSInteger    _aboutWebsiteButton;
@@ -26,6 +27,8 @@
     
     UIImageView                      *_translateLogo;
     UIImageView                      *_iatecLogo;
+    
+    UIButton *_btReconnect;
 }
 @end
 
@@ -51,8 +54,7 @@
     [lbMessage setTextAlignment:NSTextAlignmentCenter];
     [lbMessage setTextColor:[UIColor whiteColor]];
     [lbMessage setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth];
-    [lbMessage setText:@"Conectando..."];
-    
+
     [self.view addSubview:lbMessage];
     
     _iatecLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"IatecLogo"]];
@@ -73,7 +75,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MuConnecting) name:MUConnectingNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MuConnectingError) name:MUConnectingErrorNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MUConnectionOpened) name:MUConnectionOpenedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MUConnectionClosed) name:MUConnectingErrorNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MUConnectionClosed) name:MUConnectionClosedNotification object:nil];
 }
 
 -(void)MuConnecting{
@@ -84,6 +86,8 @@
 -(void)MuConnectingError {
     [lbMessage setText:NSLocalizedString(@"Connection Error", nil)];
     [loading stopAnimating];
+    
+    [self showReconnect];
 }
 
 -(void)MUConnectionOpened{
@@ -94,6 +98,31 @@
 -(void)MUConnectionClosed{
     [lbMessage setText:NSLocalizedString(@"Connection Closed", nil)];
     [loading stopAnimating];
+    
+    [self showReconnect];
+}
+
+-(void)showReconnect{
+    if (_btReconnect == nil){
+        _btReconnect = [UIButton buttonWithType:UIButtonTypeSystem];
+        _btReconnect.frame = CGRectMake(0, 0, 180, 44);
+        [_btReconnect setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_btReconnect setTitle:NSLocalizedString(@"Reconnect", nil) forState:UIControlStateNormal];
+        [_btReconnect setCenter:self.view.center];
+        [_btReconnect addTarget:self action:@selector(Reconnect) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_btReconnect];
+        
+    }
+}
+
+-(void)Reconnect{
+    [_btReconnect removeFromSuperview];
+    [_btReconnect release];
+    _btReconnect = nil;
+    [loading startAnimating];
+    
+    MUApplicationDelegate* md = (MUApplicationDelegate*)[UIApplication sharedApplication].delegate;
+    [md connect];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

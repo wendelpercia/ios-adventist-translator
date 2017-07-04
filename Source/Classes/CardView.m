@@ -85,7 +85,7 @@
     CGSize size = self.frame.size;
     iv.frame = CGRectMake(15, 20, size.width - 30, size.height / 2 - 20);
     lbTitle.frame = CGRectMake(15, size.height / 2 + 15, size.width - 30, 20);
-    lbMessage.frame = CGRectMake(15, lbTitle.frame.origin.y + 35, size.width - 30, size.height - 65 - lbTitle.frame.origin.y);
+    lbMessage.frame = CGRectMake(25, lbTitle.frame.origin.y + 35, size.width - 50, size.height - 65 - lbTitle.frame.origin.y);
 }
 
 @end

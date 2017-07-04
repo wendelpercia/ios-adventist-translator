@@ -9,7 +9,7 @@
 #import "MUOperatingSystem.h"
 #import "MUBackgroundView.h"
 #import "MUServerTableViewCell.h"
-
+#import "AboutViewController.h"
 #import <MumbleKit/MKAudio.h>
 
 #pragma mark -
@@ -58,7 +58,7 @@
 #pragma mark -
 #pragma mark MUChannelNavigationViewController
 
-@interface MUServerViewController () <UITableViewDelegate, UITableViewDataSource> {
+@interface MUServerViewController () <UITableViewDelegate, UITableViewDataSource, AboutControllerDelegate> {
     MUServerViewControllerViewMode   _viewMode;
     MKServerModel                    *_serverModel;
     NSMutableArray                   *_modelItems;
@@ -74,7 +74,9 @@
     UIImageView                      *_iatecLogo;
     
     MUServerTableViewCell            *_activeCell;
+    UIButton                         *_btAbout;
 }
+
 - (NSInteger) indexForUser:(MKUser *)user;
 - (void) reloadUser:(MKUser *)user;
 - (void) reloadChannel:(MKChannel *)channel;
@@ -126,17 +128,13 @@
     _caption.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _caption.numberOfLines = 0;
     _caption.hidden = true;
-    
     [self.view addSubview:_caption];
     
-    _lbMessage = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 40, self.view.frame.size.width, 20)];
-    [_lbMessage setFont:[UIFont systemFontOfSize:15]];
-    [_lbMessage setTextAlignment:NSTextAlignmentCenter];
-    [_lbMessage setTextColor:[UIColor whiteColor]];
-    [_lbMessage setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth];
-    [_lbMessage setText:@"www.iatec.com"];
-    
-    [self.view addSubview:_lbMessage];
+    _btAbout = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    _btAbout.tintColor = [UIColor whiteColor];
+    [_btAbout setFrame:CGRectMake(10, 20, 44, 44)];
+    [_btAbout addTarget:self action:@selector(showAbout) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_btAbout];
 }
 
 - (void) dealloc {
@@ -145,6 +143,18 @@
     [_lbMessage release];
     [_tableView release];
     [super dealloc];
+}
+
+-(void)showAbout {
+    AboutViewController* avc = [[AboutViewController alloc] init];
+    [self presentViewController:avc animated:true completion:nil];
+    avc.delegate = self;
+    
+    [avc release];
+}
+
+-(void)aboutClosed:(AboutViewController *)controller{
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -194,7 +204,12 @@
 - (void) reloadChannel:(MKChannel *)channel {
     NSInteger idx = [self indexForChannel:channel];
     if (idx != NSNotFound) {
-        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:idx inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        [UIView animateWithDuration:0.2 animations:^{
+            MKUser *connectedUser = [_serverModel connectedUser];
+            MUServerTableViewCell* cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+            cell.Activated = connectedUser.channel == channel;
+            [cell layoutIfNeeded];
+        }];
     }
 }
 
@@ -236,7 +251,7 @@
 }
 
 -(void)addChannelTreeToModel:(MKChannel *)channel {
-     for (MKChannel *chan in [channel channels]) {
+    for (MKChannel *chan in [channel channels]) {
         [_channelIndexMap setObject:[NSNumber numberWithUnsignedInteger:[_modelItems count]] forKey:[NSNumber numberWithInteger:[chan channelId]]];
         [_modelItems addObject:[MUChannelNavigationItem navigationItemWithObject:chan indentLevel:0]];
     }
@@ -295,7 +310,12 @@
     MUChannelNavigationItem *navItem = [_modelItems objectAtIndex:index];
     id object = [navItem object];
     if ([object class] == [MKChannel class]) {
-        [_serverModel joinChannel:object];
+         MKUser *connectedUser = [_serverModel connectedUser];
+        if (object==connectedUser.channel){
+            [_serverModel joinChannel:[_serverModel rootChannel]];
+        } else {
+            [_serverModel joinChannel:object];
+        }
     }
 }
 
@@ -303,19 +323,6 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self changeServer:[indexPath row]];
-    [tableView reloadData];
-    
-    if (_activeCell)
-        _activeCell.Activated = false;
-    
-    MUServerTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.Activated = true;
-    [UIView animateWithDuration:0.3 animations:^{
-        [_activeCell layoutIfNeeded];
-        [cell layoutIfNeeded];
-    }];
-    
-    _activeCell = cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -340,15 +347,6 @@
 }
 
 - (void) serverModel:(MKServerModel *)model userLeft:(MKUser *)user {
-    NSInteger idx = [self indexForUser:user];
-    if (idx != NSNotFound) {
-        if (_viewMode == MUServerViewControllerViewModeServer) {
-            [self rebuildModelArrayFromChannel:[model rootChannel]];
-        } else if (_viewMode) {
-            [self switchToChannelMode];
-        }
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:idx inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-    }
 }
 
 - (void) serverModel:(MKServerModel *)model userTalkStateChanged:(MKUser *)user {
@@ -405,21 +403,12 @@
 }
 
 - (void) serverModel:(MKServerModel *)model userMoved:(MKUser *)user toChannel:(MKChannel *)chan fromChannel:(MKChannel *)prevChan byUser:(MKUser *)mover {
-    
     if (_viewMode == MUServerViewControllerViewModeServer) {
         [self.tableView beginUpdates];
         if (user == [model connectedUser]) {
             [self reloadChannel:chan];
             [self reloadChannel:prevChan];
         }
-    
-        // Check if the user is joining a channel for the first time.
-        if (prevChan != nil) {
-            NSInteger prevIdx = [self indexForUser:user];
-            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:prevIdx inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        }
-
-        [self rebuildModelArrayFromChannel:[model rootChannel]];
     } else if (_viewMode == MUServerViewControllerViewModeChannel) {
         NSInteger userIdx = [self indexForUser:user];
         MKChannel *curChan = [[_serverModel connectedUser] channel];
