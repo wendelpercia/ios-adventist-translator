@@ -136,8 +136,6 @@
 }
 
 - (BOOL)isHeadsetPluggedIn {
-    return  true;
-
     
     AVAudioSessionRouteDescription* route = [[AVAudioSession sharedInstance] currentRoute];
     for (AVAudioSessionPortDescription* desc in [route outputs]) {
