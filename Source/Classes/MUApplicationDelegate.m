@@ -200,8 +200,9 @@
 
 -(void)connect {
         MUConnectionController *connController = [MUConnectionController sharedController];
-        NSString *hostname = @"192.168.2.3";// @"10.91.14.177";
+        //NSString *hostname = @"192.168.2.3";// @"10.91.14.177";
         //NSString *hostname = @"ios.localnet";
+        NSString *hostname = @"adventisttranslator.iatec.com";
         NSUInteger port = 64738;
         NSString *username = [NSString stringWithFormat:@"ios-%@", [self getIPAddress]];
         NSString *password = @"";
