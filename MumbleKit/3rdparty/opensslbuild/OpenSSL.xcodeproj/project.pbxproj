@@ -841,7 +841,6 @@
 		2852D4E7132AF20F0078051B /* aes_ecb.c in Sources */ = {isa = PBXBuildFile; fileRef = 2852D4D8132AF20F0078051B /* aes_ecb.c */; };
 		2852D4E8132AF20F0078051B /* aes_ige.c in Sources */ = {isa = PBXBuildFile; fileRef = 2852D4D9132AF20F0078051B /* aes_ige.c */; };
 		2852D4E9132AF20F0078051B /* aes_ige.c in Sources */ = {isa = PBXBuildFile; fileRef = 2852D4D9132AF20F0078051B /* aes_ige.c */; };
-		2852D4EA132AF20F0078051B /* aes_locl.h in Headers */ = {isa = PBXBuildFile; fileRef = 2852D4DA132AF20F0078051B /* aes_locl.h */; };
 		2852D4EB132AF20F0078051B /* aes_locl.h in Headers */ = {isa = PBXBuildFile; fileRef = 2852D4DA132AF20F0078051B /* aes_locl.h */; };
 		2852D4EC132AF20F0078051B /* aes_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2852D4DB132AF20F0078051B /* aes_misc.c */; };
 		2852D4ED132AF20F0078051B /* aes_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2852D4DB132AF20F0078051B /* aes_misc.c */; };
@@ -1264,7 +1263,6 @@
 		2876DB3416C1CB5D00BB7968 /* s3_cbc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2876DB3316C1CB5D00BB7968 /* s3_cbc.c */; };
 		2876DB3516C1CB5D00BB7968 /* s3_cbc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2876DB3316C1CB5D00BB7968 /* s3_cbc.c */; };
 		28F58C4A132AF1070053C348 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F58C49132AF1070053C348 /* Foundation.framework */; };
-		28F58C67132AF1690053C348 /* OpenSSL.pch in Headers */ = {isa = PBXBuildFile; fileRef = 28F58C66132AF1690053C348 /* OpenSSL.pch */; };
 		28F58C68132AF1690053C348 /* OpenSSL.pch in Headers */ = {isa = PBXBuildFile; fileRef = 28F58C66132AF1690053C348 /* OpenSSL.pch */; };
 /* End PBXBuildFile section */
 
@@ -3055,15 +3053,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		28F58C44132AF1070053C348 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				28F58C67132AF1690053C348 /* OpenSSL.pch in Headers */,
-				2852D4EA132AF20F0078051B /* aes_locl.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		28F58C55132AF1170053C348 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -3082,7 +3071,6 @@
 			buildPhases = (
 				28F58C42132AF1070053C348 /* Sources */,
 				28F58C43132AF1070053C348 /* Frameworks */,
-				28F58C44132AF1070053C348 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -4412,6 +4400,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190CEB150D5B6C00E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = BetaDist;
 		};
@@ -4433,6 +4422,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190CEB150D5B6C00E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = AppStore;
 		};
@@ -4456,6 +4446,7 @@
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4463,6 +4454,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190CEB150D5B6C00E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};

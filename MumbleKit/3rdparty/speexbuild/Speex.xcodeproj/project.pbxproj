@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		287F0258132AEEE8003C03FE /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 287F0257132AEEE8003C03FE /* config.h */; };
 		287F0259132AEEE8003C03FE /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 287F0257132AEEE8003C03FE /* config.h */; };
 		287F025B132AEF9E003C03FE /* modes.c in Sources */ = {isa = PBXBuildFile; fileRef = 287F025A132AEF9E003C03FE /* modes.c */; };
 		287F025C132AEF9E003C03FE /* modes.c in Sources */ = {isa = PBXBuildFile; fileRef = 287F025A132AEF9E003C03FE /* modes.c */; };
@@ -18,7 +17,6 @@
 		287F0264132AEFF0003C03FE /* high_lsp_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = 287F0263132AEFEF003C03FE /* high_lsp_tables.c */; };
 		287F0265132AEFF0003C03FE /* high_lsp_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = 287F0263132AEFEF003C03FE /* high_lsp_tables.c */; };
 		28D1DAEC132AEB1500456ED6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DAEB132AEB1500456ED6 /* Foundation.framework */; };
-		28D1DB09132AEBB500456ED6 /* Speex.pch in Headers */ = {isa = PBXBuildFile; fileRef = 28D1DB08132AEBB500456ED6 /* Speex.pch */; };
 		28D1DB0A132AEBB500456ED6 /* Speex.pch in Headers */ = {isa = PBXBuildFile; fileRef = 28D1DB08132AEBB500456ED6 /* Speex.pch */; };
 		28D1DB0D132AEBD300456ED6 /* bits.c in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DB0C132AEBD300456ED6 /* bits.c */; };
 		28D1DB0E132AEBD300456ED6 /* bits.c in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DB0C132AEBD300456ED6 /* bits.c */; };
@@ -251,15 +249,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		28D1DAE6132AEB1400456ED6 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				28D1DB09132AEBB500456ED6 /* Speex.pch in Headers */,
-				287F0258132AEEE8003C03FE /* config.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		28D1DAF7132AEB2200456ED6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -278,7 +267,6 @@
 			buildPhases = (
 				28D1DAE4132AEB1400456ED6 /* Sources */,
 				28D1DAE5132AEB1400456ED6 /* Frameworks */,
-				28D1DAE6132AEB1400456ED6 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -422,6 +410,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190D05150D61EB00E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = BetaDist;
 		};
@@ -443,6 +432,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190D05150D61EB00E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = AppStore;
 		};
@@ -466,6 +456,7 @@
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -473,6 +464,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190D05150D61EB00E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};

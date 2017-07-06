@@ -655,13 +655,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		287D85A414E6D474002B5D79 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -688,7 +681,6 @@
 			buildPhases = (
 				287D85A214E6D474002B5D79 /* Sources */,
 				287D85A314E6D474002B5D79 /* Frameworks */,
-				287D85A414E6D474002B5D79 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -1031,6 +1023,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190D02150D611E00E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = AppStore;
 		};
@@ -1052,6 +1045,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190D02150D611E00E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = BetaDist;
 		};
@@ -1075,6 +1069,7 @@
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -1082,6 +1077,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190D02150D611E00E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};

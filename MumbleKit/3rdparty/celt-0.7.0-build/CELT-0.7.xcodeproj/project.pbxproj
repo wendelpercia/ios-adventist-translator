@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		280D5F89132AE73C00540C3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280D5F88132AE73C00540C3D /* Foundation.framework */; };
-		28656122132AE8240011637C /* CELT-0.7.pch in Headers */ = {isa = PBXBuildFile; fileRef = 28656121132AE8240011637C /* CELT-0.7.pch */; };
 		28656123132AE8240011637C /* CELT-0.7.pch in Headers */ = {isa = PBXBuildFile; fileRef = 28656121132AE8240011637C /* CELT-0.7.pch */; };
-		28656125132AE83B0011637C /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 28656124132AE83B0011637C /* config.h */; };
 		28656126132AE83B0011637C /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 28656124132AE83B0011637C /* config.h */; };
 		28656128132AE8640011637C /* bands.c in Sources */ = {isa = PBXBuildFile; fileRef = 28656127132AE8640011637C /* bands.c */; };
 		28656129132AE8640011637C /* bands.c in Sources */ = {isa = PBXBuildFile; fileRef = 28656127132AE8640011637C /* bands.c */; };
@@ -191,15 +189,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		280D5F83132AE73C00540C3D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				28656122132AE8240011637C /* CELT-0.7.pch in Headers */,
-				28656125132AE83B0011637C /* config.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2865610E132AE7A80011637C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,7 +207,6 @@
 			buildPhases = (
 				280D5F81132AE73C00540C3D /* Sources */,
 				280D5F82132AE73C00540C3D /* Frameworks */,
-				280D5F83132AE73C00540C3D /* Headers */,
 			);
 			buildRules = (
 			);
@@ -334,6 +322,7 @@
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -341,6 +330,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190CFB150D600400E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -360,6 +350,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190CFB150D600400E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = BetaDist;
 		};
@@ -397,6 +388,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28190CFB150D600400E07613 /* Base.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = AppStore;
 		};
