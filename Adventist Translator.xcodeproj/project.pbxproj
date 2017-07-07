@@ -1022,6 +1022,8 @@
 		8EF4AA931EFD4F6500EA1943 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		8EF4AA941EFD4F6500EA1943 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8EF4AA971EFD52FE00EA1943 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E7FBF03A1F0FB0C3004EE033 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/AboutViewController.xib; sourceTree = "<group>"; };
+		E7FBF03B1F0FB10E004EE033 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/AboutViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1818,6 +1820,8 @@
 				en,
 				da,
 				"pt-BR",
+				fr,
+				es,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -2346,6 +2350,8 @@
 			children = (
 				8E5213881F0AD44500AD2ACE /* en */,
 				8E52138A1F0AD44900AD2ACE /* pt-BR */,
+				E7FBF03A1F0FB0C3004EE033 /* fr */,
+				E7FBF03B1F0FB10E004EE033 /* es */,
 			);
 			name = AboutViewController.xib;
 			sourceTree = "<group>";
@@ -2368,9 +2374,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q78NUT75T3;
+				DEVELOPMENT_TEAM = C82EXA77J4;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.advtranslator;
 				PRODUCT_NAME = "Adv Translator";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2384,9 +2390,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q78NUT75T3;
+				DEVELOPMENT_TEAM = C82EXA77J4;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.advtranslator;
 				PRODUCT_NAME = "Adv Translator";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2442,9 +2448,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q78NUT75T3;
+				DEVELOPMENT_TEAM = C82EXA77J4;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.advtranslator;
 				PRODUCT_NAME = "Adv Translator";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2501,9 +2507,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Q78NUT75T3;
+				DEVELOPMENT_TEAM = C82EXA77J4;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.adventisttranslator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iatec.advtranslator;
 				PRODUCT_NAME = "Adv Translator";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
