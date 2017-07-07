@@ -454,6 +454,8 @@
 		8EC2AFB91EF94F5D00AF4756 /* TutorialController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EC2AFB71EF94F5D00AF4756 /* TutorialController.xib */; };
 		8EF4AA951EFD4F6500EA1943 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF4AA941EFD4F6500EA1943 /* Reachability.m */; };
 		8EF4AA981EFD52FE00EA1943 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF4AA971EFD52FE00EA1943 /* SystemConfiguration.framework */; };
+		E7FBF0401F0FCA88004EE033 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7FBF03E1F0FCA88004EE033 /* Localizable.strings */; };
+		E7FBF0441F0FCCDC004EE033 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7FBF0421F0FCCDC004EE033 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -487,7 +489,6 @@
 		2801C35911CA9F1A00E664E8 /* MUPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUPreferencesViewController.h; sourceTree = "<group>"; };
 		2801C35A11CA9F1A00E664E8 /* MUPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUPreferencesViewController.m; sourceTree = "<group>"; };
 		280256371510D70D00178B08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
-		2802563B1510DDCA00178B08 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = Localizable.strings; sourceTree = "<group>"; };
 		2802ABFE14C9E948000983A5 /* MUDataURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUDataURL.h; sourceTree = "<group>"; };
 		2802ABFF14C9E948000983A5 /* MUDataURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUDataURL.m; sourceTree = "<group>"; };
 		2802AC0114CB0130000983A5 /* MUImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUImage.h; sourceTree = "<group>"; };
@@ -1023,7 +1024,9 @@
 		8EF4AA941EFD4F6500EA1943 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		8EF4AA971EFD52FE00EA1943 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E7FBF03A1F0FB0C3004EE033 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/AboutViewController.xib; sourceTree = "<group>"; };
-		E7FBF03B1F0FB10E004EE033 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/AboutViewController.xib; sourceTree = "<group>"; };
+		E7FBF03C1F0FB378004EE033 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/AboutViewController.xib; sourceTree = "<group>"; };
+		E7FBF03F1F0FCA88004EE033 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Resources/es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E7FBF0431F0FCCDC004EE033 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Resources/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1169,15 +1172,6 @@
 			);
 			name = en.lproj;
 			path = Resources/en.lproj;
-			sourceTree = "<group>";
-		};
-		280256391510DDCA00178B08 /* da.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				2802563A1510DDCA00178B08 /* Localizable.strings */,
-			);
-			name = da.lproj;
-			path = Resources/da.lproj;
 			sourceTree = "<group>";
 		};
 		2838EA0C1293165700035C5D /* Preferences */ = {
@@ -1327,12 +1321,13 @@
 		28DC1C1213DE59120037CDC2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E7FBF0411F0FCCC6004EE033 /* fr.lproj */,
+				E7FBF03D1F0FCA5D004EE033 /* es.lproj */,
 				8E52138B1F0AD51400AD2ACE /* close.png */,
 				8E52138C1F0AD51400AD2ACE /* close@2x.png */,
 				8E52138D1F0AD51400AD2ACE /* close@3x.png */,
 				8E665B5A1EF16C6F00BF72EA /* flags */,
 				280256351510D70D00178B08 /* en.lproj */,
-				280256391510DDCA00178B08 /* da.lproj */,
 				8EA987D81EFAA01B0059B15D /* pt-BR.lproj */,
 				2879527A14C248B700567430 /* Apple */,
 				8EA987DC1EFADF410059B15D /* Internet.png */,
@@ -1778,6 +1773,22 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		E7FBF03D1F0FCA5D004EE033 /* es.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				E7FBF03E1F0FCA88004EE033 /* Localizable.strings */,
+			);
+			name = es.lproj;
+			sourceTree = "<group>";
+		};
+		E7FBF0411F0FCCC6004EE033 /* fr.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				E7FBF0421F0FCCDC004EE033 /* Localizable.strings */,
+			);
+			name = fr.lproj;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1818,7 +1829,6 @@
 				French,
 				German,
 				en,
-				da,
 				"pt-BR",
 				fr,
 				es,
@@ -2161,6 +2171,7 @@
 				8E665D251EF16C6F00BF72EA /* TR.png in Resources */,
 				8E665CC21EF16C6F00BF72EA /* KR.png in Resources */,
 				8E665C771EF16C6F00BF72EA /* CK.png in Resources */,
+				E7FBF0401F0FCA88004EE033 /* Localizable.strings in Resources */,
 				8E665B581EF15FB200BF72EA /* translatelogo@3x.png in Resources */,
 				8E52137D1F0AB77900AD2ACE /* Church@3x.png in Resources */,
 				8E665C761EF16C6F00BF72EA /* CI.png in Resources */,
@@ -2178,6 +2189,7 @@
 				8E665C9B1EF16C6F00BF72EA /* GG.png in Resources */,
 				287172AC151A041A00153D74 /* certificatecell-intermediate@2x.png in Resources */,
 				8E665D2F1EF16C6F00BF72EA /* VA.png in Resources */,
+				E7FBF0441F0FCCDC004EE033 /* Localizable.strings in Resources */,
 				8E665C9C1EF16C6F00BF72EA /* GH.png in Resources */,
 				8E665D121EF16C6F00BF72EA /* SN.png in Resources */,
 				8E52138E1F0AD51400AD2ACE /* close.png in Resources */,
@@ -2327,14 +2339,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		2802563A1510DDCA00178B08 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2802563B1510DDCA00178B08 /* da */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		285D6B8416BF02E900F239EB /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2351,7 +2355,7 @@
 				8E5213881F0AD44500AD2ACE /* en */,
 				8E52138A1F0AD44900AD2ACE /* pt-BR */,
 				E7FBF03A1F0FB0C3004EE033 /* fr */,
-				E7FBF03B1F0FB10E004EE033 /* es */,
+				E7FBF03C1F0FB378004EE033 /* es */,
 			);
 			name = AboutViewController.xib;
 			sourceTree = "<group>";
@@ -2360,6 +2364,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				8EA987DA1EFAA01B0059B15D /* pt-BR */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		E7FBF03E1F0FCA88004EE033 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7FBF03F1F0FCA88004EE033 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		E7FBF0421F0FCCDC004EE033 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7FBF0431F0FCCDC004EE033 /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
