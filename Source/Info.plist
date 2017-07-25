@@ -46,8 +46,6 @@
 	</dict>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Adventist Translator uses your microphone for voice chats</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

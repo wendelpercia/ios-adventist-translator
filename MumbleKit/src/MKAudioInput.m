@@ -83,6 +83,7 @@
 
 - (id) initWithDevice:(MKAudioDevice *)device andSettings:(MKAudioSettings *)settings {
     self = [super init];
+    return nil;
     if (self == nil)
         return nil;
     
