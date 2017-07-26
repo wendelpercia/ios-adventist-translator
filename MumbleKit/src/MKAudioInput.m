@@ -20,58 +20,58 @@
 #include <opus.h>
 
 @interface MKAudioInput () {
-    @public
+@public
     int                    micSampleSize;
     int                    numMicChannels;
-
-    @private
+    
+@private
     MKAudioDevice          *_device;
     MKAudioSettings        _settings;
-
+    
     SpeexPreprocessState   *_preprocessorState;
     CELTEncoder            *_celtEncoder;
     SpeexResamplerState    *_micResampler;
     SpeexBits              _speexBits;
     void                   *_speexEncoder;
     OpusEncoder            *_opusEncoder;
-
+    
     int                    frameSize;
     int                    micFrequency;
     int                    sampleRate;
-
+    
     int                    micFilled;
     int                    micLength;
     int                    bitrate;
     int                    frameCounter;
     int                    _bufferedFrames;
-
+    
     BOOL                   doResetPreprocessor;
-
+    
     short                  *psMic;
     short                  *psOut;
-
+    
     MKUDPMessageType       udpMessageType;
     NSMutableArray         *frameList;
-
+    
     MKCodecFormat          _codecFormat;
     BOOL                   _doTransmit;
     BOOL                   _forceTransmit;
     BOOL                   _lastTransmit;
-
+    
     signed long            _preprocRunningAvg;
     signed long            _preprocAvgItems;
-
+    
     float                  _speechProbability;
     float                  _peakCleanMic;
-
+    
     BOOL                   _selfMuted;
     BOOL                   _muted;
     BOOL                   _suppressed;
- 
+    
     BOOL                   _vadGateEnabled;
     double                 _vadGateTimeSeconds;
     double                 _vadOpenLastTime;
-
+    
     NSMutableData          *_encodingOutputBuffer;
     NSMutableData          *_opusBuffer;
     
@@ -82,15 +82,13 @@
 @implementation MKAudioInput
 
 - (id) initWithDevice:(MKAudioDevice *)device andSettings:(MKAudioSettings *)settings {
-    return nil;
-
     self = [super init];
     if (self == nil)
         return nil;
     
     // Set device
     _device = [device retain];
-
+    
     // Copy settings
     memcpy(&_settings, settings, sizeof(MKAudioSettings));
     
@@ -104,13 +102,13 @@
     _vadGateEnabled = _settings.enableVadGate;
     _vadGateTimeSeconds = _settings.vadGateTimeSeconds;
     _vadOpenLastTime = [[NSDate date] timeIntervalSince1970];
-
+    
     // Fall back to CELT if Opus is not enabled.
     if (![[MKVersion sharedVersion] isOpusEnabled] && _settings.codec == MKCodecFormatOpus) {
         _settings.codec = MKCodecFormatCELT;
         NSLog(@"Falling back to CELT");
     }
-
+    
     if (_settings.codec == MKCodecFormatOpus) {
         sampleRate = SAMPLE_RATE;
         frameSize = SAMPLE_RATE / 100;
@@ -123,72 +121,72 @@
         NSLog(@"MKAudioInput: %i bits/s, %d Hz, %d sample CELT", _settings.quality, sampleRate, frameSize);
     } else if (_settings.codec == MKCodecFormatSpeex) {
         sampleRate = 32000;
-
+        
         speex_bits_init(&_speexBits);
         speex_bits_reset(&_speexBits);
         _speexEncoder = speex_encoder_init(speex_lib_get_mode(SPEEX_MODEID_UWB));
         speex_encoder_ctl(_speexEncoder, SPEEX_GET_FRAME_SIZE, &frameSize);
         speex_encoder_ctl(_speexEncoder, SPEEX_GET_SAMPLING_RATE, &sampleRate);
-
+        
         int iArg = 1;
         speex_encoder_ctl(_speexEncoder, SPEEX_SET_VBR, &iArg);
-
+        
         iArg = 0;
         speex_encoder_ctl(_speexEncoder, SPEEX_SET_VAD, &iArg);
         speex_encoder_ctl(_speexEncoder, SPEEX_SET_DTX, &iArg);
-
+        
         float fArg = 8.0;
         speex_encoder_ctl(_speexEncoder, SPEEX_SET_VBR_QUALITY, &fArg);
-
+        
         iArg = _settings.quality;
         speex_encoder_ctl(_speexEncoder, SPEEX_SET_VBR_MAX_BITRATE, &iArg);
-
+        
         iArg = 5;
         speex_encoder_ctl(_speexEncoder, SPEEX_SET_COMPLEXITY, &iArg);
         NSLog(@"MKAudioInput: %d bits/s, %d Hz, %d sample Speex-UWB", _settings.quality, sampleRate, frameSize);
     }
-
+    
     doResetPreprocessor = YES;
     _lastTransmit = NO;
-
+    
     numMicChannels = 0;
     bitrate = 0;
-
+    
     /*
      if (g.uiSession)
-        setMaxBandwidth(g.iMaxBandwidth);
+     setMaxBandwidth(g.iMaxBandwidth);
      */
-
+    
     frameList = [[NSMutableArray alloc] initWithCapacity:_settings.audioPerPacket];
-
+    
     udpMessageType = ~0;
     
     micFrequency = [_device inputSampleRate];
     numMicChannels = [_device numberOfInputChannels];
     
     [self initializeMixer];
- 
+    
     [_device setupInput:^BOOL(short *frames, unsigned int nsamp) {
         [self addMicrophoneDataWithBuffer:frames amount:nsamp];
         return YES;
     }];
-
+    
     return self;
 }
 
 - (void) dealloc {
     [_device setupInput:NULL];
     [_device release];
-
+    
     [frameList release];
     [_opusBuffer release];
     [_encodingOutputBuffer release];
-
+    
     if (psMic)
         free(psMic);
     if (psOut)
         free(psOut);
-
+    
     if (_speexEncoder)
         speex_encoder_destroy(_speexEncoder);
     if (_micResampler)
@@ -199,7 +197,7 @@
         speex_preprocess_state_destroy(_preprocessorState);
     if (_opusEncoder)
         opus_encoder_destroy(_opusEncoder);
-
+    
     [super dealloc];
 }
 
@@ -211,48 +209,48 @@
 
 - (void) initializeMixer {
     int err;
-
+    
     NSLog(@"MKAudioInput: initializeMixer -- iMicFreq=%u, iSampleRate=%u", micFrequency, sampleRate);
-
+    
     micLength = (frameSize * micFrequency) / sampleRate;
-
+    
     if (_micResampler)
         speex_resampler_destroy(_micResampler);
-
+    
     if (psMic)
         free(psMic);
     if (psOut)
         free(psOut);
-
+    
     if (micFrequency != sampleRate) {
         _micResampler = speex_resampler_init(1, micFrequency, sampleRate, 3, &err);
         NSLog(@"MKAudioInput: initialized resampler (%iHz -> %iHz)", micFrequency, sampleRate);
     }
-
+    
     psMic = malloc(micLength * sizeof(short));
     psOut = malloc(frameSize * sizeof(short));
     micSampleSize = numMicChannels * sizeof(short);
     doResetPreprocessor = YES;
-
+    
     NSLog(@"MKAudioInput: Initialized mixer for %i channel %i Hz and %i channel %i Hz echo", numMicChannels, micFrequency, 0, 0);
 }
 
 - (void) addMicrophoneDataWithBuffer:(short *)input amount:(NSUInteger)nsamp {
     int i;
-
+    
     while (nsamp > 0) {
         NSUInteger left = MIN(nsamp, micLength - micFilled);
-
+        
         short *output = psMic + micFilled;
-
+        
         for (i = 0; i < left; i++) {
             output[i] = input[i];
         }
-
+        
         input += left;
         micFilled += left;
         nsamp -= left;
-
+        
         if (micFilled == micLength) {
             // Should we resample?
             if (_micResampler) {
@@ -261,7 +259,7 @@
                 speex_resampler_process_int(_micResampler, 0, psMic, &inlen, psOut, &outlen);
             }
             micFilled = 0;
-
+            
             [self processAndEncodeAudioFrame];
         }
     }
@@ -286,41 +284,41 @@
 
 - (void) resetPreprocessor {
     int iArg;
-
+    
     _preprocAvgItems = 0;
     _preprocRunningAvg = 0;
-
+    
     if (_preprocessorState)
         speex_preprocess_state_destroy(_preprocessorState);
-
+    
     _preprocessorState = speex_preprocess_state_init(frameSize, sampleRate);
     SpeexPreprocessState *state = _preprocessorState;
-
+    
     iArg = 1;
     speex_preprocess_ctl(state, SPEEX_PREPROCESS_SET_VAD, &iArg);
     speex_preprocess_ctl(state, SPEEX_PREPROCESS_SET_AGC, &iArg);
     speex_preprocess_ctl(state, SPEEX_PREPROCESS_SET_DENOISE, &iArg);
     speex_preprocess_ctl(state, SPEEX_PREPROCESS_SET_DEREVERB, &iArg);
-
+    
     iArg = 30000;
     speex_preprocess_ctl(state, SPEEX_PREPROCESS_SET_AGC_TARGET, &iArg);
-
+    
     //float v = 30000.0f / (float) 0.0f; // iMinLoudness
     //iArg = iroundf(floorf(20.0f * log10f(v)));
     //speex_preprocess_ctl(state, SPEEX_PREPROCESS_SET_AGC_MAX_GAIN, &iArg);
-
+    
     iArg = _settings.noiseSuppression;
     speex_preprocess_ctl(state, SPEEX_PREPROCESS_SET_NOISE_SUPPRESS, &iArg);
 }
 
 - (int) encodeAudioFrameOfSpeech:(BOOL)isSpeech intoBuffer:(unsigned char *)encbuf ofSize:(NSUInteger)max  {
     int len = 0;
-    int encoded = 1;  
+    int encoded = 1;
     BOOL resampled = micFrequency != sampleRate;
     
     if (max < 500)
         return -1;
-
+    
     BOOL useOpus = NO;
     if (_lastTransmit) {
         useOpus = udpMessageType == UDPVoiceOpusMessage;
@@ -349,7 +347,7 @@
             if (!_lastTransmit) {
                 opus_encoder_ctl(_opusEncoder, OPUS_RESET_STATE, NULL);
             }
-
+            
             // Force CELT mode when using Opus if we were asked to.
             if (_settings.opusForceCELTMode) {
 #define OPUS_SET_FORCE_MODE_REQUEST  11002
@@ -357,7 +355,7 @@
 #define MODE_CELT_ONLY               1002
                 opus_encoder_ctl(_opusEncoder, OPUS_SET_FORCE_MODE(MODE_CELT_ONLY));
             }
-
+            
             opus_encoder_ctl(_opusEncoder, OPUS_SET_BITRATE(_settings.quality));
             len = opus_encode(_opusEncoder, (short *) [_opusBuffer bytes], (opus_int32)(_bufferedFrames * frameSize), encbuf, (opus_int32)max);
             [_opusBuffer setLength:0];
@@ -403,7 +401,7 @@
                 }
             }
         }
-
+        
         if (!_lastTransmit) {
             celt_encoder_ctl(encoder, CELT_RESET_STATE);
         }
@@ -435,12 +433,12 @@
 
 - (void) processAndEncodeAudioFrame {
     frameCounter++;
-
+    
     if (doResetPreprocessor) {
         [self resetPreprocessor];
         doResetPreprocessor = NO;
     }
-
+    
     int isSpeech = 0;
     BOOL resampled = micFrequency != sampleRate;
     short *frame = resampled ? psOut : psMic;
@@ -483,7 +481,7 @@
             level = ((_peakCleanMic)/96.0f) + 1.0;
         }
         _doTransmit = NO;
-
+        
         if (_settings.vadMax == 0 && _settings.vadMin == 0) {
             _doTransmit = NO;
         } else if (level > _settings.vadMax) {
@@ -511,7 +509,7 @@
     } else if (_settings.transmitType == MKTransmitTypeToggle) {
         _doTransmit = _forceTransmit;
     }
-
+    
     if (_selfMuted)
         _doTransmit = NO;
     if (_suppressed)
@@ -533,10 +531,10 @@
         NSNotification *notification = [NSNotification notificationWithName:@"MKAudioUserTalkStateChanged" object:talkStateDict];
         [center performSelectorOnMainThread:@selector(postNotification:) withObject:notification waitUntilDone:NO];
     }
-     
-     if (!_lastTransmit && !_doTransmit) {
-         return;
-     }
+    
+    if (!_lastTransmit && !_doTransmit) {
+        return;
+    }
     
     if (_encodingOutputBuffer == nil)
         _encodingOutputBuffer = [[NSMutableData alloc] initWithLength:960];
@@ -558,17 +556,17 @@
     if (! terminator && _bufferedFrames < _settings.audioPerPacket) {
         return;
     }
-
+    
     int flags = 0;
     if (terminator)
         flags = 0; /* g.iPrevTarget. */
-
+    
     /*
      * Server loopback:
      * flags = 0x1f;
      */
     flags |= (udpMessageType << 5);
-
+    
     unsigned char data[1024];
     data[0] = (unsigned char )(flags & 0xff);
     
@@ -577,9 +575,9 @@
     
     MKPacketDataStream *pds = [[MKPacketDataStream alloc] initWithBuffer:(data+1) length:1023];
     [pds addVarint:(frameCounter - frames)];
-
+    
     if (udpMessageType == UDPVoiceOpusMessage) {
-       NSData *frame = [frameList objectAtIndex:0]; 
+        NSData *frame = [frameList objectAtIndex:0];
         uint64_t header = [frame length];
         if (terminator)
             header |= (1 << 13); // Opus terminator flag
@@ -599,7 +597,7 @@
     }
     
     [frameList removeAllObjects];
-
+    
     NSUInteger len = [pds size] + 1;
     NSData *msgData = [[NSData alloc] initWithBytes:data length:len];
     [pds release];
@@ -607,7 +605,7 @@
     @synchronized(self) {
         [_connection sendVoiceData:msgData];
     }
-
+    
     [msgData release];
 }
 

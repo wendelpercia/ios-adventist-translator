@@ -132,12 +132,12 @@ static OSStatus outputCallback(void *udata, AudioUnitRenderActionFlags *flags, c
         return NO;
     }
         
-    val = 1;
+  /*  val = 1;
     err = AudioUnitSetProperty(_audioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Input, 1, &val, sizeof(UInt32));
     if (err != noErr) {
         NSLog(@"MKiOSAudioDevice: Unable to configure input scope on AudioUnit.");
         return NO;
-    }
+    }*/
     
     val = 1;
     err = AudioUnitSetProperty(_audioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Output, 0, &val, sizeof(UInt32));
@@ -165,7 +165,7 @@ static OSStatus outputCallback(void *udata, AudioUnitRenderActionFlags *flags, c
         return NO;
     }
     
-    len = sizeof(AudioStreamBasicDescription);
+   /* len = sizeof(AudioStreamBasicDescription);
     err = AudioUnitGetProperty(_audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 1, &fmt, &len);
     if (err != noErr) {
         NSLog(@"MKiOSAudioDevice: Unable to query device for stream info.");
@@ -174,7 +174,7 @@ static OSStatus outputCallback(void *udata, AudioUnitRenderActionFlags *flags, c
     
     if (fmt.mChannelsPerFrame > 1) {
         NSLog(@"MKiOSAudioDevice: Input device with more than one channel detected. Defaulting to 1.");
-    }
+    }*/
     
     _micFrequency = 48000;
     _numMicChannels = 1;
