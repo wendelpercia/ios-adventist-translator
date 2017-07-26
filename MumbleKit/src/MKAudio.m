@@ -62,7 +62,9 @@ static void MKAudio_InterruptCallback(void *udata, UInt32 interrupt) {
 }
 
 static void MKAudio_AudioInputAvailableCallback(MKAudio *audio, AudioSessionPropertyID prop, UInt32 len, uint32_t *avail) {
-    BOOL audioInputAvailable;
+    return;
+    
+    /*BOOL audioInputAvailable;
     UInt32 val;
     OSStatus err;
 
@@ -100,7 +102,7 @@ static void MKAudio_AudioInputAvailableCallback(MKAudio *audio, AudioSessionProp
         } else {
             [audio stop];
         }
-    }
+    }*/
 }
 
 static void MKAudio_AudioRouteChangedCallback(MKAudio *audio, AudioSessionPropertyID prop, UInt32 len, NSDictionary *dict) {
@@ -155,7 +157,7 @@ static void MKAudio_SetupAudioSession(MKAudio *audio) {
         return;
     }
     
-    // Listen for audio input availability changes
+    /*// Listen for audio input availability changes
     err = AudioSessionAddPropertyListener(kAudioSessionProperty_AudioInputAvailable,
                                           (AudioSessionPropertyListener)MKAudio_AudioInputAvailableCallback,
                                           audio);
@@ -173,8 +175,8 @@ static void MKAudio_SetupAudioSession(MKAudio *audio) {
     }
     
     // Set the correct category for our Audio Session depending on our current audio input situation.
-    audioInputAvailable = (BOOL) val;
-    val = audioInputAvailable ? kAudioSessionCategory_PlayAndRecord : kAudioSessionCategory_MediaPlayback;
+    audioInputAvailable = (BOOL) val;*/
+    val = kAudioSessionCategory_MediaPlayback;
     err = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(val), &val);
     if (err != kAudioSessionNoError) {
         NSLog(@"MKAudio: unable to set AudioCategory property.");
@@ -210,7 +212,7 @@ static void MKAudio_SetupAudioSession(MKAudio *audio) {
         return;
     }
     
-    if (audioInputAvailable) {
+/*    if (audioInputAvailable) {
         // Allow input from Bluetooth devices.
         val = 1;
         err = AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryEnableBluetoothInput, sizeof(val), &val);
@@ -218,7 +220,7 @@ static void MKAudio_SetupAudioSession(MKAudio *audio) {
             NSLog(@"MKAudio: unable to enable bluetooth input.");
             return;
         }
-    }
+    }*/
     
     // Allow us to be mixed with other applications.
     // It's important that this call comes last, since changing the other OverrideCategory properties
@@ -232,13 +234,13 @@ static void MKAudio_SetupAudioSession(MKAudio *audio) {
 }
 
 static void MKAudio_UpdateAudioSessionSettings(MKAudio *audio) {
-    OSStatus err;
+   /*  OSStatus err;
     UInt32 val, valSize;
-    BOOL audioInputAvailable = YES;
+    BOOL audioInputAvailable = NO;
     
 
     // To be able to select the correct category, we must query whethe audio input is available.
-    valSize = sizeof(UInt32);
+   valSize = sizeof(UInt32);
     err = AudioSessionGetProperty(kAudioSessionProperty_AudioInputAvailable, &valSize, &val);
     if (err != kAudioSessionNoError || valSize != sizeof(UInt32)) {
         NSLog(@"MKAudio: unable to query for input availability.");
@@ -261,7 +263,7 @@ static void MKAudio_UpdateAudioSessionSettings(MKAudio *audio) {
             NSLog(@"MKAudio: unable to set OverrideCategoryDefaultToSpeaker property.");
             return;
         }
-    }
+    }*/
 }
 #else
 static void MKAudio_SetupAudioSession(MKAudio *audio) {
