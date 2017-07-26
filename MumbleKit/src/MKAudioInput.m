@@ -82,8 +82,9 @@
 @implementation MKAudioInput
 
 - (id) initWithDevice:(MKAudioDevice *)device andSettings:(MKAudioSettings *)settings {
-    self = [super init];
     return nil;
+
+    self = [super init];
     if (self == nil)
         return nil;
     

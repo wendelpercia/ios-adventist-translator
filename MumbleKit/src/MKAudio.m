@@ -5,7 +5,7 @@
 #import <MumbleKit/MKAudio.h>
 #import "MKUtils.h"
 #import "MKAudioDevice.h"
-#import "MKAudioInput.h"
+//#import "MKAudioInput.h"
 #import "MKAudioOutput.h"
 #import "MKAudioOutputSidetone.h"
 #import <MumbleKit/MKConnection.h>
@@ -32,7 +32,7 @@ NSString *MKAudioRouteChangedNotification = @"MKAudioRouteChangedNotification";
 @interface MKAudio () {
     id<MKAudioDelegate>      _delegate;
     MKAudioDevice            *_audioDevice;
-    MKAudioInput             *_audioInput;
+    //MKAudioInput             *_audioInput;
     MKAudioOutput            *_audioOutput;
     MKAudioOutputSidetone    *_sidetoneOutput;
     MKConnection             *_connection;
@@ -137,7 +137,7 @@ static void MKAudio_SetupAudioSession(MKAudio *audio) {
     OSStatus err;
     UInt32 val, valSize;
     Float64 fval;
-    BOOL audioInputAvailable = YES;
+    BOOL audioInputAvailable = NO;
     
     // Initialize Audio Session
     err = AudioSessionInitialize(CFRunLoopGetMain(), kCFRunLoopDefaultMode, MKAudio_InterruptCallback, audio);
@@ -347,8 +347,8 @@ static void MKAudio_UpdateAudioSessionSettings(MKAudio *audio) {
 // Stop the audio engine
 - (void) stop {
     @synchronized(self) {
-        [_audioInput release];
-        _audioInput = nil;
+       // [_audioInput release];
+       // _audioInput = nil;
         [_audioOutput release];
         _audioOutput = nil;
         [_audioDevice teardownDevice];
@@ -381,8 +381,8 @@ static void MKAudio_UpdateAudioSessionSettings(MKAudio *audio) {
 # error Missing MKAudioDevice
 #endif
         [_audioDevice setupDevice];
-        _audioInput = [[MKAudioInput alloc] initWithDevice:_audioDevice andSettings:&_audioSettings];
-        [_audioInput setMainConnectionForAudio:_connection];
+     //   _audioInput = [[MKAudioInput alloc] initWithDevice:_audioDevice andSettings:&_audioSettings];
+       // [_audioInput setMainConnectionForAudio:_connection];
         _audioOutput = [[MKAudioOutput alloc] initWithDevice:_audioDevice andSettings:&_audioSettings];
         if (_audioSettings.enableSideTone) {
             _sidetoneOutput = [[MKAudioOutputSidetone alloc] initWithSettings:&_audioSettings];
@@ -403,7 +403,7 @@ static void MKAudio_UpdateAudioSessionSettings(MKAudio *audio) {
 - (void) setMainConnectionForAudio:(MKConnection *)conn {
     @synchronized(self) {
         [conn retain];
-        [_audioInput setMainConnectionForAudio:conn];
+   //     [_audioInput setMainConnectionForAudio:conn];
         [_connection release];
         _connection = conn;
     }
@@ -426,50 +426,53 @@ static void MKAudio_UpdateAudioSessionSettings(MKAudio *audio) {
 }
 
 - (BOOL) forceTransmit {
-    @synchronized(self) {
+ /*   @synchronized(self) {
         return [_audioInput forceTransmit];
-    }
+    }*/
+    return NO;
 }
 
 - (void) setForceTransmit:(BOOL)flag {
-    @synchronized(self) {
+   /* @synchronized(self) {
         [_audioInput setForceTransmit:flag];
-    }
+    }*/
 }
 
 - (float) speechProbablity {
-    @synchronized(self) {
+   /* @synchronized(self) {
         return [_audioInput speechProbability];
-    }
+    }*/
+    return 0;
 }
 
 - (float) peakCleanMic {
-    @synchronized(self) {
+    /*@synchronized(self) {
         return [_audioInput peakCleanMic];
-    }
+    }*/
+    return 0;
 }
 
 - (void) setSelfMuted:(BOOL)selfMuted {
-    @synchronized(self) {
+    /*@synchronized(self) {
         [_audioInput setSelfMuted:selfMuted];
-    }
+    }*/
 }
 
 - (void) setSuppressed:(BOOL)suppressed {
-    @synchronized(self) {
+    /*@synchronized(self) {
         [_audioInput setSuppressed:suppressed];
-    }
+    }*/
 }
 
 - (void) setMuted:(BOOL)muted {
-    @synchronized(self) {
+    /*@synchronized(self) {
         [_audioInput setMuted:muted];
-    }
+    }*/
 }
 
 - (BOOL) echoCancellationAvailable {
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
-    NSDictionary *dict = nil;
+    /*NSDictionary *dict = nil;
     UInt32 valSize = sizeof(NSDictionary *);
     OSStatus err = AudioSessionGetProperty(kAudioSessionProperty_AudioRouteDescription, &valSize, &dict);
     if (err != kAudioSessionNoError) {
@@ -485,7 +488,7 @@ static void MKAudio_UpdateAudioSessionSettings(MKAudio *audio) {
     NSString *inputKind = [input objectForKey:(id)kAudioSession_AudioRouteKey_Type];
 
     if ([inputKind isEqualToString:(NSString *)kAudioSessionInputRoute_BuiltInMic])
-        return YES;
+        return YES;*/
 #endif
     return NO;
 }

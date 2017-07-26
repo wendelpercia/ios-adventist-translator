@@ -6,7 +6,7 @@
 #import <MumbleKit/MKConnection.h>
 
 @class MKAudio;
-@class MKAudioInput;
+//@class MKAudioInput;
 @class MKAudioOutput;
 @class MKAudioOutputSidetone;
 

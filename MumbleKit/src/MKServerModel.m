@@ -97,7 +97,7 @@
         [[MKAudio sharedAudio] setSuppressed:NO];
 
         // Listens to notifications form MKAudioOutput and MKAudioInput
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationUserTalkStateChanged:) name:@"MKAudioUserTalkStateChanged" object:nil];
+        //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationUserTalkStateChanged:) name:@"MKAudioUserTalkStateChanged" object:nil];
     }
     return self;
 }
