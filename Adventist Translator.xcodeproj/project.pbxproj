@@ -177,6 +177,9 @@
 		28FAA35F14D74C1600F6D711 /* SmallMumbleIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAA35D14D74C1600F6D711 /* SmallMumbleIcon.png */; };
 		28FAA36014D74C1600F6D711 /* SmallMumbleIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAA35E14D74C1600F6D711 /* SmallMumbleIcon@2x.png */; };
 		28FAA36414D7551600F6D711 /* MKNumberBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FAA36314D7551600F6D711 /* MKNumberBadgeView.m */; };
+		8E1520A11F28C9EC0046C197 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E15209E1F28C9EC0046C197 /* calendar.png */; };
+		8E1520A21F28C9EC0046C197 /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E15209F1F28C9EC0046C197 /* calendar@2x.png */; };
+		8E1520A31F28C9EC0046C197 /* calendar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1520A01F28C9EC0046C197 /* calendar@3x.png */; };
 		8E44B4B91F013A3000D75634 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E44B4B81F013A3000D75634 /* LaunchScreen.storyboard */; };
 		8E44B4BC1F013B2800D75634 /* GradientBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E44B4BB1F013B2800D75634 /* GradientBack.png */; };
 		8E44B4BE1F013EDC00D75634 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E44B4BD1F013EDC00D75634 /* Image.xcassets */; };
@@ -740,6 +743,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Mumble.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mumble.pch; path = Source/Mumble.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Source/Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		8E15209E1F28C9EC0046C197 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = calendar.png; path = Resources/calendar.png; sourceTree = "<group>"; };
+		8E15209F1F28C9EC0046C197 /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "calendar@2x.png"; path = "Resources/calendar@2x.png"; sourceTree = "<group>"; };
+		8E1520A01F28C9EC0046C197 /* calendar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "calendar@3x.png"; path = "Resources/calendar@3x.png"; sourceTree = "<group>"; };
 		8E44B4B81F013A3000D75634 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E44B4BB1F013B2800D75634 /* GradientBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GradientBack.png; path = Resources/GradientBack.png; sourceTree = "<group>"; };
 		8E44B4BD1F013EDC00D75634 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
@@ -1323,13 +1329,16 @@
 			children = (
 				E7FBF0411F0FCCC6004EE033 /* fr.lproj */,
 				E7FBF03D1F0FCA5D004EE033 /* es.lproj */,
-				8E52138B1F0AD51400AD2ACE /* close.png */,
-				8E52138C1F0AD51400AD2ACE /* close@2x.png */,
-				8E52138D1F0AD51400AD2ACE /* close@3x.png */,
 				8E665B5A1EF16C6F00BF72EA /* flags */,
 				280256351510D70D00178B08 /* en.lproj */,
 				8EA987D81EFAA01B0059B15D /* pt-BR.lproj */,
 				2879527A14C248B700567430 /* Apple */,
+				8E52138B1F0AD51400AD2ACE /* close.png */,
+				8E52138C1F0AD51400AD2ACE /* close@2x.png */,
+				8E52138D1F0AD51400AD2ACE /* close@3x.png */,
+				8E15209E1F28C9EC0046C197 /* calendar.png */,
+				8E15209F1F28C9EC0046C197 /* calendar@2x.png */,
+				8E1520A01F28C9EC0046C197 /* calendar@3x.png */,
 				8EA987DC1EFADF410059B15D /* Internet.png */,
 				8E5213751F0AB77900AD2ACE /* Church.png */,
 				8E5213761F0AB77900AD2ACE /* Church@2x.png */,
@@ -2017,6 +2026,7 @@
 				28DC1C8B13DE596B0037CDC2 /* muted_suppressed@2x.png in Resources */,
 				8E52137E1F0AB77900AD2ACE /* Logo.png in Resources */,
 				28DC1C8F13DE596B0037CDC2 /* priorityspeaker.png in Resources */,
+				8E1520A11F28C9EC0046C197 /* calendar.png in Resources */,
 				8E665C8B1EF16C6F00BF72EA /* EG.png in Resources */,
 				28DC1C9013DE596B0037CDC2 /* priorityspeaker@2x.png in Resources */,
 				8E665CAA1EF16C6F00BF72EA /* HR.png in Resources */,
@@ -2044,6 +2054,7 @@
 				8E665C781EF16C6F00BF72EA /* CL.png in Resources */,
 				8E665D0E1EF16C6F00BF72EA /* SI.png in Resources */,
 				8E665CCA1EF16C6F00BF72EA /* LK.png in Resources */,
+				8E1520A31F28C9EC0046C197 /* calendar@3x.png in Resources */,
 				8E665CC41EF16C6F00BF72EA /* KY.png in Resources */,
 				28BE99A118CFF03D00910551 /* RightBalloonSelectedMono.png in Resources */,
 				28BE998018CFA83800910551 /* BlackToolbarPatterniOS7@2x.png in Resources */,
@@ -2152,6 +2163,7 @@
 				2879528414C2687D00567430 /* Balloon_Blue.png in Resources */,
 				28BE99A018CFF03D00910551 /* LeftBalloonSelectedMono@2x.png in Resources */,
 				8E665CD51EF16C6F00BF72EA /* MF.png in Resources */,
+				8E1520A21F28C9EC0046C197 /* calendar@2x.png in Resources */,
 				8E665CA21EF16C6F00BF72EA /* GR.png in Resources */,
 				8EA987EA1EFADF410059B15D /* Phones@3x.png in Resources */,
 				28BE999A18CFED9A00910551 /* Balloon_2_Right@2x.png in Resources */,

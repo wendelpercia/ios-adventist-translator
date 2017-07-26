@@ -75,6 +75,7 @@
     
     MUServerTableViewCell            *_activeCell;
     UIButton                         *_btAbout;
+    UIButton                         *_btCalendar;
 }
 
 - (NSInteger) indexForUser:(MKUser *)user;
@@ -130,6 +131,13 @@
     _caption.hidden = true;
     [self.view addSubview:_caption];
     
+    _btCalendar = [UIButton buttonWithType:UIButtonTypeCustom];
+    _btCalendar.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+    [_btCalendar setFrame:CGRectMake(self.view.frame.size.width - 54, 20, 44, 44)];
+    [_btCalendar setImage:[UIImage imageNamed:@"calendar"] forState:UIControlStateNormal];
+    [_btCalendar addTarget:self action:@selector(showCalendar) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_btCalendar];
+    
     _btAbout = [UIButton buttonWithType:UIButtonTypeInfoLight];
     _btAbout.tintColor = [UIColor whiteColor];
     [_btAbout setFrame:CGRectMake(10, 20, 44, 44)];
@@ -143,6 +151,30 @@
     [_lbMessage release];
     [_tableView release];
     [super dealloc];
+}
+
+-(void)showCalendar{
+    UIViewController* vc = [[UIViewController alloc] init];
+    vc.title = NSLocalizedString(@"Schedule", nil);
+    vc.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissSchedule)] autorelease];
+    
+    UIWebView* web = [[UIWebView alloc] init];
+    vc.view = web;
+    [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.iatec.com/translatorsystem/agenda.html"]]];
+    
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    nav.navigationBar.barTintColor = [MUColor MainColor];
+    nav.navigationBar.tintColor = [UIColor whiteColor];
+    nav.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    
+    [self presentViewController:nav animated:true completion:nil];
+    [vc release];
+    [nav release];
+}
+
+-(void)dismissSchedule {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 -(void)showAbout {
