@@ -137,7 +137,7 @@
 
 - (BOOL)isHeadsetPluggedIn {
     
-    return true; //Suprimir a necessidade do Headset
+    //return true; //Quando true, suprimime a necessidade do Headset
     AVAudioSessionRouteDescription* route = [[AVAudioSession sharedInstance] currentRoute];
     for (AVAudioSessionPortDescription* desc in [route outputs]) {
         if ([[desc portType] isEqualToString:AVAudioSessionPortHeadphones])
@@ -201,6 +201,7 @@
 
 -(void)connect {
         MUConnectionController *connController = [MUConnectionController sharedController];
+        //NSString *hostname = @"192.168.56.101"; //Test porpouse
         //NSString *hostname = @"ios.localnet"; //Test porpouse
         NSString *hostname = @"adventisttranslator.iatec.com";
         NSUInteger port = 64738;
