@@ -137,13 +137,14 @@
 
 - (BOOL)isHeadsetPluggedIn {
     
-    //return true; //Quando true, suprimime a necessidade do Headset
+   // return true; //Quando true, suprimime a necessidade do Headset
     AVAudioSessionRouteDescription* route = [[AVAudioSession sharedInstance] currentRoute];
     for (AVAudioSessionPortDescription* desc in [route outputs]) {
-        if ([[desc portType] isEqualToString:AVAudioSessionPortHeadphones])
-            return YES;
+        NSLog(@"%@", [route outputs]);
+        if ([[desc portType] isEqualToString:AVAudioSessionPortBuiltInSpeaker])
+            return NO;
     }
-    return NO;
+    return YES;
 }
 
 -(void)showTutorial {

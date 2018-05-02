@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,47 +14,47 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
-                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                        <viewControllerLayoutGuide type="top" id="ncz-w2-Uyh"/>
+                        <viewControllerLayoutGuide type="bottom" id="jro-ht-W03"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GradientBack.png" translatesAutoresizingMaskIntoConstraints="NO" id="cVc-pZ-c4u">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="GradientBack.png" translatesAutoresizingMaskIntoConstraints="NO" id="cVc-pZ-c4u">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="translatelogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="N5Q-VJ-GPS">
-                                <rect key="frame" x="134" y="209" width="106" height="139"/>
+                                <rect key="frame" x="134" y="336.66666666666669" width="106" height="139"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adventist Translator" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leQ-6x-wob" userLabel="Adventist Translator">
-                                <rect key="frame" x="81" y="373" width="213.5" height="27"/>
+                                <rect key="frame" x="83" y="495.66666666666669" width="209" height="27.000000000000057"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.25" contentMode="center" image="IatecLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="DSc-3D-Wdv">
-                                <rect key="frame" x="184" y="320" width="216" height="361"/>
+                                <rect key="frame" x="192" y="451" width="216" height="361"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="leQ-6x-wob" firstAttribute="top" secondItem="N5Q-VJ-GPS" secondAttribute="bottom" constant="25" id="14G-I4-oi9"/>
-                            <constraint firstAttribute="trailing" secondItem="cVc-pZ-c4u" secondAttribute="trailing" id="A7w-V0-kN9"/>
-                            <constraint firstItem="N5Q-VJ-GPS" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="C2V-ky-Z1n"/>
-                            <constraint firstItem="leQ-6x-wob" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="FNT-fb-LoE"/>
-                            <constraint firstItem="cVc-pZ-c4u" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Gc1-qj-An3"/>
-                            <constraint firstAttribute="bottom" secondItem="DSc-3D-Wdv" secondAttribute="bottom" constant="-14" id="Ma4-bG-vBK"/>
-                            <constraint firstItem="cVc-pZ-c4u" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="cgo-Gc-96i"/>
-                            <constraint firstItem="N5Q-VJ-GPS" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-55" id="qo3-37-oZ1"/>
-                            <constraint firstAttribute="trailing" secondItem="DSc-3D-Wdv" secondAttribute="trailing" constant="-25" id="tSK-ck-c5T"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="cVc-pZ-c4u" secondAttribute="bottom" id="xG1-kq-SMg"/>
+                            <constraint firstItem="leQ-6x-wob" firstAttribute="top" secondItem="N5Q-VJ-GPS" secondAttribute="bottom" constant="20" id="8nU-VE-27v"/>
+                            <constraint firstAttribute="trailing" secondItem="DSc-3D-Wdv" secondAttribute="trailing" constant="-33" id="ESW-u6-yq9"/>
+                            <constraint firstItem="N5Q-VJ-GPS" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="JwW-Xi-BiI"/>
+                            <constraint firstItem="cVc-pZ-c4u" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="MM2-zW-hfo"/>
+                            <constraint firstItem="cVc-pZ-c4u" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="O9O-cF-Eam"/>
+                            <constraint firstAttribute="bottom" secondItem="cVc-pZ-c4u" secondAttribute="bottom" id="Xx2-Fc-C5c"/>
+                            <constraint firstItem="leQ-6x-wob" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="eLt-BJ-vrE"/>
+                            <constraint firstAttribute="trailing" secondItem="cVc-pZ-c4u" secondAttribute="trailing" id="fMU-VZ-RrC"/>
+                            <constraint firstAttribute="bottom" secondItem="DSc-3D-Wdv" secondAttribute="bottom" id="jbD-Fa-WtM"/>
+                            <constraint firstItem="N5Q-VJ-GPS" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="k2Y-P5-BhB"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52" y="374.66266866566718"/>
+            <point key="canvasLocation" x="32.5" y="416"/>
         </scene>
     </scenes>
     <resources>
